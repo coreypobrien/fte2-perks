@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "capturedAtUtc": "2026-10-26T23:57:20.0689511Z",
+  "appId": "3448650",
+  "game": "Aliens: Fireteam Elite 2",
+  "buildId": "26090957",
+  "installPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Aliens Fireteam Elite 2",
+  "archives": [
+    {
+      "path": "AFE2/Content/Paks/global.ucas",
+      "bytes": 1961008
+    },
+    {
+      "path": "AFE2/Content/Paks/global.utoc",
+      "bytes": 693
+    },
+    {
+      "path": "AFE2/Content/Paks/pakchunk0-WindowsNoEditor.pak",
+      "bytes": 2835873469
+    },
+    {
+      "path": "AFE2/Content/Paks/pakchunk0-WindowsNoEditor.ucas",
+      "bytes": 23191894272
+    },
+    {
+      "path": "AFE2/Content/Paks/pakchunk0-WindowsNoEditor.utoc",
+      "bytes": 16711576
+    },
+    {
+      "path": "AFE2/Content/Paks/pakchunk1-WindowsNoEditor.pak",
+      "bytes": 8393465
+    },
+    {
+      "path": "AFE2/Content/Paks/pakchunk1-WindowsNoEditor.ucas",
+      "bytes": 48
+    },
+    {
+      "path": "AFE2/Content/Paks/pakchunk1-WindowsNoEditor.utoc",
+      "bytes": 245
+    }
+  ],
+  "perkExtractionStatus": "not_started"
+}

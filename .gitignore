@@ -1,0 +1,13 @@
+/work/
+*.pak
+*.ucas
+*.utoc
+*.uasset
+*.uexp
+*.ubulk
+.env
+.env.*
+node_modules/
+__pycache__/
+.DS_Store
+Thumbs.db

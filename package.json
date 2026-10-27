@@ -1,14 +1,25 @@
 {
-  "name": "aliens-fireteam-2-research",
+  "name": "aliens-fireteam-2-planner",
   "version": "0.1.0",
   "private": true,
-  "description": "Local game asset research for an Aliens: Fireteam Elite 2 perk-grid planner",
+  "description": "Static local perk planner with native-derived game rules and exact priority fitting",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.14.0"
   },
   "scripts": {
-    "test": "node scripts/validate-catalog.mjs && node scripts/test-catalog-inputs.mjs",
+    "test": "node scripts/validate-catalog.mjs && node scripts/test-catalog-inputs.mjs && node --test --experimental-test-coverage --test-coverage-lines=95 --test-coverage-branches=90 --test-coverage-functions=90 tests/*.test.js",
     "research:normalize": "node scripts/normalize-perks.mjs",
-    "research:build": "node scripts/build-catalog.mjs"
-  }
+    "research:build": "node scripts/build-catalog.mjs",
+    "dev": "node scripts/build-web-data.mjs && vite",
+    "build": "node scripts/build-web-data.mjs && node scripts/build-static.mjs",
+    "test:unit": "node --test --experimental-test-coverage --test-coverage-lines=95 --test-coverage-branches=90 --test-coverage-functions=90 tests/*.test.js",
+    "test:e2e": "node scripts/test-browser.mjs --directory dist",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "vite": "8.3.5"
+  },
+  "packageManager": "pnpm@11.25.0"
 }

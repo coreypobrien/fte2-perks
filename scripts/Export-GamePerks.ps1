@@ -18,6 +18,8 @@ if (-not $PythonPath -and (Test-Path -LiteralPath (Join-Path $root 'work\python-
 if (-not $PythonPath) { throw 'Run Initialize-NativeTools.ps1 -PythonPath PATH_TO_PYTHON or supply -PythonPath.' }
 & $PythonPath (Join-Path $PSScriptRoot 'extract-native-defaults.py') --exe (Join-Path $inventory.installPath 'AFE2\Binaries\Win64\AFE2-Win64-Shipping.exe')
 if ($LASTEXITCODE -ne 0) { throw 'Native default extraction failed. Unknown builds require a new audit.' }
+& $PythonPath (Join-Path $PSScriptRoot 'extract-native-rules.py') --exe (Join-Path $inventory.installPath 'AFE2\Binaries\Win64\AFE2-Win64-Shipping.exe')
+if ($LASTEXITCODE -ne 0) { throw 'Native rule extraction failed. Unknown builds require a new audit.' }
 $pakDir = Join-Path $inventory.installPath 'AFE2\Content\Paks'
 # Build-specific directories prevent stale exports from leaking into a later patch's catalog.
 $assetDir = Join-Path $root ('work\build-' + $inventory.buildId + '\class-assets')
@@ -34,6 +36,8 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Normalization failed.' }
     & node scripts/build-catalog.mjs
     if ($LASTEXITCODE -ne 0) { throw 'Effective catalog build failed.' }
+    & node scripts/build-web-data.mjs
+    if ($LASTEXITCODE -ne 0) { throw 'Browser data build failed.' }
     & node scripts/validate-catalog.mjs
     if ($LASTEXITCODE -ne 0) { throw 'Catalog validation failed.' }
 } finally { Pop-Location }

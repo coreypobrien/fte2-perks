@@ -58,3 +58,9 @@ Updated the UI plan with browser-local draft and named Save/Load, stable IDs and
 The user clarified the result panel should present descriptions of abilities and bonuses from equipped items, not another perk-name list. The plan and illustrative concept now show Effects you get, In grid checks on priority rows, and Below the line omissions. A versioned fragment snapshot is under `docs/mockups/`; it is a footprint-only design demonstration, not the production application or complete game-rule solver.
 
 Preview checks passed for source-description inclusion/exclusion, fresh versus stale highlights, rank locks, impossible required sets, named local browser Save/Load across reload, and layouts at 320, 736, and 1024 pixels.
+
+## 2026-10-27: working local Vite v0
+
+Implemented the static browser app, game-derived catalog adapter, module-worker solver, unique connected-group assignment, required/lexicographic priorities, fixed ability replacements, local draft/named saves, equipped effect descriptions, inclusion checks and below-the-line reasons. Vite supplies development and production builds; deployment output remains static.
+
+Added executable-backed native rules for class alternatives, tag population/hierarchy, modifier groups and ability-override exclusion. Added future-agent guidance in root AGENTS.md, architecture/testing docs, and verification.md. Final validation passed 35 unit/integration cases and 13 browser scenarios against both production and dev builds. Unit thresholds are enforced; measured total coverage is 97.98% lines, 94.75% branches, 96% functions. Core solver/model/storage have 100% line coverage. Scope limits are documented rather than hidden.

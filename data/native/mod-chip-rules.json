@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "buildId": "26090957",
+  "classPath": "/Script/Endeavor.ModChipDef",
+  "defaults": {
+    "Type": "Core",
+    "RestrictionType": "None",
+    "bDoNotAutoPopulateCompatibilityTags": false
+  },
+  "enumValues": {
+    "Type": {
+      "Core": 0,
+      "Modifier": 1
+    },
+    "RestrictionType": {
+      "None": 0,
+      "Role": 1,
+      "Kit": 2
+    }
+  },
+  "memberOffsets": {
+    "Type": "0x1f8",
+    "RestrictionType": "0x478",
+    "RoleRestriction": "0x479",
+    "OriginKit": "0x480",
+    "KitRestriction": "0x4a8",
+    "AlternativeKitsAllowed": "0x4d0",
+    "ModifierCompatability": "0x200",
+    "Modifiers": "0x270",
+    "GrantedAbilityOverride": "0x220"
+  },
+  "semantics": {
+    "restrictionNone": "Pass the class/role restriction check; other placement/dependency/ownership checks still apply.",
+    "restrictionRole": "Compare RoleRestriction with the selected character role; no packaged chip explicitly serializes this restriction in the inspected catalog.",
+    "restrictionKit": "Pass when selected class is KitRestriction or its subclass, OR matches any AlternativeKitsAllowed class or its subclass.",
+    "originKit": "Not read by IsKitAllowed; preserve as origin/unlock metadata, not an equip restriction.",
+    "modifierTagAutoPopulation": "When Type is Modifier and bDoNotAutoPopulateCompatibilityTags is false, append each Modifiers[].ModifierTag.TagName into Tags.",
+    "tagCompatibility": "Any core ModifierCompatability tag must equal a modifier effective Tag or one of that Tag's dot-separated ancestors.",
+    "adjacency": "Orthogonal occupied-cell perimeter neighbors; diagonal-only contact does not connect.",
+    "groups": "An adjacent chip identifies a connected group; incoming modifier is tested against that group's Core. Compatible modifier chains can therefore reach the core indirectly.",
+    "abilityOverrideExclusion": "If incoming modifier has a non-null GrantedAbilityOverride, reject groups already containing any chip with non-null GrantedAbilityOverride.",
+    "coreVsModifier": "Core has Type=0 and forms its own group; Modifier has Type=1 and requires a compatible group."
+  },
+  "source": {
+    "kind": "native_static_analysis",
+    "executableSha256": "3493d7ce83c4c9dcd45d2466c1c02c2d4e69bf20ffb862ef3380ee8c96cfb93c",
+    "blocks": {
+      "constructor": {
+        "startRva": "0x21c0fb0",
+        "endRva": "0x21c1463",
+        "sha256": "788c0fcd949aa3f776ab7994cd6f7c3f0007b3cca39f15486b8b50bfe85ccac2"
+      },
+      "isKitAllowed": {
+        "startRva": "0x1eb8620",
+        "endRva": "0x1eb8762",
+        "sha256": "77a7bd461a53902600d457e4f84a9ed1de0b1aefdfff433ad22ee19b997604a6"
+      },
+      "socketRestrictionDispatch": {
+        "startRva": "0x1ec4428",
+        "endRva": "0x1ec4460",
+        "sha256": "87330ce7f97df9fb2b5950dc91d7b097c618c28ec82afc25e6757dbad6dbf5d2"
+      },
+      "modifierTagAutoPopulation": {
+        "startRva": "0x1ebc777",
+        "endRva": "0x1ebc7c8",
+        "sha256": "3f2ab63902892a11d5789ce72b71c49293d21140e5895df1dc891d5669415409"
+      },
+      "groupCompatibility": {
+        "startRva": "0x1e9d030",
+        "endRva": "0x1e9d294",
+        "sha256": "ad801f6f0fbfa8bd7a5ea0516fb6a2787aeca122969c1726b0e9487acdd5bc98"
+      },
+      "perimeterNeighbors": {
+        "startRva": "0x1eb0460",
+        "endRva": "0x1eb0766",
+        "sha256": "6025f8e912ec5e5893bff507b29d244f736bf84cb9cd96546561ccf3f5d9a89b"
+      },
+      "possibleSocketGroups": {
+        "startRva": "0x1eb1cb0",
+        "endRva": "0x1eb20c3",
+        "sha256": "eb1696aea237bb1d28971e647ecc4039ad17e092a9cbcc23f3ae37ac044ad290"
+      },
+      "anyTagQueryConstructor": {
+        "startRva": "0x3999530",
+        "endRva": "0x39995d6",
+        "sha256": "32bd94c8e1ef287e198c0f3fccbb27ea8bcbfcc0c54cb153b05d3735bd15dd81"
+      },
+      "anyTagQueryEvaluator": {
+        "startRva": "0x3995dd0",
+        "endRva": "0x3995f1c",
+        "sha256": "0e2d2f6e09ba1eb3a536aa8c2cd07eaa09c39995d026d50774b5999889e147b0"
+      }
+    },
+    "coreDefaultStoreRva": "0x21c130c",
+    "autoPopulationBoolStoreRva": "0x21c1305",
+    "restrictionDefault": "No constructor override at native byte0x478; UObject pre-constructor zero initialization gives enum None=0.",
+    "zeroInitializationReference": "https://dev.epicgames.com/documentation/unreal-engine/gameplay-classes-in-unreal-engine",
+    "isKitAllowedWrapperRva": "0x21c6600",
+    "isKitAllowedPredicateRva": "0x1eb8620"
+  },
+  "limitations": [
+    "This is an audited static translation for this exact executable, not a runtime dump or full decompiler.",
+    "Full current acquisition/catalog membership and role-restriction character values are not recovered here.",
+    "Shape replacement and multi-group merge edge cases remain additional native research scope; graph reachability captures the observed compatible modifier-chain behavior."
+  ]
+}

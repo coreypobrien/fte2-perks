@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Plan Aliens: Fireteam Elite 2 perk grids with priorities, fixed-orientation fitting, and local saved builds.">
+  <title>AFE2 · Perk planner</title><link rel="stylesheet" href="./styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23151f19'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-family='sans-serif' font-size='24' fill='%23c9e582'%3EA%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="masthead"><div><span class="eyebrow">ALIENS: FIRETEAM ELITE 2</span><h1>PERK PLANNER<span class="version">v0</span></h1></div><div class="build-info"><span class="signal"></span>LOCAL WORKSPACE <span id="data-version"></span></div></header>
+<main>
+  <section class="setup" aria-label="Build configuration">
+    <label>Class<select id="class-select"></select></label>
+    <label>Rank<select id="rank-select"></select></label>
+    <label>Primary ability<select id="primary-select"></select></label>
+    <label>Secondary ability<select id="secondary-select"></select></label>
+    <label>Passive<select id="passive-select"></select></label>
+    <span class="setup-note">All perks unlocked<br>Fixed orientations</span>
+  </section>
+  <section class="save-bar" aria-label="Local saved builds">
+    <label>Build name<input id="build-name" maxlength="80" value="Medic priorities" placeholder="Name this build"></label>
+    <button id="save-build">Save build</button><label>Saved builds<select id="saved-builds"><option value="">No saved builds</option></select></label><button id="load-build">Load</button><button id="save-copy" class="quiet">Save copy</button>
+    <span id="save-status" class="secondary" role="status">Stored in this browser only.</span>
+  </section>
+  <div id="notice" class="notice" role="status" hidden></div>
+  <div class="workspace">
+    <section class="library pane" aria-labelledby="library-title"><div class="section-heading"><h2 id="library-title">Perk library</h2><span id="library-count" class="counter"></span></div>
+      <label class="search-label">Search perks<input id="search" type="search" placeholder="Name or effect…" autocomplete="off"></label>
+      <div class="filters"><label>Type<select id="type-filter"><option value="all">All perks</option><option value="Core">Core perks</option><option value="Modifier">Modifiers</option><option value="universal">Universal use</option></select></label><label class="check-row"><input id="show-unavailable" type="checkbox">Show unavailable</label></div>
+      <div id="library-list" class="library-list"></div>
+    </section>
+    <section class="priorities pane" aria-labelledby="priorities-title"><div class="section-heading"><h2 id="priorities-title">Your priorities</h2><span id="priority-count" class="counter">0</span></div><p class="secondary intro">Higher perks take priority.<br>Required perks are never dropped.</p>
+      <ol id="priority-list" class="priority-list"></ol>
+      <div class="solve-bar"><button id="solve" class="primary">Find arrangement <span aria-hidden="true">↗</span></button><button id="cancel" hidden>Cancel</button><label class="budget-label">Search limit<select id="search-budget"><option value="2500">2.5 seconds</option><option value="10000">10 seconds</option></select></label></div>
+      <p id="solve-status" class="secondary" role="status"></p>
+    </section>
+    <section class="result pane" aria-labelledby="grid-title"><div class="section-heading"><h2 id="grid-title">Grid arrangement</h2><span id="result-badge" class="badge">Ready</span></div>
+      <div id="grid" class="grid" role="group" aria-label="Perk grid"></div>
+      <div class="legend"><span><i class="legend-perk"></i>Selected perks</span><span><i class="legend-fixed"></i>Ability slots</span><span><i class="legend-locked"></i>Rank locked</span></div>
+      <p id="grid-summary" class="secondary"></p><div id="selected-detail" class="selected-detail" hidden></div>
+      <section class="effects-section" aria-labelledby="effects-title"><div class="section-heading"><h2 id="effects-title">Effects you get</h2><span id="effect-count" class="counter"></span></div><p class="secondary intro" id="effects-note">Descriptions from the equipped build, including conditional bonuses.</p><ul id="effects-list" class="effects-list"></ul></section>
+      <section class="below-section" aria-labelledby="below-title"><div class="section-heading"><h2 id="below-title">Below the line</h2><span id="below-count" class="counter"></span></div><div id="below-list"></div></section>
+    </section>
+  </div>
+</main>
+<footer><span>Game-derived catalog · no account · no server-side saves</span><details><summary>Data &amp; validation</summary><p id="data-scope"></p><p>Class restrictions, modifier tags, connected groups, and override exclusions follow the audited native-code translation. Full runtime parity for every replacement and unused catalog asset remains under investigation. This tool arranges your choices; it does not rate combat strength.</p></details></footer>
+<noscript>This planner needs JavaScript to load its catalog and run the local solver.</noscript>
+<script type="module" src="./main.js"></script>
+</body></html>

@@ -1,64 +1,70 @@
-# Aliens: Fireteam Elite 2 — perk research and planner
+# Aliens: Fireteam Elite 2 — static perk planner
 
-Gather reproducible information from a local game installation, then build a perk-grid planner using verified data.
+A working local browser app for choosing required and prioritized perks, generating a fixed-orientation grid, reviewing equipped effect descriptions, and saving builds in the browser.
 
-## Current findings
+## Run locally
 
-Build **26090957** has been decoded into a first research dataset:
+Requires **Node.js 22.14+**. Install the pinned development dependencies first:
 
-- **509 chip definitions** with names and descriptions.
-- **509 code-derived footprints**: 483 explicit asset masks and 26 native constructor defaults.
-- Six class catalogs with **428 distinct referenced chips**, all resolved.
-- Seven board definitions, including a **10x6 base board** and fixed ability placements.
+```powershell
+pnpm install --frozen-lockfile
+pnpm dev
+```
 
-Footprints combine serialized asset observations with the compiled native class default. Eligibility, other native defaults, rotation, connectivity, and runtime stacking are still being researched. No planner has been implemented yet.
+Open **http://127.0.0.1:4173/**. Keep this port for the same browser saves. Stop the server with Ctrl+C in its terminal. The server binds to loopback only.
 
-Start with [native default recovery](docs/native-defaults.md) and [the extraction findings](docs/extraction.md) for evidence, limitations, reproducible commands, and next tasks.
+The application is under `app/`; Vite provides development/build tooling. The custom static server is retained only as a test/preview helper. Do not open index.html with file:// because module fetches and the solver worker need an HTTP origin.
 
-## Validate the dataset
+## Use it
 
-Requires Node.js 20+; no npm packages need to be installed:
+1. Choose a class, rank, and fixed-slot abilities. Medic is the default; all six class setups are available.
+2. Search the game-derived perk library. Add desired perks and use the arrow controls to prioritize them.
+3. Mark hard requirements as Required, then select Find arrangement.
+4. Review the grid, In grid checks, Effects you get descriptions, and Below the line omissions. Changing inputs marks all prior results stale.
+5. Name and save a build, save a copy, or load a named snapshot. The working draft autosaves separately.
+
+All perks are assumed unlocked in v0. Universal-use eligibility is independent of unlock origin; class restrictions and alternative classes still apply. The app arranges user choices; it does not score combat strength or add unrequested filler perks.
+
+## Static output
+
+```powershell
+node scripts/build-web-data.mjs
+node scripts/build-static.mjs
+node scripts/serve.mjs --directory dist --port 4174
+```
+
+`dist/` contains Vite-generated HTML, hashed JavaScript/CSS assets, a bundled worker, and the game-data JSON. It needs no backend, cloud account, secrets, or external CDN. Serve these files with any static HTTP(S) host. The generated dist directory is replaced by each build and is ignored by Git. Use `pnpm preview` to review a production build on port 4173 after stopping the dev server.
+
+## Tests
 
 ```powershell
 node scripts/validate-catalog.mjs
-# or: npm test
+node scripts/test-catalog-inputs.mjs
+node --test --experimental-test-coverage tests/*.test.js
 ```
 
-## Extract from the installed game
-
-Requires Windows, PowerShell, Node.js, Python, and the game:
+For real-browser testing:
 
 ```powershell
-.\scripts\Initialize-ResearchTools.ps1
-.\scripts\Initialize-NativeTools.ps1 -PythonPath 'PATH_TO_PYTHON_EXE'
-.\scripts\Export-GamePerks.ps1
+pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
+node scripts/test-browser.mjs --directory dist
 ```
 
-Tools are pinned, checksum-verified, and stored under ignored `work/tools/`. The asset key can be supplied through `-ArchiveKey`, `AFE2_AES_KEY`, or ignored `work/archive-key.txt` (already present on this checkout). Extraction reads the game and writes only to this repository.
+Use `--browser-path` for installed Edge/Chrome, `--playwright-module` for an existing Playwright installation, or `--base-url` for an existing local server. See [testing instructions](docs/testing.md) and [verification evidence](docs/verification.md).
 
-For metadata only, run `.\scripts\Get-GameInventory.ps1`. Use `-SteamAppsPath` for a different Steam library.
+## Game data and limits
 
-## Layout
+The committed data covers build **26090957**: 509 chip definitions, all 509 code-derived footprints (483 explicit plus 26 native defaults), six class definitions, seven board definitions, and native-derived class and connection rules. Ordinary app development does not require the game installed.
 
-- `docs/`: research findings, open questions, and data design notes.
-- `data/inventory/`: installation and archive metadata.
-- `data/extracted/`: normalized chip, class, board, and coverage JSON.
-- `data/perks/catalog.json`: effective footprints built from game files only; runtime rules remain incomplete.
-- `data/native/`: defaults recovered from the hash-verified shipping executable.
-- `data/verified/`: independent in-game observations used as validation checks, never catalog inputs.
-- `scripts/`: installation, extraction, normalization, and validation helpers.
-- `work/`: ignored tools, package listings, raw exports, and scratch data.
+Native research recovered Core/Modifier defaults, class restriction dispatch, alternative-class matching, tag auto-population and hierarchy, orthogonal connected-group rules, and per-group ability-override exclusion. The solver assigns each modifier to one Core group; a shared bridge cannot belong to two groups simultaneously.
 
-## Milestones
+This is an audited static translation, not complete runtime instrumentation. Full acquisition/ownership membership and all replacement/merge edge cases are not certified. No rotations is an explicit user-approved planning assumption. Results are optimal within the implemented rules and requested priorities when search completes; time-limited results never claim optimality or impossibility.
 
-1. Identify installed build and archive formats — complete.
-2. Decode perk descriptions, shapes, and catalog references — initial dataset complete.
-3. Recover shape defaults from native code — complete for the installed build; trace remaining runtime rules next.
-4. Build a grid editor with compatibility validation and saved builds.
-5. Add automatic placement for a selected set of perks.
+User observations under `data/verified/` are independent checks and are never production catalog overrides. Game files are read only. Tool binaries, raw exports, scratch assets, and browser evidence stay under ignored work/.
 
-Game archives, bulk raw exports, and tool binaries are excluded from Git. Preserve provenance and uncertainty for every field.
+## Future agents
 
-## UI and solver plan
+Start with [AGENTS.md](AGENTS.md), [architecture](docs/architecture.md), [native rule evidence](docs/native-chip-rules.md), and [the UI plan](docs/planner-ui-plan.md). The research history and native extraction reproduction are in docs/.
 
-See [the proposed first-release UI and solver plan](docs/planner-ui-plan.md). The first goal is required and prioritized perk selection followed by automatic placement, using fixed orientations and explicit results when requests cannot all fit.
+To refresh after a game patch, first audit changed executable code; the native extractors intentionally reject unknown hashes. Use `scripts/Initialize-ResearchTools.ps1`, `scripts/Initialize-NativeTools.ps1`, and `scripts/Export-GamePerks.ps1` for local research regeneration. Never bypass the hash guard simply to force a new patch through.

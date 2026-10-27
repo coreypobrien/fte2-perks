@@ -1,6 +1,6 @@
 # Perk planner: first UI and solver plan
 
-Status: proposed v0 static web app, updated 2026-10-26.
+Status: v0 implemented locally with Vite, 2026-10-27. This document records the design contract; see architecture.md and verification.md for current implementation and remaining research limits.
 
 ## Goal
 

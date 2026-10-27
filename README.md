@@ -7,13 +7,13 @@ Gather reproducible information from a local game installation, then build a per
 Build **26090957** has been decoded into a first research dataset:
 
 - **509 chip definitions** with names and descriptions.
-- **483 explicit shape masks**; 26 omitted native-default shapes remain unknown.
+- **509 code-derived footprints**: 483 explicit asset masks and 26 native constructor defaults.
 - Six class catalogs with **428 distinct referenced chips**, all resolved.
 - Seven board definitions, including a **10x6 base board** and fixed ability placements.
 
-These are serialized asset observations. Eligibility, native defaults, board progression, rotation, connectivity, and runtime stacking are still being researched. No planner has been implemented yet.
+Footprints combine serialized asset observations with the compiled native class default. Eligibility, other native defaults, rotation, connectivity, and runtime stacking are still being researched. No planner has been implemented yet.
 
-Start with [the extraction findings](docs/extraction.md) for evidence, limitations, reproducible commands, and next tasks.
+Start with [native default recovery](docs/native-defaults.md) and [the extraction findings](docs/extraction.md) for evidence, limitations, reproducible commands, and next tasks.
 
 ## Validate the dataset
 
@@ -26,10 +26,11 @@ node scripts/validate-catalog.mjs
 
 ## Extract from the installed game
 
-Requires Windows, PowerShell, Node.js, and the game:
+Requires Windows, PowerShell, Node.js, Python, and the game:
 
 ```powershell
 .\scripts\Initialize-ResearchTools.ps1
+.\scripts\Initialize-NativeTools.ps1 -PythonPath 'PATH_TO_PYTHON_EXE'
 .\scripts\Export-GamePerks.ps1
 ```
 
@@ -42,7 +43,9 @@ For metadata only, run `.\scripts\Get-GameInventory.ps1`. Use `-SteamAppsPath` f
 - `docs/`: research findings, open questions, and data design notes.
 - `data/inventory/`: installation and archive metadata.
 - `data/extracted/`: normalized chip, class, board, and coverage JSON.
-- `data/perks/`: reserved for a future verified planner catalog.
+- `data/perks/catalog.json`: effective footprints built from game files only; runtime rules remain incomplete.
+- `data/native/`: defaults recovered from the hash-verified shipping executable.
+- `data/verified/`: independent in-game observations used as validation checks, never catalog inputs.
 - `scripts/`: installation, extraction, normalization, and validation helpers.
 - `work/`: ignored tools, package listings, raw exports, and scratch data.
 
@@ -50,7 +53,7 @@ For metadata only, run `.\scripts\Get-GameInventory.ps1`. Use `-SteamAppsPath` f
 
 1. Identify installed build and archive formats — complete.
 2. Decode perk descriptions, shapes, and catalog references — initial dataset complete.
-3. Verify missing defaults, current catalog membership, and grid rules — next.
+3. Recover shape defaults from native code — complete for the installed build; trace remaining runtime rules next.
 4. Build a grid editor with compatibility validation and saved builds.
 5. Add automatic placement for a selected set of perks.
 

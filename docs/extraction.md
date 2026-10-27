@@ -99,3 +99,7 @@ The short `npm run research:normalize` command uses the build recorded in `data/
 3. Board mask rank semantics are user-confirmed. Verify coordinate indexing, rotations, and modifier connection rules with representative in-game examples.
 4. Resolve effective compatibility tags, replacement relationships, and native restrictions.
 5. Define a planner-ready schema only after those rules are verified. Numerical optimization requires separate confirmation of stacking and conditions.
+
+## Native-code follow-up
+
+The initial missing-footprint findings above describe the first asset-only export. Native constructor analysis now recovers the shared 2x2 default, resolving all 26 omitted footprints. `data/perks/catalog.json` has 509 game-derived footprints and uses no manual overrides. See `native-defaults.md` for instruction-level provenance and reproduction. User observations remain independent cross-checks. Native logic for other defaults and runtime rules is still being traced.

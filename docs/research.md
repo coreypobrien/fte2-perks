@@ -42,3 +42,7 @@ The next step is verifying native defaults and actual grid rules before building
 ## 2026-10-26: user verification of five perks
 
 User verified Doctor's Orders, Concentrated Formula, and CQW Weapon Training as 2x2; Stack 'Em Up as 4x1; and Resiliency as 10x1 with the extracted description. Connection rules are recorded only where supplied. Rotation remains a tentative observation. See `in-game-verification.md` and `data/verified/perks.json`. Combined shape coverage is 486 of 509 packaged chip definitions, with 23 unresolved.
+
+## 2026-10-26: native constructor defaults recovered
+
+Traced ModChipDef registration, reflected PossibleShapes member offset 0x468, and constructor initialization in the shipping executable. The constructor supplies a filled 2x2 default. The catalog now derives all 509 footprints from game assets plus compiled code (483 explicit, 26 inherited), without user overrides. User observations remain cross-checks. See `native-defaults.md`. Runtime connection and rotation rules remain separate research tasks.

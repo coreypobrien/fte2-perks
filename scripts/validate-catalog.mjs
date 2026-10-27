@@ -26,9 +26,12 @@ for(const b of boards) for(const placement of b.properties.BoardLockedPlacements
 }
 assert.equal(report.perkAssets,perks.length);
 console.log(`Validated ${perks.length} chip assets, ${classes.length} classes, and ${boards.length} boards for build ${report.buildId}.`);
-console.log(`${perks.filter(p=>!p.shapes.length).length} chips lack serialized shapes; these remain unknown.`);
+console.log(`${perks.filter(p=>!p.shapes.length).length} chips omit serialized shapes; native defaults resolve them in the effective catalog.`);
 
-// User verification supplements raw exports without filling unknown native properties.
+// User observations are cross-checks only. The catalog build never reads them.
+const catalog = JSON.parse(fs.readFileSync('data/perks/catalog.json','utf8'));
+assert.equal(catalog.perks.length, perks.length);
+assert.equal(catalog.counts.assetShapes + catalog.counts.nativeDefaultShapes, perks.length);
 const verified = JSON.parse(fs.readFileSync('data/verified/perks.json','utf8').replace(/^\uFEFF/,''));
 const verifiedIds = new Set();
 for (const observation of verified.perks) {
@@ -41,9 +44,21 @@ for (const observation of verified.perks) {
   const shape = observation.footprint;
   assert.ok(Number.isInteger(shape.width) && shape.width > 0);
   assert.ok(Number.isInteger(shape.height) && shape.height > 0);
-  if (perk.shapes.length) assert.ok(perk.shapes.some(s => s.width === shape.width && s.height === shape.height), 'Verified footprint conflicts with extracted shape');
+  assert.ok(catalog.perks.find(p => p.assetPath === observation.assetPath).shapes.some(s => s.width === shape.width && s.height === shape.height), 'Verified footprint conflicts with extracted shape');
   if (observation.connection) assert.ok(['none_required','required'].includes(observation.connection.mode));
   if (observation.connection?.mode === 'required') assert.equal(typeof observation.connection.targetName, 'string');
 }
 const recovered = verified.perks.filter(o => !perks.find(p => p.assetPath === o.assetPath).shapes.length).length;
-console.log(`User verification: ${verified.perks.length} perks checked, ${recovered} missing footprints recovered, ${perks.filter(p => !p.shapes.length).length - recovered} footprints unresolved.`);
+console.log(`User checks agree with code-derived footprints for ${verified.perks.length} perks, including ${recovered} omitted asset shapes.`);
+
+// All catalog inputs below come from game files, never observation fixtures.
+const native = JSON.parse(fs.readFileSync('data/native/mod-chip-defaults.json','utf8'));
+assert.equal(catalog.buildId, native.buildId);
+for (const effective of catalog.perks) {
+  const raw = perks.find(p => p.assetPath === effective.assetPath);
+  const hasExplicit = Object.hasOwn(raw.properties, 'PossibleShapes');
+  assert.equal(effective.shapes[0].source.kind, hasExplicit ? 'asset_property' : 'native_constructor_default');
+  const expected = hasExplicit ? raw.properties.PossibleShapes : native.properties.PossibleShapes;
+  assert.deepEqual(effective.shapes.map(s => ({Width:s.width,Height:s.height,CollisionMask:s.collisionMask})), expected);
+}
+console.log(`All ${catalog.perks.length} effective footprints have game-file provenance; no manual overrides.`);

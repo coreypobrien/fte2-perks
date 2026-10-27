@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "buildId": "26090957",
+  "classPath": "/Script/Endeavor.ModChipDef",
+  "source": {
+    "kind": "native_constructor_static_analysis",
+    "executableSha256": "3493d7ce83c4c9dcd45d2466c1c02c2d4e69bf20ffb862ef3380ee8c96cfb93c",
+    "constructorRva": "0x21c0fb0",
+    "constructorEndRva": "0x21c1463",
+    "constructorSha256": "788c0fcd949aa3f776ab7994cd6f7c3f0007b3cca39f15486b8b50bfe85ccac2",
+    "possibleShapesDescriptorRva": "0x58d5c18",
+    "possibleShapesMemberOffset": "0x468",
+    "widthStoreRva": "0x21c131e",
+    "heightStoreRva": "0x21c1326",
+    "maskStoreRvas": [
+      "0x21c139a",
+      "0x21c13a6",
+      "0x21c13b8",
+      "0x21c13cb"
+    ]
+  },
+  "properties": {
+    "PossibleShapes": [
+      {
+        "Width": 2,
+        "Height": 2,
+        "CollisionMask": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "scope": "Constructor PossibleShapes default only. Other native properties and post-load behavior are not yet decoded.",
+  "coordinateOrder": {
+    "value": "column_major",
+    "evidence": "Constructor uses height as the column stride when filling the shape."
+  }
+}

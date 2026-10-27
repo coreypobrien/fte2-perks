@@ -21,6 +21,15 @@
       "userStatement": "I don't think any of them rotate",
       "hypothesis": "Perks may have fixed orientations",
       "enforcement": "Do not enforce globally until confirmed"
+    },
+    {
+      "subject": "perk_rotation_for_planner",
+      "status": "user_approved_planning_assumption",
+      "recordedOn": "2026-10-26",
+      "source": "User instruction in project chat",
+      "userStatement": "As far as I'm aware we can assume the game doesn't allow rotation",
+      "policy": "Use fixed orientations; do not generate rotated placements",
+      "scope": "Planner policy, not evidence that native rotation logic has been decoded"
     }
   ]
 }

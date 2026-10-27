@@ -46,3 +46,7 @@ User verified Doctor's Orders, Concentrated Formula, and CQW Weapon Training as 
 ## 2026-10-26: native constructor defaults recovered
 
 Traced ModChipDef registration, reflected PossibleShapes member offset 0x468, and constructor initialization in the shipping executable. The constructor supplies a filled 2x2 default. The catalog now derives all 509 footprints from game assets plus compiled code (483 explicit, 26 inherited), without user overrides. User observations remain cross-checks. See `native-defaults.md`. Runtime connection and rotation rules remain separate research tasks.
+
+## 2026-10-26: initial UI and solver plan
+
+Added `planner-ui-plan.md`: class/rank/ability setup, perk library, required and ordered optional requests, automatic arrangement, and explainable omissions. Solver preference is lexicographic, with no automatic unrequested fillers. No rotation is now an explicit user-approved planning assumption. Native game-rule coverage remains a prerequisite for calling output legal. The accompanying in-chat concept demonstrates footprint packing only.

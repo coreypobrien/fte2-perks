@@ -58,3 +58,7 @@ For metadata only, run `.\scripts\Get-GameInventory.ps1`. Use `-SteamAppsPath` f
 5. Add automatic placement for a selected set of perks.
 
 Game archives, bulk raw exports, and tool binaries are excluded from Git. Preserve provenance and uncertainty for every field.
+
+## UI and solver plan
+
+See [the proposed first-release UI and solver plan](docs/planner-ui-plan.md). The first goal is required and prioritized perk selection followed by automatic placement, using fixed orientations and explicit results when requests cannot all fit.

@@ -50,7 +50,7 @@ Interpreting the mask as column-major (`index = column * height + row`) yields:
 -1 -1 -1  0  0  0  0 -1 -1 -1
 ```
 
-**Inference:** negative entries appear to be permanently blocked; positive values appear to be rank thresholds. This interpretation fits the fixed ability shapes (two 1x4 strips and a 4x1 passive strip): 60 total minus six blocked cells minus twelve ability cells leaves 42 cells for optional perks. Verify mask indexing and threshold behavior in game before enforcing them in a planner.
+**User confirmed in game, 2026-10-26:** `-1` means an unusable board cell; the other numbers specify the rank at which that cell unlocks. This evidence is recorded separately in `data/verified/grid-rules.json`. The column-major coordinate interpretation remains an inference. With the fixed ability shapes (two 1x4 strips and a 4x1 passive strip), 60 total minus six blocked cells minus twelve ability cells leaves 42 cells for optional perks.
 
 The exported perk coordinate lists use this column-major interpretation and are explicitly marked as inferred. Source masks remain authoritative observations. Rotation, reflection, modifier connectivity, and replacement behavior still need verification.
 
@@ -96,6 +96,6 @@ The short `npm run research:normalize` command uses the build recorded in `data/
 
 1. Recover or verify native defaults for the 26 missing shapes; do not silently assume 1x1.
 2. Trace common/shop/weapon/horde rewards to distinguish current selectable chips from unused assets. Class entitlements alone are incomplete.
-3. Verify board rank thresholds, rotations, and modifier connection rules with representative in-game examples.
+3. Board mask rank semantics are user-confirmed. Verify coordinate indexing, rotations, and modifier connection rules with representative in-game examples.
 4. Resolve effective compatibility tags, replacement relationships, and native restrictions.
 5. Define a planner-ready schema only after those rules are verified. Numerical optimization requires separate confirmation of stacking and conditions.

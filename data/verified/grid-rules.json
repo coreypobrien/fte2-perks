@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "buildIdContext": "26090957",
+  "observations": [
+    {
+      "subject": "base_board_collision_mask",
+      "status": "user_confirmed_in_game",
+      "confirmedOn": "2026-10-26",
+      "source": "User confirmation in project chat",
+      "rules": {
+        "negativeOne": "unusable_cell",
+        "nonnegativeValues": "rank_at_which_cell_unlocks"
+      },
+      "scope": "Board mask values only. Does not establish perk-mask value semantics, coordinate indexing, rotation, or connectivity rules."
+    }
+  ]
+}

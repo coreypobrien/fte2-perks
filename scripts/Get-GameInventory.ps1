@@ -33,7 +33,6 @@ $inventory = [ordered]@{
     buildId = Read-ManifestValue 'buildid'
     installPath = $installPath
     archives = $archives
-    perkExtractionStatus = 'not_started'
 }
 $outputFullPath = [IO.Path]::GetFullPath($OutputPath)
 New-Item -ItemType Directory -Path (Split-Path -Parent $outputFullPath) -Force | Out-Null

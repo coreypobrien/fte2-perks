@@ -1,0 +1,278 @@
+[
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Custom/Perks/PerkBoard_Custom",
+    "objectName": "Default__PerkBoard_Custom_C",
+    "parentClass": "/Game/Blueprints/Avocado_Classes/Perks/BasePerkBoard.BasePerkBoard_C",
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Custom/Perks/PerkBoard_Custom.json",
+      "jsonSha256": "1e7553c24f14caf3a1d6e6631b51121e791cdf5a9a778ad8e0e8f7a60d9f041e"
+    },
+    "properties": {
+      "BoardLockedPlacements": [
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Ultimate.Perk_Custom_Ultimate_C",
+          "Row": 1,
+          "Column": 0
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Tactical.Perk_Custom_Tactical_C",
+          "Row": 1,
+          "Column": 9
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Passive.Perk_Custom_Passive_C",
+          "Row": 5,
+          "Column": 3
+        }
+      ]
+    },
+    "parseWarnings": []
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerkBoard_Demolisher",
+    "objectName": "Default__PerkBoard_Demolisher_C",
+    "parentClass": "/Game/Blueprints/Avocado_Classes/Perks/BasePerkBoard.BasePerkBoard_C",
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Demolisher/Perks/PerkBoard_Demolisher.json",
+      "jsonSha256": "d3033937b323255cd5b0d4724de9c9248a3978ae664d971a541317d8de381903"
+    },
+    "properties": {
+      "BoardLockedPlacements": [
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Base_Ultimate.Perk_Demolisher_TitanRockets_Base_Ultimate_C",
+          "Row": 1,
+          "Column": 0
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Base_Tactical.Perk_Demolisher_BlastCannon_Base_Tactical_C",
+          "Row": 1,
+          "Column": 9
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Base_Passive.Perk_Demolisher_DeadEye_Base_Passive_C",
+          "Row": 5,
+          "Column": 3
+        }
+      ]
+    },
+    "parseWarnings": []
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerkBoard_Gunner_V2",
+    "objectName": "Default__PerkBoard_Gunner_V2_C",
+    "parentClass": "/Game/Blueprints/Avocado_Classes/Perks/BasePerkBoard.BasePerkBoard_C",
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Gunner/Perks/PerkBoard_Gunner_V2.json",
+      "jsonSha256": "7b5721dcc41cfe9b2773083d16284f8862df71736841b1ab46ae95c7e41abf46"
+    },
+    "properties": {
+      "BoardLockedPlacements": [
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Base.Perk_Gunner_Weapon_Base_C",
+          "Row": 1,
+          "Column": 0
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Base.Perk_Gunner_Grenade_Base_C",
+          "Row": 1,
+          "Column": 9
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger.Perk_Gunner_Gunslinger_C",
+          "Row": 5,
+          "Column": 3
+        }
+      ]
+    },
+    "parseWarnings": []
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/PerkBoard_Lancer_V2",
+    "objectName": "Default__PerkBoard_Lancer_V2_C",
+    "parentClass": "/Game/Blueprints/Avocado_Classes/Perks/BasePerkBoard.BasePerkBoard_C",
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Lancer/Perks/PerkBoard_Lancer_V2.json",
+      "jsonSha256": "e43c95358d640d8d63ffef0541a1c69e0157eb49426da99231767d74ea44fdc9"
+    },
+    "properties": {
+      "BoardLockedPlacements": [
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Base.Perk_Lancer_Particle_Base_C",
+          "Row": 1,
+          "Column": 0
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Base.Perk_Lancer_Bolt_Base_C",
+          "Row": 1,
+          "Column": 9
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Base.Perk_Lancer_Weakpoint_Base_C",
+          "Row": 5,
+          "Column": 3
+        }
+      ]
+    },
+    "parseWarnings": []
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Medic/Perks/PerkBoard_Medic",
+    "objectName": "Default__PerkBoard_Medic_C",
+    "parentClass": "/Game/Blueprints/Avocado_Classes/Perks/BasePerkBoard.BasePerkBoard_C",
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Medic/Perks/PerkBoard_Medic.json",
+      "jsonSha256": "0a739ec51bc04db9a54cce89542f4fd7bd7dac416a7d6c23c606d1f040fb2e63"
+    },
+    "properties": {
+      "BoardLockedPlacements": [
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Base.Perk_Medic_TraumaStation_Base_C",
+          "Row": 1,
+          "Column": 0
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Base.Perk_Medic_CombatStims_Base_C",
+          "Row": 1,
+          "Column": 9
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_Base.Perk_Medic_Guardian_Passive_Base_C",
+          "Row": 5,
+          "Column": 3
+        }
+      ]
+    },
+    "parseWarnings": []
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Perks/BasePerkBoard",
+    "objectName": "Default__BasePerkBoard_C",
+    "parentClass": "/Script/Endeavor.ModChipBoardDef",
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Perks/BasePerkBoard.json",
+      "jsonSha256": "ab54e4407f13f460dcac63a12913108de2dcd88b5e816a419159b6964e6b8f5b"
+    },
+    "properties": {
+      "BaseShape": {
+        "CollisionMask": [
+          10,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          10,
+          3,
+          3,
+          0,
+          0,
+          -1,
+          10,
+          3,
+          3,
+          0,
+          0,
+          -1,
+          10,
+          7,
+          7,
+          0,
+          0,
+          0,
+          10,
+          7,
+          7,
+          5,
+          5,
+          0,
+          10,
+          7,
+          7,
+          5,
+          5,
+          0,
+          10,
+          7,
+          7,
+          0,
+          0,
+          0,
+          10,
+          3,
+          3,
+          0,
+          0,
+          -1,
+          10,
+          3,
+          3,
+          0,
+          0,
+          -1,
+          10,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Width": 10,
+        "Height": 6
+      },
+      "BoardLockedPlacements": [
+        {
+          "LockedSpecificChip": null,
+          "Row": 1,
+          "Column": 0
+        },
+        {
+          "LockedSpecificChip": null,
+          "Row": 1,
+          "Column": 9
+        },
+        {
+          "LockedSpecificChip": null,
+          "Row": 5,
+          "Column": 3
+        }
+      ]
+    },
+    "parseWarnings": []
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerkBoard_Technician",
+    "objectName": "Default__PerkBoard_Technician_C",
+    "parentClass": "/Game/Blueprints/Avocado_Classes/Perks/BasePerkBoard.BasePerkBoard_C",
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Technician/Perks/PerkBoard_Technician.json",
+      "jsonSha256": "8f17f8f329e14324370c683dccf20921b5f9515331bb2de272d94475c172b4ec"
+    },
+    "properties": {
+      "BoardLockedPlacements": [
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Base.Perk_Technician_Turret_Base_C",
+          "Row": 1,
+          "Column": 0
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Base.Perk_Technician_Bodyguard_Base_C",
+          "Row": 1,
+          "Column": 9
+        },
+        {
+          "LockedSpecificChip": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg.Perk_Technician_TurretBonusDmg_C",
+          "Row": 5,
+          "Column": 3
+        }
+      ]
+    },
+    "parseWarnings": []
+  }
+]

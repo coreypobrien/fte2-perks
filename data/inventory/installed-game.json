@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedAtUtc": "2026-10-26T23:57:20.0689511Z",
+  "capturedAtUtc": "2026-10-27T00:08:29.4251554Z",
   "appId": "3448650",
   "game": "Aliens: Fireteam Elite 2",
   "buildId": "26090957",
@@ -38,6 +38,5 @@
       "path": "AFE2/Content/Paks/pakchunk1-WindowsNoEditor.utoc",
       "bytes": 245
     }
-  ],
-  "perkExtractionStatus": "not_started"
+  ]
 }

@@ -1,0 +1,151 @@
+{
+  "buildId": "26090957",
+  "exportedRecords": 523,
+  "perkNamedAssets": 510,
+  "perkAssets": 509,
+  "excludedNonChipAssets": [
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Special_Proc",
+      "parentClass": "/Script/Endeavor.CoreProcAbility"
+    }
+  ],
+  "classDefinitions": 6,
+  "boardDefinitions": 7,
+  "withName": 509,
+  "withDescription": 509,
+  "withShapes": 483,
+  "malformedShapes": [],
+  "nonBinaryMasks": [
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_StackCount",
+      "name": "Stack 'Em Up"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerksOld/Perk_Demolisher_BiggerNBetter_Core",
+      "name": "Bigger & Better"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_Cooldown_Mod",
+      "name": "Rapid Deployment"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_EmergencyActivation",
+      "name": "Emergency Activation"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_TempHealthDelayBonus_Core",
+      "name": "Resiliency"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsPathogen",
+      "name": "Pathogen Hunter"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsRobots",
+      "name": "Robot Hunter"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsSynth",
+      "name": "Synth Hunter"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsXeno",
+      "name": "Xenomorph Hunter"
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Mastery_Duration",
+      "name": "Increased Uptime"
+    }
+  ],
+  "parseWarnings": [],
+  "referencedPerks": 428,
+  "referencedButNotExtracted": [],
+  "perksNotInClassEntitlements": [
+    "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Passive",
+    "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Tactical",
+    "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Ultimate",
+    "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Base_Tactical",
+    "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Base_Passive",
+    "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Base_Ultimate",
+    "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Base",
+    "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Base",
+    "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger",
+    "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Base",
+    "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Base",
+    "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Base",
+    "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Base",
+    "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_Base",
+    "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Mod_RapidRecovery",
+    "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Base",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotDamage_DamageBonus",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotHealth_HealthBonus",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotHealth_WoundBonus",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsPathogen",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsRobots",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsSynth",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsXeno",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HordeMode_DamageBonus",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HordeMode_HealPermanentHealth",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HordeMode_HealTempHealth",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HordeMode_HealthBonus",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_MeleeMastery",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_OnKill_TempHealth",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Campaign",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_BotDamage_DamageBonus_2",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_BotDamage_DamageBonus_3",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_BotHealth_HealthBonus_2",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_BotHealth_HealthBonus_3",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_Damage",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_Damage_2",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_ElectricStoppingPower",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_ElectricWeakness",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_EMPBonusDamage",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_RevivePlayer",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_Stamina",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_Taunt",
+    "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_MeleeMastery_TempHealth",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Common",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Exotic",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Rare",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Uncommon",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Common",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Exotic",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Rare",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Uncommon",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Common",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Exotic",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Rare",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Uncommon",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Radius_Common",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Radius_Exotic",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Radius_Rare",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Radius_Uncommon",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Common",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Exotic",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Rare",
+    "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Uncommon",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_CQWWeaponTraining_Core",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_CQWWeaponTraining_Mod_Expertise",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_CQWWeaponTraining_Mod_Mastery",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HandgunTraining_Core",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HandgunTraining_Mod_Expertise",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HandgunTraining_Mod_Mastery",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HeavyWeaponTraining_Core",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HeavyWeaponTraining_Mod_Expertise",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HeavyWeaponTraining_Mod_Mastery",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_PrecisionWeaponTraining_Core",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_PrecisionWeaponTraining_Mod_Expertise",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_PrecisionWeaponTraining_Mod_Mastery",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_RifleWeaponTraining_Core",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_RifleWeaponTraining_Mod_RifleExpertise",
+    "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_RifleWeaponTraining_Mod_RifleMastery",
+    "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Base",
+    "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg",
+    "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Base"
+  ],
+  "limitations": [
+    "Native class defaults are not available in these exports. Missing properties remain unknown.",
+    "Class entitlements describe catalog/unlock references, not proof of full current equip eligibility.",
+    "Column-major cell interpretation is inferred from board layout; runtime compatibility, unlock progression, and stacking rules require further verification."
+  ]
+}

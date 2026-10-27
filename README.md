@@ -2,30 +2,56 @@
 
 Gather reproducible information from a local game installation, then build a perk-grid planner using verified data.
 
-## First steps
+## Current findings
 
-Run from the repository root in PowerShell:
+Build **26090957** has been decoded into a first research dataset:
+
+- **509 chip definitions** with names and descriptions.
+- **483 explicit shape masks**; 26 omitted native-default shapes remain unknown.
+- Six class catalogs with **428 distinct referenced chips**, all resolved.
+- Seven board definitions, including a **10x6 base board** and fixed ability placements.
+
+These are serialized asset observations. Eligibility, native defaults, board progression, rotation, connectivity, and runtime stacking are still being researched. No planner has been implemented yet.
+
+Start with [the extraction findings](docs/extraction.md) for evidence, limitations, reproducible commands, and next tasks.
+
+## Validate the dataset
+
+Requires Node.js 20+; no npm packages need to be installed:
 
 ```powershell
-.\scripts\Get-GameInventory.ps1
+node scripts/validate-catalog.mjs
+# or: npm test
 ```
 
-The script reads the Steam manifest and lists packaged assets without modifying the game. It writes a small JSON inventory to `data/inventory/installed-game.json`. Override `-SteamAppsPath` for a different Steam library.
+## Extract from the installed game
+
+Requires Windows, PowerShell, Node.js, and the game:
+
+```powershell
+.\scripts\Initialize-ResearchTools.ps1
+.\scripts\Export-GamePerks.ps1
+```
+
+Tools are pinned, checksum-verified, and stored under ignored `work/tools/`. The asset key can be supplied through `-ArchiveKey`, `AFE2_AES_KEY`, or ignored `work/archive-key.txt` (already present on this checkout). Extraction reads the game and writes only to this repository.
+
+For metadata only, run `.\scripts\Get-GameInventory.ps1`. Use `-SteamAppsPath` for a different Steam library.
 
 ## Layout
 
-- `docs/research.md`: findings, open questions, and extraction plan.
-- `data/inventory/`: reproducible installation and archive metadata.
-- `data/perks/`: future normalized perk records; see `docs/perk-data.md`.
-- `scripts/`: research and extraction helpers.
-- `work/`: ignored scratch files and local extraction tools.
+- `docs/`: research findings, open questions, and data design notes.
+- `data/inventory/`: installation and archive metadata.
+- `data/extracted/`: normalized chip, class, board, and coverage JSON.
+- `data/perks/`: reserved for a future verified planner catalog.
+- `scripts/`: installation, extraction, normalization, and validation helpers.
+- `work/`: ignored tools, package listings, raw exports, and scratch data.
 
 ## Milestones
 
-1. Identify the installed build and archive formats.
-2. Decode sample perk assets, including shapes and dependencies.
-3. Extract and validate a versioned perk catalog.
+1. Identify installed build and archive formats — complete.
+2. Decode perk descriptions, shapes, and catalog references — initial dataset complete.
+3. Verify missing defaults, current catalog membership, and grid rules — next.
 4. Build a grid editor with compatibility validation and saved builds.
 5. Add automatic placement for a selected set of perks.
 
-Game archives and bulk extracted assets are excluded from Git. Record provenance and uncertainty for every extracted field. No planner or perk decoder has been implemented yet.
+Game archives, bulk raw exports, and tool binaries are excluded from Git. Preserve provenance and uncertainty for every field.

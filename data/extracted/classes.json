@@ -1,0 +1,2229 @@
+[
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Custom/Player_Custom",
+    "name": "Specialist",
+    "board": "/Game/Blueprints/Avocado_Classes/Custom/Perks/PerkBoard_Custom.PerkBoard_Custom_C",
+    "chipEntitlements": [
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Custom.Perk_Generic_Core_HealthBonus_Custom_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Core_FieldEffectResistance.Perk_Generic_Core_FieldEffectResistance_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_Cover_DamageReduction.Perk_Generic_Core_Cover_DamageReduction_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HandlingBonus.Perk_Generic_Core_HandlingBonus_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_Cover_RecoilReduction.Perk_Generic_Mod_Cover_RecoilReduction_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaIncrease.Perk_Generic_Core_StaminaIncrease_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AutoRevive.Perk_Generic_Core_AutoRevive_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AmmoMaxBonus.Perk_Generic_Core_AmmoMaxBonus_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_Cover_SpreadReduction.Perk_Generic_Mod_Cover_SpreadReduction_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_AutoRevive_2.Perk_Generic_Mod_AutoRevive_2_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_MedkitToStart.Perk_Generic_Core_MedkitToStart_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_LastManStanding_Bonus.Perk_Generic_Core_LastManStanding_Bonus_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeMeleeDamageBonus.Perk_Generic_Core_DodgeMeleeDamageBonus_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Mod_FieldEffectResistance_2.Perk_Generic_Mod_FieldEffectResistance_2_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_Cover_TempHealthGain.Perk_Generic_Core_Cover_TempHealthGain_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_AutoRevive_3.Perk_Generic_Mod_AutoRevive_3_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_LastManStanding_LastAlive.Perk_Generic_Mod_LastManStanding_LastAlive_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeSpeedBonus.Perk_Generic_Core_DodgeSpeedBonus_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_Cover_TempHealthGain_2.Perk_Generic_Mod_Cover_TempHealthGain_2_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthReviveBonus.Perk_Generic_Core_HealthReviveBonus_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_Medkit_WoundRestoreChance.Perk_Generic_Mod_Medkit_WoundRestoreChance_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus.Perk_Generic_Core_HealthBonus_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnKill_TempHealth_Core.Perk_Lancer_OnKill_TempHealth_Core_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageResist.Perk_Generic_Core_DamageResist_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_Cover_TempHealthGain_3.Perk_Generic_Mod_Cover_TempHealthGain_3_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaDrainWhileSprinting.Perk_Generic_Core_StaminaDrainWhileSprinting_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthReviveBonus_2.Perk_Generic_Core_HealthReviveBonus_2_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_2.Perk_Generic_Core_HealthBonus_2_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnKill_TempHealth_Mod_Assist.Perk_Lancer_OnKill_TempHealth_Mod_Assist_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Mod_FieldEffectResistance_3.Perk_Generic_Mod_FieldEffectResistance_3_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageResist_2.Perk_Generic_Core_DamageResist_2_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_Medkit_WoundRestoreChance_2.Perk_Generic_Mod_Medkit_WoundRestoreChance_2_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_3.Perk_Generic_Core_HealthBonus_3_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnKill_TempHealth_Mod_Special.Perk_Lancer_OnKill_TempHealth_Mod_Special_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeResistanceBonus.Perk_Generic_Core_DodgeResistanceBonus_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageResist_3.Perk_Generic_Core_DamageResist_3_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_CrouchMovementSpeed.Perk_Generic_Core_CrouchMovementSpeed_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_4.Perk_Generic_Core_HealthBonus_4_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Core_GrappleDamageBonus.Perk_Generic_Core_GrappleDamageBonus_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnKill_TempHealth_Mod_Elite.Perk_Lancer_OnKill_TempHealth_Mod_Elite_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_ExtraWound.Perk_Generic_Core_ExtraWound_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Custom_Mastery.Perk_Generic_Core_HealthBonus_Custom_Mastery_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Custom.Perk_Generic_Core_XPBonus_Custom_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_ADSMovementSpeed.Perk_Generic_Core_ADSMovementSpeed_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Mod_Medkit_WoundRestoreChance_3.Perk_Generic_Mod_Medkit_WoundRestoreChance_3_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Core_SpecialReload.Perk_Generic_Core_SpecialReload_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth.Perk_Generic_Core_DodgeRestoreHealth_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AmmoMaxBonus_2.Perk_Generic_Core_AmmoMaxBonus_2_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      }
+    ],
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Custom/Player_Custom.json",
+      "jsonSha256": "3b0b460645bac57c93cc1c6a6f0796ebec18737f877cdea4bb3c3e62b4505150"
+    }
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Demolisher/Player_Demolisher_V2",
+    "name": "Marauder",
+    "board": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerkBoard_Demolisher.PerkBoard_Demolisher_C",
+    "chipEntitlements": [
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_MaxHealthBonus_Core.Perk_Demolisher_MaxHealthBonus_Core_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Replacer_FireRocket.Perk_Demolisher_TitanRockets_Replacer_FireRocket_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_Radius.Perk_Demolisher_TitanRockets_Mod_Radius_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_StoppingPower.Perk_Demolisher_TitanRockets_Mod_StoppingPower_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_DefenseBuff.Perk_Demolisher_BlastCannon_Mod_DefenseBuff_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_Radius.Perk_Demolisher_BlastCannon_Mod_Radius_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_DamageResistanceBonus.Perk_Demolisher_DeadEye_Mod_DamageResistanceBonus_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_LowHealthDamageBonus_Core.Perk_Demolisher_LowHealthDamageBonus_Core_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Ultimate_Replacer_TitanRockets.Perk_Custom_Ultimate_Replacer_TitanRockets_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Tactical_Replacer_BlastCannon.Perk_Custom_Tactical_Replacer_BlastCannon_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Passive_Replacer_DeadEye.Perk_Custom_Passive_Replacer_DeadEye_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_ReloadBonus.Perk_Demolisher_DeadEye_Mod_ReloadBonus_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_ExtraRockets01.Perk_Demolisher_TitanRockets_Mod_ExtraRockets01_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Fire_Mod_Damage.Perk_Demolisher_TitanRockets_Fire_Mod_Damage_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_OffenseBuff.Perk_Demolisher_BlastCannon_Mod_OffenseBuff_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_BonusStacksFromAbility.Perk_Demolisher_DeadEye_Mod_BonusStacksFromAbility_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_PiercingCannon.Perk_Demolisher_BlastCannon_Mod_PiercingCannon_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Replacer_Blastwave.Perk_Demolisher_BlastCannon_Replacer_Blastwave_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerksOld/Perk_Demolisher_ReactiveCharges_Core.Perk_Demolisher_ReactiveCharges_Core_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_Radius2.Perk_Demolisher_TitanRockets_Mod_Radius2_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Fire_Mod_Duration.Perk_Demolisher_TitanRockets_Fire_Mod_Duration_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Wave_Mod_DazedAndConfused.Perk_Demolisher_BlastCannon_Wave_Mod_DazedAndConfused_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_Concussive.Perk_Demolisher_BlastCannon_Mod_Concussive_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_EMP.Perk_Demolisher_BlastCannon_Mod_EMP_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_MeleeBonus.Perk_Demolisher_DeadEye_Mod_MeleeBonus_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_StoppingPower.Perk_Demolisher_BlastCannon_Mod_StoppingPower_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_AutoFireOnReload.Perk_Demolisher_TitanRockets_Mod_AutoFireOnReload_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_BracedForLaunch.Perk_Demolisher_TitanRockets_Mod_BracedForLaunch_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_ExtraRockets02.Perk_Demolisher_TitanRockets_Mod_ExtraRockets02_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Fire_Mod_Damage2.Perk_Demolisher_TitanRockets_Fire_Mod_Damage2_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Wave_Mod_Debilitation.Perk_Demolisher_BlastCannon_Wave_Mod_Debilitation_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_Radius2.Perk_Demolisher_BlastCannon_Mod_Radius2_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_BonusStacksFromAbility_2.Perk_Demolisher_DeadEye_Mod_BonusStacksFromAbility_2_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_StackCount.Perk_Demolisher_DeadEye_Mod_StackCount_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_SmartAim.Perk_Demolisher_TitanRockets_Mod_SmartAim_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_Breach.Perk_Demolisher_BlastCannon_Mod_Breach_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Replacer_ProximityMines.Perk_Demolisher_TitanRockets_Replacer_ProximityMines_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_Taunt.Perk_Demolisher_BlastCannon_Mod_Taunt_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Fire_Mod_Duration2.Perk_Demolisher_TitanRockets_Fire_Mod_Duration2_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_Charge.Perk_Demolisher_BlastCannon_Mod_Charge_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Wave_Mod_ProactiveWave.Perk_Demolisher_BlastCannon_Wave_Mod_ProactiveWave_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Wave_Mod_ReactiveWave.Perk_Demolisher_BlastCannon_Wave_Mod_ReactiveWave_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_StackDuration.Perk_Demolisher_DeadEye_Mod_StackDuration_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Wave_Mod_Chain.Perk_Demolisher_BlastCannon_Wave_Mod_Chain_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_BulletPenetration.Perk_Demolisher_DeadEye_Mod_BulletPenetration_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_Minefield.Perk_Demolisher_TitanRockets_Mod_Minefield_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_EMP.Perk_Demolisher_TitanRockets_Mod_EMP_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerksOld/Perk_Demolisher_Rampage_Core.Perk_Demolisher_Rampage_Core_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_AssaultNBattery.Perk_Demolisher_BlastCannon_Mod_AssaultNBattery_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_Minefield.Perk_Demolisher_TitanRockets_Mod_Minefield_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_ExtraRockets03.Perk_Demolisher_TitanRockets_Mod_ExtraRockets03_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mines_Mod_AntiTank.Perk_Demolisher_TitanRockets_Mines_Mod_AntiTank_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Fire_Mod_Linger.Perk_Demolisher_TitanRockets_Fire_Mod_Linger_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_FireNForget.Perk_Demolisher_TitanRockets_Mod_FireNForget_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_StackCount_2.Perk_Demolisher_DeadEye_Mod_StackCount_2_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_ThermalAmmo.Perk_Demolisher_DeadEye_Mod_ThermalAmmo_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Replacer_Flamethrower.Perk_Demolisher_BlastCannon_Replacer_Flamethrower_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerksOld/Perk_Demolisher_DownNOut_Core.Perk_Demolisher_DownNOut_Core_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_RateOfFireIncrease.Perk_Demolisher_TitanRockets_Mod_RateOfFireIncrease_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mines_Mod_Cluster.Perk_Demolisher_TitanRockets_Mines_Mod_Cluster_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_DoTDuration.Perk_Demolisher_BlastCannon_Flame_Mod_DoTDuration_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_EnvDuration.Perk_Demolisher_BlastCannon_Flame_Mod_EnvDuration_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_TriggerUlt.Perk_Demolisher_TitanRockets_Mod_TriggerUlt_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_LastWoundReloadBonus_Core.Perk_Demolisher_LastWoundReloadBonus_Core_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_CastMoveSpeedBonus.Perk_Demolisher_TitanRockets_Mod_CastMoveSpeedBonus_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_DamageBonus.Perk_Demolisher_DeadEye_Mod_DamageBonus_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_StackDuration_2.Perk_Demolisher_DeadEye_Mod_StackDuration_2_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_ExtraRockets04.Perk_Demolisher_TitanRockets_Mod_ExtraRockets04_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mines_Mod_EMP.Perk_Demolisher_TitanRockets_Mines_Mod_EMP_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Fire_Mod_Linger2.Perk_Demolisher_TitanRockets_Fire_Mod_Linger2_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_AirBurst.Perk_Demolisher_TitanRockets_Mod_AirBurst_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_DoTDuration2.Perk_Demolisher_BlastCannon_Flame_Mod_DoTDuration2_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_EnvDuration2.Perk_Demolisher_BlastCannon_Flame_Mod_EnvDuration2_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_Linger.Perk_Demolisher_BlastCannon_Flame_Mod_Linger_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_Radius.Perk_Demolisher_BlastCannon_Flame_Mod_Radius_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_Range.Perk_Demolisher_BlastCannon_Flame_Mod_Range_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_TargetExpireQuicker.Perk_Demolisher_DeadEye_Mod_TargetExpireQuicker_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerksOld/Perk_Demolisher_BiggerNBetter_Core.Perk_Demolisher_BiggerNBetter_Core_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Demolisher.Perk_Generic_Core_XPBonus_Demolisher_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerksOld/Perk_Demolisher_RoughNTumble_Core.Perk_Demolisher_RoughNTumble_Core_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_CarpetBombing.Perk_Demolisher_TitanRockets_Mod_CarpetBombing_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_RateOfFireDecrease.Perk_Demolisher_TitanRockets_Mod_RateOfFireDecrease_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/TitanRockets/Perk_Demolisher_TitanRockets_Mod_StoppingPower_Extra.Perk_Demolisher_TitanRockets_Mod_StoppingPower_Extra_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_ConcussiveReroute.Perk_Demolisher_BlastCannon_Flame_Mod_ConcussiveReroute_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_Linger2.Perk_Demolisher_BlastCannon_Flame_Mod_Linger2_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_Radius2.Perk_Demolisher_BlastCannon_Flame_Mod_Radius2_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_Range2.Perk_Demolisher_BlastCannon_Flame_Mod_Range2_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_StandingStillGeneratesStacks.Perk_Demolisher_DeadEye_Mod_StandingStillGeneratesStacks_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/PerksOld/Perk_Demolisher_RoughNTumble_Core.Perk_Demolisher_RoughNTumble_Core_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Flame_Mod_CryoBlast.Perk_Demolisher_BlastCannon_Flame_Mod_CryoBlast_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      }
+    ],
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Demolisher/Player_Demolisher_V2.json",
+      "jsonSha256": "6903d2c297c727fbfdd5da0948b3db1b7bf4088fb079e72463ab9e45a0e5a181"
+    }
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Gunner/Player_Gunner_V2",
+    "name": "Duelist",
+    "board": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerkBoard_Gunner_V2.PerkBoard_Gunner_V2_C",
+    "chipEntitlements": [
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Gunner.Perk_Generic_Core_HealthBonus_Gunner_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Replacer_Shotgun.Perk_Gunner_Weapon_Replacer_Shotgun_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_CooldownBonus.Perk_Gunner_Gunslinger_Mod_CooldownBonus_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_RecoilReduction.Perk_Gunner_Weapon_Mod_RecoilReduction_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Mod_Concussive.Perk_Gunner_Grenade_Mod_Concussive_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Burst_Mod_SlowFirerate.Perk_Gunner_Gun_Burst_Mod_SlowFirerate_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Ultimate_Replacer_WeaponBurstGunner.Perk_Custom_Ultimate_Replacer_WeaponBurstGunner_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Tactical_Replacer_GrenadeShrapnel.Perk_Custom_Tactical_Replacer_GrenadeShrapnel_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Passive_Replacer_Gunslinger.Perk_Custom_Passive_Replacer_Gunslinger_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Mod_Emergency.Perk_Gunner_Grenade_Mod_Emergency_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_StayOnTarget_Core.Perk_Gunner_StayOnTarget_Core_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_Firerate.Perk_Gunner_Gunslinger_Mod_Firerate_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_AimAssist.Perk_Gunner_Weapon_Mod_AimAssist_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_QuickFire.Perk_Gunner_Weapon_Mod_QuickFire_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Shrapnel_Mod_Dazed.Perk_Gunner_Grenade_Shrapnel_Mod_Dazed_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Burst_Mod_BurstFire.Perk_Gunner_Gun_Burst_Mod_BurstFire_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Replacer_Cluster.Perk_Gunner_Grenade_Replacer_Cluster_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_CooldownBonus_2.Perk_Gunner_Gunslinger_Mod_CooldownBonus_2_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Mod_Penetration.Perk_Gunner_Gun_Mod_Penetration_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Shrapnel_Mod_Timer.Perk_Gunner_Grenade_Shrapnel_Mod_Timer_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Burst_Mod_Minigun.Perk_Gunner_Gun_Burst_Mod_Minigun_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Fragment_Mod_ExtendedBurst.Perk_Gunner_Gun_Fragment_Mod_ExtendedBurst_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_RecoilReduction2.Perk_Gunner_Weapon_Mod_RecoilReduction2_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_FocusFire_Core.Perk_Gunner_FocusFire_Core_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_StayOnTarget_Mod_TargetsAcquired.Perk_Gunner_StayOnTarget_Mod_TargetsAcquired_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_FocusFire_Mod_SuppressingFire.Perk_Gunner_FocusFire_Mod_SuppressingFire_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_ReloadSpeed.Perk_Gunner_Gunslinger_Mod_ReloadSpeed_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_Incendiary.Perk_Gunner_Weapon_Mod_Incendiary_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Cluster_Mod_Incendiary.Perk_Gunner_Grenade_Cluster_Mod_Incendiary_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Burst_Mod_SmartAim.Perk_Gunner_Gun_Burst_Mod_SmartAim_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Fragment_Mod_TightenedChoke.Perk_Gunner_Gun_Fragment_Mod_TightenedChoke_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Replacer_Precision.Perk_Gunner_Weapon_Replacer_Precision_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_CooldownBonus_3.Perk_Gunner_Gunslinger_Mod_CooldownBonus_3_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_Cryo.Perk_Gunner_Weapon_Mod_Cryo_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Mod_ExplosiveExpert.Perk_Gunner_Grenade_Mod_ExplosiveExpert_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_StaminaRefill.Perk_Gunner_Gunslinger_Mod_StaminaRefill_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_PowerBonus.Perk_Gunner_Weapon_Mod_PowerBonus_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Mod_Explosive.Perk_Gunner_Gun_Mod_Explosive_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Fragment_Mod_ExtendedBurst2.Perk_Gunner_Gun_Fragment_Mod_ExtendedBurst2_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_StayOnTarget_Mod_TargetsEngaged.Perk_Gunner_StayOnTarget_Mod_TargetsEngaged_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_FocusFire_Mod_OverwhelmingFire.Perk_Gunner_FocusFire_Mod_OverwhelmingFire_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Mod_Overclock.Perk_Gunner_Mod_Overclock_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_Recoil.Perk_Gunner_Gunslinger_Mod_Recoil_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_Shock.Perk_Gunner_Weapon_Mod_Shock_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Precision_Mod_Weakpoint.Perk_Gunner_Gun_Precision_Mod_Weakpoint_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Cluster_Mod_Dispersal.Perk_Gunner_Grenade_Cluster_Mod_Dispersal_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Replacer_Remote.Perk_Gunner_Grenade_Replacer_Remote_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_CooldownBonus_4.Perk_Gunner_Gunslinger_Mod_CooldownBonus_4_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_ControlledBursts_Core.Perk_Gunner_ControlledBursts_Core_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Mod_Penetration2.Perk_Gunner_Gun_Mod_Penetration2_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Precision_Mod_DelayedCharge.Perk_Gunner_Gun_Precision_Mod_DelayedCharge_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Remote_Mod_DazingProtocol.Perk_Gunner_Grenade_Remote_Mod_DazingProtocol_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Cluster_Mod_Swarm.Perk_Gunner_Grenade_Cluster_Mod_Swarm_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Shrapnel_Mod_GlassCasing.Perk_Gunner_Grenade_Shrapnel_Mod_GlassCasing_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Mod_ExplosiveExpert2.Perk_Gunner_Grenade_Mod_ExplosiveExpert2_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_GunnerMobility_Core.Perk_Gunner_GunnerMobility_Core_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Mod_Uplink.Perk_Gunner_Mod_Uplink_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_Spread.Perk_Gunner_Gunslinger_Mod_Spread_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Mod_ConcussiveRounds.Perk_Gunner_Gun_Mod_ConcussiveRounds_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Precision_Mod_Weakpoint2.Perk_Gunner_Gun_Precision_Mod_Weakpoint2_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Remote_Mod_Escalation.Perk_Gunner_Grenade_Remote_Mod_Escalation_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Fragment_Mod_PackedCartridges.Perk_Gunner_Gun_Fragment_Mod_PackedCartridges_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_Cooldown_Mod.Perk_Gunner_Cooldown_Mod_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Gunner.Perk_Generic_Core_XPBonus_Gunner_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_ControlledBursts_Mod_LetsRock.Perk_Gunner_ControlledBursts_Mod_LetsRock_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gunslinger/Perk_Gunner_Gunslinger_Mod_Inspiring.Perk_Gunner_Gunslinger_Mod_Inspiring_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Weapon_Mod_TurboLoading.Perk_Gunner_Weapon_Mod_TurboLoading_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Precision_Mod_Penetration.Perk_Gunner_Gun_Precision_Mod_Penetration_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Remote_Mod_AntiPersonnel.Perk_Gunner_Grenade_Remote_Mod_AntiPersonnel_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Remote_Mod_Hemorrhage.Perk_Gunner_Grenade_Remote_Mod_Hemorrhage_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Grenade/Perk_Gunner_Grenade_Cluster_Mod_Mines.Perk_Gunner_Grenade_Cluster_Mod_Mines_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/Gun/Perk_Gunner_Gun_Fragment_Mod_Shred.Perk_Gunner_Gun_Fragment_Mod_Shred_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      }
+    ],
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Gunner/Player_Gunner_V2.json",
+      "jsonSha256": "050b688aaeb14f6d5b87bda529a8ac06d61e54671c12a8d0a058443bac1eae33"
+    }
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Lancer/Player_Lancer_V2",
+    "name": "Hunter",
+    "board": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/PerkBoard_Lancer_V2.PerkBoard_Lancer_V2_C",
+    "chipEntitlements": [
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Lancer.Perk_Generic_Core_HealthBonus_Lancer_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Replacer_Cryo.Perk_Lancer_Particle_Replacer_Cryo_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageOnSlow_Core.Perk_Lancer_WeakPointDamageOnSlow_Core_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Core_Cooldown.Perk_Lancer_OnEliteKill_Core_Cooldown_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_Amplify.Perk_Lancer_Bolt_Mod_Amplify_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_LongSlow.Perk_Lancer_Bolt_Mod_LongSlow_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_WarningBlast.Perk_Lancer_Particle_Mod_WarningBlast_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Ultimate_Beam_Quick.Perk_Custom_Ultimate_Beam_Quick_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Tactical_Bolt_Stasis.Perk_Custom_Tactical_Bolt_Stasis_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Passive_Weakpoint.Perk_Custom_Passive_Weakpoint_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Mod_BuffAllyWeakPointDamage.Perk_Lancer_Weakpoint_Mod_BuffAllyWeakPointDamage_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Beam_Mod_DisruptingRadiation.Perk_Lancer_Particle_Beam_Mod_DisruptingRadiation_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_ExtraBolt.Perk_Lancer_Bolt_Mod_ExtraBolt_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_SpreadDamage.Perk_Lancer_Bolt_Mod_SpreadDamage_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Cryo_Mod_CryoAOE.Perk_Lancer_Particle_Cryo_Mod_CryoAOE_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_ClearOut.Perk_Lancer_Particle_Mod_ClearOut_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Replacer_Arc.Perk_Lancer_Bolt_Replacer_Arc_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Mod_HighPrecision.Perk_Lancer_Weakpoint_Mod_HighPrecision_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Mod_HealPHP.Perk_Lancer_OnEliteKill_Mod_HealPHP_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_Weaken.Perk_Lancer_Bolt_Mod_Weaken_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_Inverted.Perk_Lancer_Bolt_Mod_Inverted_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_Shock.Perk_Lancer_Particle_Mod_Shock_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageStoppingPower_Core.Perk_Lancer_WeakPointDamageStoppingPower_Core_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_DelayedDetonation.Perk_Lancer_Bolt_Mod_DelayedDetonation_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_ExtraCharge.Perk_Lancer_Particle_Mod_ExtraCharge_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_PulseRate.Perk_Lancer_Bolt_Mod_PulseRate_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Cryo_Mod_DeepChill.Perk_Lancer_Particle_Cryo_Mod_DeepChill_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_CynosureMatrix.Perk_Lancer_Particle_Mod_CynosureMatrix_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Replacer_Beam.Perk_Lancer_Particle_Replacer_Beam_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Mod_FocusedShotLegs.Perk_Lancer_Weakpoint_Mod_FocusedShotLegs_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Mod_CooldownBonus.Perk_Lancer_OnEliteKill_Mod_CooldownBonus_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_WeakpointDamage.Perk_Lancer_Bolt_Mod_WeakpointDamage_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_StoppingPower.Perk_Lancer_Bolt_Mod_StoppingPower_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_ElectricAmmo.Perk_Lancer_Particle_Mod_ElectricAmmo_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_SpreadDamage2.Perk_Lancer_Bolt_Mod_SpreadDamage2_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Cryo_Mod_ShatterProtocol.Perk_Lancer_Particle_Cryo_Mod_ShatterProtocol_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Mod_FocusedShotArms.Perk_Lancer_Weakpoint_Mod_FocusedShotArms_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_ParticleSword.Perk_Lancer_Particle_Mod_ParticleSword_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_Punch.Perk_Lancer_Particle_Mod_Punch_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_ExtraBolt2.Perk_Lancer_Bolt_Mod_ExtraBolt2_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_ShockField.Perk_Lancer_Bolt_Mod_ShockField_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Beam_Mod_AOEBeam.Perk_Lancer_Particle_Beam_Mod_AOEBeam_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Cryo_Mod_CryoPool.Perk_Lancer_Particle_Cryo_Mod_CryoPool_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_Weakpoint.Perk_Lancer_Particle_Mod_Weakpoint_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Replacer_Javelin.Perk_Lancer_Bolt_Replacer_Javelin_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Beam_Mod_ThermalBoost.Perk_Lancer_Particle_Beam_Mod_ThermalBoost_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Mod_FocusedShotTorso.Perk_Lancer_Weakpoint_Mod_FocusedShotTorso_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Mod_PermanentMaxHealth.Perk_Lancer_OnEliteKill_Mod_PermanentMaxHealth_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_Stun.Perk_Lancer_Bolt_Mod_Stun_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_Run.Perk_Lancer_Particle_Mod_Run_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_Supercharged.Perk_Lancer_Particle_Mod_Supercharged_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Bolt_Mod_SpreadDOT.Perk_Lancer_Bolt_Mod_SpreadDOT_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_SpreadDamage3.Perk_Lancer_Bolt_Mod_SpreadDamage3_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_Weakpoint_Mod_Vulture.Perk_Lancer_Weakpoint_Mod_Vulture_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_ResidualCharge.Perk_Lancer_Particle_Mod_ResidualCharge_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_Weaken.Perk_Lancer_Particle_Mod_Weaken_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_ExtraCharge2.Perk_Lancer_Particle_Mod_ExtraCharge2_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_MirrorDamage.Perk_Lancer_Bolt_Mod_MirrorDamage_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_Gravity.Perk_Lancer_Bolt_Mod_Gravity_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Cryo_Mod_AmbientCooling.Perk_Lancer_Particle_Cryo_Mod_AmbientCooling_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_LightningStrike.Perk_Lancer_Particle_Mod_LightningStrike_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Beam_Mod_Radius.Perk_Lancer_Particle_Beam_Mod_Radius_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Mod_EliteMultiplier.Perk_Lancer_OnEliteKill_Mod_EliteMultiplier_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Beam_Mod_Radius.Perk_Lancer_Particle_Beam_Mod_Radius_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core.Perk_Lancer_WeakPointDamageBonus_Core_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Lancer.Perk_Generic_Core_XPBonus_Lancer_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_Bullseye.Perk_Lancer_Bolt_Mod_Bullseye_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Mod_PermanentDamage.Perk_Lancer_OnEliteKill_Mod_PermanentDamage_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/BoltLauncher/Perk_Lancer_Bolt_Mod_Bleed.Perk_Lancer_Bolt_Mod_Bleed_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Mod_DelayedCooling.Perk_Lancer_Particle_Mod_DelayedCooling_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Beam_Mod_Shortbeam.Perk_Lancer_Particle_Beam_Mod_Shortbeam_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Beam/Perk_Lancer_Particle_Beam_Mod_Overdrive.Perk_Lancer_Particle_Beam_Mod_Overdrive_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      }
+    ],
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Lancer/Player_Lancer_V2.json",
+      "jsonSha256": "950ca2d89bc1ef622a195d68f69b332d73ed46ce41fc3e579c13a955891a7e33"
+    }
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Medic/Player_Medic",
+    "name": "Medic",
+    "board": "/Game/Blueprints/Avocado_Classes/Medic/Perks/PerkBoard_Medic.PerkBoard_Medic_C",
+    "chipEntitlements": [
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic.Perk_Generic_Core_HealthBonus_Medic_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Replacer_Overclock.Perk_Medic_CombatStims_Replacer_Overclock_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_WoundBonus_Core.Perk_Medic_WoundBonus_Core_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_Mechanic.Perk_Medic_CombatStims_Mod_Mechanic_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_ProcessorUpgrade.Perk_Medic_TraumaStation_Mod_ProcessorUpgrade_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_THP_Ally.Perk_Medic_Guardian_Passive_THP_Ally_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_AcidNeutralize.Perk_Medic_TraumaStation_Mod_AcidNeutralize_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_MoreEnergy.Perk_Medic_TraumaStation_Mod_MoreEnergy_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Ultimate_Replacer_TraumaStation_Base.Perk_Custom_Ultimate_Replacer_TraumaStation_Base_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Tactical_Replacer_CombatStims.Perk_Custom_Tactical_Replacer_CombatStims_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Passive_Replacer_Guardian.Perk_Custom_Passive_Replacer_Guardian_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_ConcentratedFormula.Perk_Medic_TraumaStation_Mod_ConcentratedFormula_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_TempHealthBonus.Perk_Medic_CombatStims_Mod_TempHealthBonus_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_DoctorsOrders_Core.Perk_Medic_DoctorsOrders_Core_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_Physician_Base.Perk_Medic_Physician_Base_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_THP_Self.Perk_Medic_Guardian_Passive_THP_Self_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Overclock_Mod_BallisticAmplifier.Perk_Medic_CombatStims_Overclock_Mod_BallisticAmplifier_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_MoreEnergy2.Perk_Medic_TraumaStation_Mod_MoreEnergy2_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Replacer_Buff.Perk_Medic_TraumaStation_Replacer_Buff_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_Revive.Perk_Medic_CombatStims_Mod_Revive_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_FieldImprovements.Perk_Medic_TraumaStation_Mod_FieldImprovements_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_HealingBonus_Core.Perk_Medic_HealingBonus_Core_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_THP_Ally2.Perk_Medic_Guardian_Passive_THP_Ally2_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Overclock_Mod_CoordinationAcceleration.Perk_Medic_CombatStims_Overclock_Mod_CoordinationAcceleration_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_EmergencyActivation.Perk_Medic_CombatStims_Mod_EmergencyActivation_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_Anesthesiologist_Core.Perk_Medic_Anesthesiologist_Core_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_AllyTempHealthOnKill_Core.Perk_Medic_AllyTempHealthOnKill_Core_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_THP_Self2.Perk_Medic_Guardian_Passive_THP_Self2_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_Amphetamine.Perk_Medic_CombatStims_Mod_Amphetamine_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Overclock_Mod_QuickloadInterlink.Perk_Medic_CombatStims_Overclock_Mod_QuickloadInterlink_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Buff_Mod_AcidResist.Perk_Medic_TraumaStation_Buff_Mod_AcidResist_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_Overheal.Perk_Medic_TraumaStation_Mod_Overheal_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_MoreEnergy3.Perk_Medic_TraumaStation_Mod_MoreEnergy3_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Replacer_AdrenalineSurge.Perk_Medic_CombatStims_Replacer_AdrenalineSurge_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_FieldMedic_Core.Perk_Medic_FieldMedic_Core_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_Readiness_Core.Perk_Medic_Readiness_Core_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_Physician_Mod_HealSelfBonus.Perk_Medic_Physician_Mod_HealSelfBonus_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_Adrenaline.Perk_Medic_Guardian_Passive_Adrenaline_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_AdrenalineSurge_Mod_StaminaRestore.Perk_Medic_CombatStims_AdrenalineSurge_Mod_StaminaRestore_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_Hyperfocus.Perk_Medic_CombatStims_Mod_Hyperfocus_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Overclock_Mod_SmartLink.Perk_Medic_CombatStims_Overclock_Mod_SmartLink_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Buff_Mod_AnabolicAerosol.Perk_Medic_TraumaStation_Buff_Mod_AnabolicAerosol_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_FieldImprovements2.Perk_Medic_TraumaStation_Mod_FieldImprovements2_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_FieldMedic_Mod_SupportSystem.Perk_Medic_FieldMedic_Mod_SupportSystem_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_PassiveEnergyBonus.Perk_Medic_TraumaStation_Mod_PassiveEnergyBonus_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core.Perk_Medic_BedsideManner_Core_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_Neutralization.Perk_Medic_Guardian_Passive_Neutralization_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_AdrenalineSurge_Mod_TempHealthBonus.Perk_Medic_CombatStims_AdrenalineSurge_Mod_TempHealthBonus_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_Amphetamine2.Perk_Medic_CombatStims_Mod_Amphetamine2_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Buff_Mod_CooldownBonus.Perk_Medic_TraumaStation_Buff_Mod_CooldownBonus_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_BuffShockwave.Perk_Medic_CombatStims_Mod_BuffShockwave_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_MoreEnergy4.Perk_Medic_TraumaStation_Mod_MoreEnergy4_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Replacer_Poison.Perk_Medic_TraumaStation_Replacer_Poison_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_FieldMedic_Mod_StrengthInNumbers.Perk_Medic_FieldMedic_Mod_StrengthInNumbers_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_CooldownBonusOnDownedAlly_Core.Perk_Medic_CooldownBonusOnDownedAlly_Core_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_SurgeonsHands_Core.Perk_Medic_SurgeonsHands_Core_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_Reciprocity.Perk_Medic_Guardian_Passive_Reciprocity_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Poison_Mod_LingeringPoison.Perk_Medic_TraumaStation_Poison_Mod_LingeringPoison_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_AdrenalineSurge_Mod_FightOrFight.Perk_Medic_CombatStims_AdrenalineSurge_Mod_FightOrFight_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Buff_Mod_DamageResist.Perk_Medic_TraumaStation_Buff_Mod_DamageResist_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_UnstableConcoction.Perk_Medic_TraumaStation_Mod_UnstableConcoction_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Poison_Mod_Cryo.Perk_Medic_TraumaStation_Poison_Mod_Cryo_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_Mod_MetabolicStimulant.Perk_Medic_CombatStims_Mod_MetabolicStimulant_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_EnergyBonusOnDownedAlly.Perk_Medic_TraumaStation_Mod_EnergyBonusOnDownedAlly_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_PassiveEnergyBonus2.Perk_Medic_TraumaStation_Mod_PassiveEnergyBonus2_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_PressurizedDispersion.Perk_Medic_TraumaStation_Mod_PressurizedDispersion_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Guardian/Perk_Medic_Guardian_Passive_SecondWind.Perk_Medic_Guardian_Passive_SecondWind_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Poison_Mod_CreepingPoison.Perk_Medic_TraumaStation_Poison_Mod_CreepingPoison_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Poison_Mod_EnfeeblingPoison.Perk_Medic_TraumaStation_Poison_Mod_EnfeeblingPoison_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_AdrenalineSurge_Mod_SuperSerum.Perk_Medic_CombatStims_AdrenalineSurge_Mod_SuperSerum_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Poison_Mod_SedatingPoison.Perk_Medic_TraumaStation_Poison_Mod_SedatingPoison_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_TempHealthDelayBonus_Core.Perk_Medic_TempHealthDelayBonus_Core_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Medic.Perk_Generic_Core_XPBonus_Medic_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_NeurotoxinSpecialist_Core.Perk_Medic_NeurotoxinSpecialist_Core_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Poison_Mod_StationImmunity.Perk_Medic_TraumaStation_Poison_Mod_StationImmunity_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_AdrenalineSurge_Mod_StaminaReservior.Perk_Medic_CombatStims_AdrenalineSurge_Mod_StaminaReservior_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Medic/Perks/CombatStims/Perk_Medic_CombatStims_AdrenalineSurge_Mod_Tireless.Perk_Medic_CombatStims_AdrenalineSurge_Mod_Tireless_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      }
+    ],
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Medic/Player_Medic.json",
+      "jsonSha256": "8e03d17cf8944b3b5393d01940c752f6d2c186d9e37a48d32bd220428038d095"
+    }
+  },
+  {
+    "assetPath": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+    "name": "Machinist",
+    "board": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerkBoard_Technician.PerkBoard_Technician_C",
+    "chipEntitlements": [
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Technician.Perk_Generic_Core_HealthBonus_Technician_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Replacer_Gas.Perk_Technician_Turret_Replacer_Gas_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthBonus.Perk_Technician_Turret_Mod_HealthBonus_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core.Perk_Technician_CrossPlatformSynergy_Core_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01.Perk_Technician_Turret_Mod_ParasocialRelationship01_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_DownDefense.Perk_Technician_Bodyguard_Mod_DownDefense_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Ultimate_Replacer_Turret_Base.Perk_Custom_Ultimate_Replacer_Turret_Base_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Tactical_Replacer_Bodyguard_Base.Perk_Custom_Tactical_Replacer_Bodyguard_Base_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Custom/Perks/Perk_Custom_Passive_TurretBonusDamage.Perk_Custom_Passive_TurretBonusDamage_C",
+        "RequiredRank": 2,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_Duration1.Perk_Technician_Turret_Gas_Mod_Duration1_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Mod_HyperlocalLogistics.Perk_Technician_CrossPlatformSynergy_Mod_HyperlocalLogistics_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth.Perk_Technician_TurretBonusDmg_Mod_TempHealth_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Shockwave.Perk_Technician_Turret_Mod_Shockwave_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration.Perk_Technician_Turret_Mod_HealthRegeneration_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Damage.Perk_Technician_Bodyguard_Mod_Damage_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ElectricAmmo.Perk_Technician_Bodyguard_Mod_ElectricAmmo_C",
+        "RequiredRank": 3,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Replacer_Shotgun.Perk_Technician_Bodyguard_Replacer_Shotgun_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked.Perk_Technician_Bodyguard_Mod_Overclocked_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_TempHealthOnKill.Perk_Technician_Turret_Mod_TempHealthOnKill_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Mod_CollaborativeAnalytics.Perk_Technician_CrossPlatformSynergy_Mod_CollaborativeAnalytics_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthBonus_2.Perk_Technician_Turret_Mod_HealthBonus_2_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Slow.Perk_Technician_TurretBonusDmg_Mod_Slow_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_CryoTurret.Perk_Technician_Turret_Gas_Mod_CryoTurret_C",
+        "RequiredRank": 4,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_RealTimeResourceReclamation.Perk_Technician_Turret_Mod_RealTimeResourceReclamation_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_TempHealthOnKill.Perk_Technician_Bodyguard_Mod_TempHealthOnKill_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship02.Perk_Technician_Turret_Mod_ParasocialRelationship02_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration_2.Perk_Technician_Turret_Mod_HealthRegeneration_2_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_Duration2.Perk_Technician_Turret_Gas_Mod_Duration2_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_SelfDestruct.Perk_Technician_Bodyguard_Mod_SelfDestruct_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ThermalAmmo.Perk_Technician_Bodyguard_Mod_ThermalAmmo_C",
+        "RequiredRank": 5,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Replacer_Rumble.Perk_Technician_Turret_Replacer_Rumble_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_SlowAura.Perk_Technician_Turret_Rumble_Mod_SlowAura_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core.Perk_Technician_ResonatingImpact_Core_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthBonus_3.Perk_Technician_Turret_Mod_HealthBonus_3_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Shock.Perk_Technician_TurretBonusDmg_Mod_Shock_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Shockwave.Perk_Technician_Bodyguard_Mod_Shockwave_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CompatibilityMatrix_Mod.Perk_Technician_CompatibilityMatrix_Mod_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_CryoAura.Perk_Technician_Turret_Gas_Mod_CryoAura_C",
+        "RequiredRank": 6,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ShrapnelShot.Perk_Technician_TurretBonusDmg_Mod_ShrapnelShot_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ScalableMachineLearning_Core.Perk_Technician_ScalableMachineLearning_Core_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special.Perk_Technician_Bodyguard_Mod_Special_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_Taunt.Perk_Technician_Turret_Rumble_Mod_Taunt_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration_3.Perk_Technician_Turret_Mod_HealthRegeneration_3_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ShockAmmo.Perk_Technician_Turret_Mod_ShockAmmo_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_ElectricAura.Perk_Technician_Turret_Rumble_Mod_ElectricAura_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_HinderingCorrosion.Perk_Technician_Turret_Gas_Mod_HinderingCorrosion_C",
+        "RequiredRank": 7,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Replacer_GrenadeLauncher.Perk_Technician_Bodyguard_Replacer_GrenadeLauncher_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage.Perk_Technician_TurretBonusDmg_Mod_ExtraDamage_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireAura.Perk_Technician_Turret_Mod_FireAura_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ScalableMachineLearning_Mod_ModularIntegration.Perk_Technician_ScalableMachineLearning_Mod_ModularIntegration_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core.Perk_Technician_CreativePainPointSolutions_Core_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship03.Perk_Technician_Turret_Mod_ParasocialRelationship03_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_RapidShotgun.Perk_Technician_Bodyguard_Mod_RapidShotgun_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_CryoShell.Perk_Technician_Bodyguard_Mod_CryoShell_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_AddlingCorrosion.Perk_Technician_Turret_Gas_Mod_AddlingCorrosion_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_KineticAmplification.Perk_Technician_Turret_Rumble_Mod_KineticAmplification_C",
+        "RequiredRank": 8,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_AgilePractices_Mod.Perk_Technician_AgilePractices_Mod_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore.Perk_Technician_Turret_Mod_ExplosiveCore_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_DynamicDeliverySystems.Perk_Technician_Turret_Mod_DynamicDeliverySystems_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_FragmentingShell.Perk_Technician_Bodyguard_Mod_FragmentingShell_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_BigExplosion.Perk_Technician_Bodyguard_Mod_BigExplosion_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireRate.Perk_Technician_Turret_Mod_FireRate_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback.Perk_Technician_TurretBonusDmg_Mod_Knockback_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_WastingCorrosion.Perk_Technician_Turret_Gas_Mod_WastingCorrosion_C",
+        "RequiredRank": 9,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Mastery_Duration.Perk_Technician_Mastery_Duration_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Technician.Perk_Generic_Core_XPBonus_Technician_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_StrategicTactics_Core.Perk_Technician_StrategicTactics_Core_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Turret_Mod_GroupEffort.Perk_Technician_Turret_Mod_GroupEffort_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_AlwaysDestroy.Perk_Technician_Turret_Mod_AlwaysDestroy_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Electrocute.Perk_Technician_Turret_Mod_Electrocute_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_SelfApplied.Perk_Technician_TurretBonusDmg_Mod_SelfApplied_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      },
+      {
+        "ChipCDO": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Gas_Mod_EnervatingCorrosion.Perk_Technician_Turret_Gas_Mod_EnervatingCorrosion_C",
+        "RequiredRank": 10,
+        "GrantedBy": "None"
+      }
+    ],
+    "source": {
+      "buildId": "26090957",
+      "jsonPath": "AFE2/Content/Blueprints/Avocado_Classes/Technician/Player_Technician_V2.json",
+      "jsonSha256": "66150011ff39c4a7bd9e41df1d15fea76b89b25434b79c5f307917fac4356651"
+    }
+  }
+]

@@ -32,3 +32,9 @@ These are candidates, not confirmed working extractors for this build. Determine
 - Which numerical effects are additive, multiplicative, conditional, or capped?
 
 Distinguish tooltip text, serialized properties, and observed behavior. Do not fill missing values with guesses.
+
+## 2026-10-26: first successful extraction
+
+The initial inspection above is historical. Perk assets have now been decoded. See `extraction.md` for the current findings: 509 chip definitions, 483 explicit masks, six class catalogs, seven boards, and coverage/validation results.
+
+The next step is verifying native defaults and actual grid rules before building a planner.

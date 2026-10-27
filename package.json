@@ -1,0 +1,11 @@
+{
+  "name": "aliens-fireteam-2-research",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local game asset research for an Aliens: Fireteam Elite 2 perk-grid planner",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node scripts/validate-catalog.mjs",
+    "research:normalize": "node scripts/normalize-perks.mjs"
+  }
+}

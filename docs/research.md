@@ -50,3 +50,11 @@ Traced ModChipDef registration, reflected PossibleShapes member offset 0x468, an
 ## 2026-10-26: initial UI and solver plan
 
 Added `planner-ui-plan.md`: class/rank/ability setup, perk library, required and ordered optional requests, automatic arrangement, and explainable omissions. Solver preference is lexicographic, with no automatic unrequested fillers. No rotation is now an explicit user-approved planning assumption. Native game-rule coverage remains a prerequisite for calling output legal. The accompanying in-chat concept demonstrates footprint packing only.
+
+## 2026-10-26: static-web v0 saves, cross-class eligibility, and effect descriptions
+
+Updated the UI plan with browser-local draft and named Save/Load, stable IDs and versioned revalidation, and explicit separation of unlock source from equip scope. Recorded raw cross-class eligibility clues in `universal-use-research.md`; no eligibility rule was inferred from missing serialized values.
+
+The user clarified the result panel should present descriptions of abilities and bonuses from equipped items, not another perk-name list. The plan and illustrative concept now show Effects you get, In grid checks on priority rows, and Below the line omissions. A versioned fragment snapshot is under `docs/mockups/`; it is a footprint-only design demonstration, not the production application or complete game-rule solver.
+
+Preview checks passed for source-description inclusion/exclusion, fresh versus stale highlights, rank locks, impossible required sets, named local browser Save/Load across reload, and layouts at 320, 736, and 1024 pixels.

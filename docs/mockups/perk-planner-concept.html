@@ -1,0 +1,137 @@
+<div id="afe-planner-concept">
+  <style>
+    #afe-planner-concept{--pp-bg:light-dark(#f4f5f0,#151b17);--pp-panel:light-dark(#ffffff,#1d2620);--pp-text:light-dark(#1d2c23,#e8eee7);--pp-muted:light-dark(#526357,#adbaae);--pp-line:light-dark(#d4ddd2,#3b493d);--pp-accent:light-dark(#34633c,#b0d17e);--pp-on:light-dark(#ffffff,#182317);--pp-tile:light-dark(#e1eccd,#34432c);--pp-lock:light-dark(#e7e9e3,#252f28);--pp-fixed:light-dark(#d3e1d4,#3a5140);font:14px/1.45 system-ui,sans-serif;color:var(--pp-text);background:var(--pp-bg);border:1px solid var(--pp-line);border-radius:12px;overflow:hidden}
+    #afe-planner-concept *{box-sizing:border-box}
+    #afe-planner-concept .pp-top{padding:18px 22px;border-bottom:1px solid var(--pp-line);display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-right:100px}
+    #afe-planner-concept h2,#afe-planner-concept h3,#afe-planner-concept p{margin:0}
+    #afe-planner-concept h2{font-size:19px;font-weight:600;letter-spacing:.02em}
+    #afe-planner-concept h3{font-size:14px;font-weight:600}
+    #afe-planner-concept .pp-small{font-size:12px;color:var(--pp-muted)}
+    #afe-planner-concept .pp-tools{padding:14px 22px;display:flex;align-items:end;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--pp-line)}
+    #afe-planner-concept label{display:grid;gap:5px;font-size:12px;color:var(--pp-muted)}
+    #afe-planner-concept select,#afe-planner-concept button{font:inherit;color:var(--pp-text);background:var(--pp-panel);border:1px solid var(--pp-line);border-radius:5px;padding:7px 10px;min-height:34px}
+    #afe-planner-concept button:disabled{opacity:.4;cursor:default}
+    #afe-planner-concept .pp-primary{background:var(--pp-accent);color:var(--pp-on);border-color:var(--pp-accent)}
+    #afe-planner-concept .pp-work{padding:20px 22px;display:grid;grid-template-columns:minmax(240px, .9fr) minmax(0,1.5fr);gap:24px}
+    #afe-planner-concept .pp-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+    #afe-planner-concept .pp-choices{margin:12px 0 16px;display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+    #afe-planner-concept .pp-choices label{flex:1;min-width:170px}
+    #afe-planner-concept .pp-list{list-style:none;padding:0;margin:0}
+    #afe-planner-concept .pp-item{padding:11px 0;border-bottom:1px solid var(--pp-line);display:grid;gap:7px}
+    #afe-planner-concept .pp-item-title{display:flex;justify-content:space-between;gap:10px}
+    #afe-planner-concept .pp-item-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+    #afe-planner-concept .pp-item-actions label{display:flex;align-items:center;gap:5px;margin-right:auto;color:var(--pp-text)}
+    #afe-planner-concept input{accent-color:var(--pp-accent)}
+    #afe-planner-concept .pp-item-actions button{padding:3px 9px}
+    #afe-planner-concept .pp-solve{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
+    #afe-planner-concept .pp-board{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));grid-template-rows:repeat(6,minmax(0,1fr));aspect-ratio:10/6;gap:3px;position:relative;margin:16px 0;background:var(--pp-bg)}
+    #afe-planner-concept .pp-cell{min-width:0;background:var(--pp-panel);border:1px solid var(--pp-line);border-radius:3px}
+    #afe-planner-concept .pp-cell.pp-locked{background:var(--pp-lock);display:grid;place-items:center;color:var(--pp-muted);font-size:11px}
+    #afe-planner-concept .pp-cell.pp-void{background:none;border:none}
+    #afe-planner-concept .pp-chip{z-index:1;background:var(--pp-tile);border:1px solid var(--pp-accent);border-radius:5px;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;font-size:12px;text-align:center;font-weight:500;padding:2px;color:var(--pp-text)}
+    #afe-planner-concept .pp-chip.pp-fixed{background:var(--pp-fixed);border-color:var(--pp-line)}
+    #afe-planner-concept .pp-chip.pp-side{writing-mode:vertical-rl}
+    #afe-planner-concept .pp-result{border-top:1px solid var(--pp-line);padding-top:12px;min-height:55px}
+    #afe-planner-concept .pp-legend{display:flex;gap:15px;flex-wrap:wrap;font-size:12px;color:var(--pp-muted)}
+    #afe-planner-concept .pp-dot{display:inline-block;width:10px;height:10px;background:var(--pp-tile);border:1px solid var(--pp-accent);margin-right:5px}
+    #afe-planner-concept .pp-bottom{padding:12px 22px;border-top:1px solid var(--pp-line);font-size:12px;color:var(--pp-muted)}
+    #afe-planner-concept .pp-save{display:flex;gap:10px;align-items:end;flex-wrap:wrap;padding:12px 22px;border-bottom:1px solid var(--pp-line)}
+    #afe-planner-concept .pp-save input{font:inherit;color:var(--pp-text);background:var(--pp-panel);border:1px solid var(--pp-line);border-radius:5px;padding:7px 10px;min-width:0;max-width:100%;min-height:34px}
+    #afe-planner-concept .pp-save label{max-width:100%}
+    #afe-planner-concept .pp-item.pp-included{background:var(--pp-tile);padding-left:9px;padding-right:9px;border-radius:5px}
+    #afe-planner-concept .pp-check{font-size:12px;color:var(--pp-accent)}
+    #afe-planner-concept .pp-effects{margin:10px 0 16px;padding-left:19px;display:grid;gap:9px}
+    #afe-planner-concept .pp-below{margin-top:16px;padding-top:14px;border-top:1px solid var(--pp-line)}
+    @media(max-width:760px){#afe-planner-concept .pp-work{grid-template-columns:1fr}#afe-planner-concept .pp-top,#afe-planner-concept .pp-work,#afe-planner-concept .pp-tools{padding-left:14px;padding-right:14px}#afe-planner-concept .pp-top{padding-right:100px}}
+    @media(pointer:coarse){#afe-planner-concept button,#afe-planner-concept select{min-height:44px}}
+  </style>
+  <div class="pp-top"><div><div class="pp-small">ALIENS: FIRETEAM ELITE 2</div><h2>Perk planner</h2></div><span class="pp-small">Interface concept · Medic example</span></div>
+  <div class="pp-tools">
+    <div><div class="pp-small">Class</div><div>Medic</div></div>
+    <label>Rank<select id="pp-rank"><option value="10">10 — full grid</option><option value="7">7</option><option value="5">5</option><option value="3">3</option></select></label>
+    <div><div class="pp-small">Left ability</div><div>Trauma Station</div></div>
+    <div><div class="pp-small">Right ability</div><div>Combat Stims</div></div>
+    <div><div class="pp-small">Passive</div><div>Guardian</div></div>
+  </div>
+  <div class="pp-save"><label>Build name<input id="pp-name" value="Medic priorities" maxlength="60"></label><button type="button" id="pp-save-build">Save build</button><label>Saved builds<select id="pp-saved-builds"><option value="">No saved builds</option></select></label><button type="button" id="pp-load-build">Load</button><span id="pp-save-status" class="pp-small" aria-live="polite">Saved on this browser.</span></div>
+  <div class="pp-work">
+    <section><div class="pp-head"><h3>Your priorities</h3><span class="pp-small" id="pp-selected"></span></div><p class="pp-small">Higher perks take priority. Required perks are never dropped.</p>
+      <div class="pp-choices"><label>Add perk<select id="pp-add"></select></label><button id="pp-add-button" type="button">Add</button></div>
+      <ol class="pp-list" id="pp-list"></ol>
+      <div class="pp-solve"><button class="pp-primary" id="pp-solve" type="button">Find arrangement</button><span id="pp-stale" class="pp-small"></span></div>
+    </section>
+    <section><div class="pp-head"><h3>Grid arrangement</h3><span class="pp-small">Fixed orientations</span></div><p class="pp-small">Footprint demonstration · complete game-rule validation planned</p>
+      <div class="pp-board" id="pp-board" role="img" aria-label="Medic perk grid with fixed side abilities and bottom passive"></div>
+      <div class="pp-legend"><span><span class="pp-dot"></span>Requested perk</span><span>TS · Trauma Station</span><span>CS · Combat Stims</span></div>
+      <div class="pp-result" aria-live="polite"><p id="pp-status"></p><p id="pp-detail" class="pp-small"></p><h3 style="margin-top:16px">Effects you get</h3><ul id="pp-effects" class="pp-effects"></ul><div class="pp-below"><h3>Below the line</h3><div id="pp-omitted" class="pp-small"></div></div></div>
+    </section>
+  </div>
+  <div class="pp-bottom">Example perks and footprints from the research catalog. No rotation or manual tile placement.</div>
+  <script>
+  (()=>{
+    const root=document.getElementById('afe-planner-concept'),q=id=>root.querySelector('#'+id);
+    const perks=[
+      {id:'do',name:"Doctor’s Orders",short:'DO',w:2,h:2,effect:'Gain 5% weapon damage and handling for each party member, including yourself, above 75% health.'},
+      {id:'cf',name:'Concentrated Formula',short:'CF',w:2,h:2,effect:'Increase Trauma Station healing potency by 50% and poison potency by 75%.'},
+      {id:'cq',name:'CQW Weapon Training',short:'CQW',w:2,h:2,effect:'Decrease recoil and increase magazine capacity of CQWs by 15%.'},
+      {id:'ea',name:'Emergency Activation',short:'EA',w:2,h:1,effect:'When downed, immediately revive and trigger the attached ability. Can occur once every 5 minutes.'},
+      {id:'re',name:'Resiliency',short:'R',w:10,h:1,effect:'Temporary Health lasts 300% longer.'}
+    ];
+    const initial={rank:5,items:perks.map((p,i)=>({id:p.id,required:i<2}))};
+    const valid=s=>s&&Array.isArray(s.items)&&[3,5,7,10].includes(s.rank)&&s.items.every(i=>perks.some(p=>p.id===i.id)&&typeof i.required==='boolean')&&new Set(s.items.map(i=>i.id)).size===s.items.length;
+    const copy=s=>JSON.parse(JSON.stringify(s));
+    const storageKey='afe2-planner-concept-v0';
+    let state=copy(initial),solution=null,solvedRank=5,stale=false,builds=[],storageAvailable=true;
+    try{const local=JSON.parse(localStorage.getItem(storageKey)||'null');if(local?.schemaVersion===1){if(valid(local.draft))state=local.draft;if(Array.isArray(local.builds))builds=local.builds.filter(b=>typeof b.name==='string'&&valid(b.config));}}catch(e){storageAvailable=false}
+    const saved=window.openai?.widgetState?.modelContent;
+    if(valid(saved))state={rank:saved.rank,items:saved.items};
+    const savedBuilds=window.openai?.widgetState?.privateContent?.builds;
+    if(!storageAvailable&&Array.isArray(savedBuilds))builds=savedBuilds.filter(b=>typeof b.name==='string'&&valid(b.config));
+    const thresholds=[10,0,0,0,0,-1,10,3,3,0,0,-1,10,3,3,0,0,-1,10,7,7,0,0,0,10,7,7,5,5,0,10,7,7,5,5,0,10,7,7,0,0,0,10,3,3,0,0,-1,10,3,3,0,0,-1,10,0,0,0,0,-1];
+    const fixed=[{id:'left',short:'TS',name:'Trauma Station',x:0,y:1,w:1,h:4,effect:'Place a medical station that restores Temporary Health to nearby allies. It deactivates when out of energy; energy recharges over time or from kills near the station.'},{id:'right',short:'CS',name:'Combat Stims',x:9,y:1,w:1,h:4,effect:'Grant nearby allies 25 Temporary Health and reduce ability cooldowns by 20%. Abilities used during Combat Stims also receive a cooldown reduction.'},{id:'passive',short:'Guardian',name:'Guardian',x:3,y:5,w:4,h:1,effect:'When defending an ally, you both gain 20 Temporary Health. The ally also gains 20% Damage Resistance for 3 seconds.'}];
+    const cells=p=>Array.from({length:p.w*p.h},(_,i)=>[p.x+i%p.w,p.y+Math.floor(i/p.w)]);
+    const bit=(x,y)=>1n<<BigInt(y*10+x);
+    function mask(p){return cells(p).reduce((m,[x,y])=>m|bit(x,y),0n)}
+    function candidates(p,rank){const a=[];for(let y=0;y<=6-p.h;y++)for(let x=0;x<=10-p.w;x++){const v={...p,x,y};if(cells(v).every(([cx,cy])=>thresholds[cx*6+cy]>=0&&thresholds[cx*6+cy]<=rank))a.push({...v,mask:mask(v)})}return a;}
+    function fit(subset,rank){let occupied=fixed.reduce((m,p)=>m|mask(p),0n);const order=subset.map(i=>({item:i,poss:candidates(perks.find(p=>p.id===i.id),rank).filter(p=>!(p.mask&occupied))})).sort((a,b)=>a.poss.length-b.poss.length);function search(n,m,placed){if(n===order.length)return placed;for(const p of order[n].poss)if(!(m&p.mask)){const r=search(n+1,m|p.mask,[...placed,p]);if(r)return r}return null}return search(0,occupied,[]);}
+    function solve(){const required=state.items.filter(i=>i.required),optional=state.items.filter(i=>!i.required);function subsets(n,chosen){if(n===optional.length)return fit([...required,...chosen],state.rank);return subsets(n+1,[...chosen,optional[n]])??subsets(n+1,chosen)}solution=subsets(0,[]);solvedRank=state.rank;stale=false;draw();renderList();q('pp-stale').textContent='';}
+    function persist(){let ok=false;try{localStorage.setItem(storageKey,JSON.stringify({schemaVersion:1,gameDataVersion:'26090957',draft:state,builds}));ok=true;storageAvailable=true}catch(e){storageAvailable=false}window.openai?.setWidgetState?.({modelContent:{rank:state.rank,items:state.items},privateContent:{builds}}).catch(()=>{});return ok;}
+    function changed(){stale=true;renderList();q('pp-stale').textContent='Result out of date';q('pp-status').textContent='Previous arrangement · out of date';persist();}
+    function renderList(){
+      q('pp-rank').value=state.rank;q('pp-selected').textContent=state.items.length+' selected';q('pp-list').innerHTML='';
+      state.items.forEach((item,index)=>{
+        const p=perks.find(p=>p.id===item.id),included=solution?.some(s=>s.id===p.id),li=document.createElement('li');
+        li.className='pp-item'+(!stale&&included?' pp-included':'');li.dataset.perkId=p.id;
+        const label=stale?(included?'Previously in grid · out of date':'Result out of date'):solution===null?'No successful arrangement':included?'✓ In grid':'Below the line';
+        li.innerHTML='<div class="pp-item-title"><span>'+(index+1)+'. '+p.name+'</span><span class="pp-small">'+p.w+'×'+p.h+'</span></div><span class="pp-check">'+label+'</span><div class="pp-item-actions"><label><input type="checkbox" '+(item.required?'checked':'')+'>Required</label><button type="button" aria-label="Move '+p.name+' up" '+(index===0?'disabled':'')+'>↑</button><button type="button" aria-label="Move '+p.name+' down" '+(index===state.items.length-1?'disabled':'')+'>↓</button><button type="button" aria-label="Remove '+p.name+'">×</button></div>';
+        li.querySelector('input').onchange=e=>{item.required=e.target.checked;changed()};const bs=li.querySelectorAll('button');
+        bs[0].onclick=()=>{[state.items[index-1],state.items[index]]=[state.items[index],state.items[index-1]];changed()};
+        bs[1].onclick=()=>{[state.items[index+1],state.items[index]]=[state.items[index],state.items[index+1]];changed()};
+        bs[2].onclick=()=>{state.items.splice(index,1);changed()};q('pp-list').append(li);
+      });
+      const available=perks.filter(p=>!state.items.some(i=>i.id===p.id));q('pp-add').innerHTML=available.map(p=>'<option value="'+p.id+'">'+p.name+'</option>').join('')||'<option>All example perks selected</option>';q('pp-add').disabled=!available.length;q('pp-add-button').disabled=!available.length;
+    }
+    function draw(){
+      const board=q('pp-board');board.innerHTML='';
+      for(let y=0;y<6;y++)for(let x=0;x<10;x++){const t=thresholds[x*6+y],d=document.createElement('div');d.className='pp-cell'+(t<0?' pp-void':t>solvedRank?' pp-locked':'');d.style.gridArea=(y+1)+' / '+(x+1);d.textContent=t>solvedRank?'R'+t:'';board.append(d)}
+      for(const p of [...fixed,...(solution??[])]){const d=document.createElement('button');d.type='button';d.className='pp-chip'+(fixed.includes(p)?' pp-fixed':'')+(p.w===1?' pp-side':'');d.style.gridArea=(p.y+1)+' / '+(p.x+1)+' / span '+p.h+' / span '+p.w;d.textContent=p.short;d.setAttribute('aria-label',p.name+', '+p.w+' wide by '+p.h+' tall');d.onclick=()=>{q('pp-detail').textContent=p.name+' · '+p.w+' wide × '+p.h+' tall'};board.append(d)}
+      q('pp-effects').innerHTML='';q('pp-omitted').innerHTML='';
+      if(solution===null){q('pp-status').textContent='Required set has no footprint arrangement';q('pp-omitted').textContent='Relax a requirement or increase the rank to try again.';const li=document.createElement('li');li.textContent='No successful arrangement to summarize yet.';q('pp-effects').append(li)}
+      else{
+        q('pp-status').textContent=solution.length+' of '+state.items.length+' requested perks fit by footprint';
+        const included=state.items.filter(i=>solution.some(p=>p.id===i.id)).map(i=>perks.find(p=>p.id===i.id));
+        for(const p of [...fixed,...included]){const li=document.createElement('li');li.textContent=p.effect;li.dataset.perkId=p.id;li.setAttribute('aria-label',p.effect+' Source: '+p.name);q('pp-effects').append(li)}
+        const omitted=state.items.filter(i=>!solution.some(p=>p.id===i.id)).map(i=>perks.find(p=>p.id===i.id));
+        for(const p of omitted){const row=document.createElement('p');row.textContent=p.name+' · '+p.w+'×'+p.h+' — '+(fit([{id:p.id}],solvedRank)===null?'No footprint placement at rank '+solvedRank+'.':'Omitted to preserve higher priorities.');q('pp-omitted').append(row)}
+        if(!omitted.length)q('pp-omitted').textContent='All requested perks included.';
+      }
+      q('pp-detail').textContent='Select a tile for its name and dimensions.';
+    }
+    function renderSaves(selected){const select=q('pp-saved-builds');select.innerHTML='';if(!builds.length){const o=document.createElement('option');o.textContent='No saved builds';o.value='';select.append(o)}for(const b of builds){const o=document.createElement('option');o.value=b.name;o.textContent=b.name;select.append(o)}if(selected)select.value=selected;select.disabled=!builds.length;q('pp-load-build').disabled=!builds.length;}
+    q('pp-save-build').onclick=()=>{const name=q('pp-name').value.trim();if(!name){q('pp-save-status').textContent='Enter a build name.';return}const build={name,config:copy(state)},index=builds.findIndex(b=>b.name===name);if(index>=0)builds[index]=build;else builds.push(build);const ok=persist();renderSaves(name);q('pp-save-status').textContent=ok?'Saved on this browser.':'Browser storage unavailable in this preview.';};
+    q('pp-load-build').onclick=()=>{const b=builds.find(b=>b.name===q('pp-saved-builds').value);if(b){state=copy(b.config);q('pp-name').value=b.name;solve();persist();q('pp-save-status').textContent='Loaded '+b.name+'.';}};
+    q('pp-rank').onchange=e=>{state.rank=Number(e.target.value);changed()};q('pp-add-button').onclick=()=>{const id=q('pp-add').value;if(perks.some(p=>p.id===id)&&!state.items.some(i=>i.id===id)){state.items.push({id,required:false});changed()}};q('pp-solve').onclick=()=>{solve();persist()};renderSaves();solve();if(!storageAvailable)q('pp-save-status').textContent='Browser storage may be restricted in this preview.';
+    window.addEventListener('openai:set_globals',e=>{const globals=e.detail?.globals,s=globals?.widgetState?.modelContent;if(valid(s)){state={rank:s.rank,items:s.items};solve()}const b=globals?.widgetState?.privateContent?.builds;if(!storageAvailable&&Array.isArray(b)){builds=b.filter(v=>typeof v.name==='string'&&valid(v.config));renderSaves()}});
+  })();
+  </script>
+</div>

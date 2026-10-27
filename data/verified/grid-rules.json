@@ -12,6 +12,15 @@
         "nonnegativeValues": "rank_at_which_cell_unlocks"
       },
       "scope": "Board mask values only. Does not establish perk-mask value semantics, coordinate indexing, rotation, or connectivity rules."
+    },
+    {
+      "subject": "perk_rotation",
+      "status": "tentative_user_observation",
+      "reportedOn": "2026-10-26",
+      "source": "User confirmation in project chat",
+      "userStatement": "I don't think any of them rotate",
+      "hypothesis": "Perks may have fixed orientations",
+      "enforcement": "Do not enforce globally until confirmed"
     }
   ]
 }

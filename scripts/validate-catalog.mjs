@@ -27,3 +27,23 @@ for(const b of boards) for(const placement of b.properties.BoardLockedPlacements
 assert.equal(report.perkAssets,perks.length);
 console.log(`Validated ${perks.length} chip assets, ${classes.length} classes, and ${boards.length} boards for build ${report.buildId}.`);
 console.log(`${perks.filter(p=>!p.shapes.length).length} chips lack serialized shapes; these remain unknown.`);
+
+// User verification supplements raw exports without filling unknown native properties.
+const verified = JSON.parse(fs.readFileSync('data/verified/perks.json','utf8').replace(/^\uFEFF/,''));
+const verifiedIds = new Set();
+for (const observation of verified.perks) {
+  assert.ok(!verifiedIds.has(observation.assetPath), 'Duplicate verified perk');
+  verifiedIds.add(observation.assetPath);
+  const perk = perks.find(p => p.assetPath === observation.assetPath);
+  assert.ok(perk, 'Verified perk must resolve to an extracted asset');
+  assert.equal(perk.name, observation.name);
+  assert.equal(perk.source.buildId, observation.evidence.buildIdContext, 'Recheck user observations for a changed build');
+  const shape = observation.footprint;
+  assert.ok(Number.isInteger(shape.width) && shape.width > 0);
+  assert.ok(Number.isInteger(shape.height) && shape.height > 0);
+  if (perk.shapes.length) assert.ok(perk.shapes.some(s => s.width === shape.width && s.height === shape.height), 'Verified footprint conflicts with extracted shape');
+  if (observation.connection) assert.ok(['none_required','required'].includes(observation.connection.mode));
+  if (observation.connection?.mode === 'required') assert.equal(typeof observation.connection.targetName, 'string');
+}
+const recovered = verified.perks.filter(o => !perks.find(p => p.assetPath === o.assetPath).shapes.length).length;
+console.log(`User verification: ${verified.perks.length} perks checked, ${recovered} missing footprints recovered, ${perks.filter(p => !p.shapes.length).length - recovered} footprints unresolved.`);

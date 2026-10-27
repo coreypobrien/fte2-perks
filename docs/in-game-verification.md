@@ -1,15 +1,32 @@
-# In-game verification requests
+# In-game verification log
 
-Requested 2026-10-26. All perk checks below are pending. Match display names rather than internal asset names. A missing serialized shape is unknown, not evidence that the perk has no footprint.
+## Confirmed 2026-10-26
 
-| Perk | Catalog | Extracted observation | In-game check |
+User observations are stored by stable asset identifier in `data/verified/perks.json`. They supplement the extracted properties; raw data is unchanged.
+
+| Perk | Verified footprint | Connection rule | Other confirmation |
 | --- | --- | --- | --- |
-| Doctor's Orders | Medic, rank 3 reference | Shape property omitted | Exact occupied cells / dimensions; whether it needs to connect to an ability |
-| Concentrated Formula | Medic, rank 3 reference | Shape property omitted; tags mention Trauma Station and Poison | Exact occupied cells; attachment to ordinary and poison station variants |
-| CQW Weapon Training | Universal weapon perk candidate | Shape property omitted; compatibility tags mention CQW | Exact occupied cells; connection requirement and any class restriction shown |
-| Stack 'Em Up | Marauder, rank 5 reference | 4x1 mask `[1,1,1,4]` | Actual footprint and whether rotation is allowed |
-| Resiliency | Medic, rank 10 reference | 10x1 mask `[1,2,3,4,5,6,7,8,9,10]`; temporary health lasts 300% longer | Whether it is present/selectable, actual footprint, and any placement restriction |
+| Doctor's Orders | 2 wide x 2 tall | No connection required | Shape omitted from export |
+| Concentrated Formula | 2 wide x 2 tall | Only connects to Trauma Station | Variant-specific behavior was not separately established |
+| CQW Weapon Training | 2 wide x 2 tall | No connection required | Shape omitted from export |
+| Stack 'Em Up | 4 wide x 1 tall | Not checked | Confirms the footprint despite mask `[1,1,1,4]` |
+| Resiliency | 10 wide x 1 tall | Not checked | User also confirms temporary health lasts 300% longer |
 
-For a straight strip, a response like `Doctor's Orders: 1x1, standalone` is enough. For an irregular shape, use a small text diagram with `#` for occupied cells and `.` for gaps.
+Three previously missing footprints are now known. Combining 483 explicit asset shapes with three user-verified shapes gives **486 chips with known footprints**, leaving **23 unresolved**. This is a coverage count, not proof that all 509 packaged definitions are currently selectable.
 
-Confirmed board evidence: user reports `-1` is unusable and other numbers are unlock ranks. This confirmation does not automatically establish the meaning of the integer values in individual perk masks.
+## Tentative rotation observation
+
+The user said, "I don't think any of them rotate." This is recorded as tentative in `data/verified/grid-rules.json`, not promoted to a confirmed global rule. Do not generate rotated orientations as though they were verified legal placements.
+
+## Confirmed board evidence
+
+`-1` means unusable; other board-mask values specify the unlock rank. This confirmation does not establish the semantics of individual perk-mask integers.
+
+## Remaining questions
+
+- Are orientations fixed for every selectable perk?
+- What are the footprints of the remaining 23 chips that omit `PossibleShapes`?
+- Do modifiers require direct adjacency to their ability, or can they connect through compatible modifier chains?
+- Which Trauma Station variants accept Concentrated Formula? The current evidence names Trauma Station but does not identify variants separately.
+
+All three checked missing-shape chips are 2x2. A shared native 2x2 default is a useful hypothesis; do not apply it to the other 23 without further evidence.

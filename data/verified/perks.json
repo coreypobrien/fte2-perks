@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "perks": [
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_DoctorsOrders_Core",
+      "name": "Doctor's Orders",
+      "evidence": {
+        "source": "User confirmation in project chat",
+        "confirmedOn": "2026-10-26",
+        "status": "user_confirmed_in_game",
+        "buildIdContext": "26090957"
+      },
+      "footprint": {
+        "filledRectangle": true,
+        "height": 2,
+        "width": 2
+      },
+      "connection": {
+        "mode": "none_required"
+      }
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Medic/Perks/TraumaStation/Perk_Medic_TraumaStation_Mod_ConcentratedFormula",
+      "name": "Concentrated Formula",
+      "evidence": {
+        "source": "User confirmation in project chat",
+        "confirmedOn": "2026-10-26",
+        "status": "user_confirmed_in_game",
+        "buildIdContext": "26090957"
+      },
+      "footprint": {
+        "filledRectangle": true,
+        "height": 2,
+        "width": 2
+      },
+      "connection": {
+        "variantDetails": "not_separately_verified",
+        "userStatement": "It only connects to the trauma station",
+        "mode": "required",
+        "targetName": "Trauma Station"
+      }
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_CQWWeaponTraining_Core",
+      "name": "CQW Weapon Training",
+      "evidence": {
+        "source": "User confirmation in project chat",
+        "confirmedOn": "2026-10-26",
+        "status": "user_confirmed_in_game",
+        "buildIdContext": "26090957"
+      },
+      "footprint": {
+        "filledRectangle": true,
+        "height": 2,
+        "width": 2
+      },
+      "connection": {
+        "mode": "none_required"
+      }
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/DeadEye/Perk_Demolisher_DeadEye_Mod_StackCount",
+      "name": "Stack 'Em Up",
+      "evidence": {
+        "source": "User confirmation in project chat",
+        "confirmedOn": "2026-10-26",
+        "status": "user_confirmed_in_game",
+        "buildIdContext": "26090957"
+      },
+      "footprint": {
+        "filledRectangle": true,
+        "height": 1,
+        "width": 4
+      }
+    },
+    {
+      "assetPath": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_TempHealthDelayBonus_Core",
+      "name": "Resiliency",
+      "evidence": {
+        "source": "User confirmation in project chat",
+        "confirmedOn": "2026-10-26",
+        "status": "user_confirmed_in_game",
+        "buildIdContext": "26090957"
+      },
+      "footprint": {
+        "filledRectangle": true,
+        "height": 1,
+        "width": 10
+      },
+      "descriptionConfirmation": {
+        "text": "Temporary Health lasts 300% longer.",
+        "status": "user_confirmed_in_game"
+      }
+    }
+  ]
+}

@@ -38,3 +38,7 @@ Distinguish tooltip text, serialized properties, and observed behavior. Do not f
 The initial inspection above is historical. Perk assets have now been decoded. See `extraction.md` for the current findings: 509 chip definitions, 483 explicit masks, six class catalogs, seven boards, and coverage/validation results.
 
 The next step is verifying native defaults and actual grid rules before building a planner.
+
+## 2026-10-26: user verification of five perks
+
+User verified Doctor's Orders, Concentrated Formula, and CQW Weapon Training as 2x2; Stack 'Em Up as 4x1; and Resiliency as 10x1 with the extracted description. Connection rules are recorded only where supplied. Rotation remains a tentative observation. See `in-game-verification.md` and `data/verified/perks.json`. Combined shape coverage is 486 of 509 packaged chip definitions, with 23 unresolved.

@@ -10,10 +10,10 @@ Story verified: browser loads the versioned game catalog → player selects clas
 
 | Check | Result |
 | --- | --- |
-| Unit/integration cases | **56 passed, 0 failed** |
-| Instrumented total line coverage | **98.69%** |
-| Instrumented total branch coverage | **96.46%** |
-| Instrumented total function coverage | **97.97%** |
+| Unit/integration cases | **57 passed, 0 failed** |
+| Instrumented total line coverage | **98.08%** |
+| Instrumented total branch coverage | **96.51%** |
+| Instrumented total function coverage | **97.98%** |
 | Core model line / branch coverage | **100% / 95.79%** |
 | Solver line / branch coverage | **100% / 97.49%** |
 | Storage line / branch coverage | **100% / 100%** |
@@ -48,15 +48,7 @@ The latest suite also verifies granting-class and independent Core/Modifier/univ
 
 Fault-injection contexts intentionally simulate failures. The zero-unexpected-error claim applies to the normal-flow context. The test server created for production QA is closed by the runner; the user-facing Vite server is retained for local review.
 
-Generated run artifacts:
-
-- [Production browser report](../work/evidence/browser-report.json)
-- [Unit/integration log and coverage table](../work/evidence/unit-tests.txt)
-- [Desktop screenshot](../work/evidence/desktop.png)
-- [Mobile screenshot](../work/evidence/mobile.png)
-- [Source manifest](../work/evidence/source-manifest.json)
-
-These artifacts are local test outputs under ignored `work/`. The chat handoff includes accessible copies; future agents should regenerate them after code changes.
+Generated run artifacts are local files under ignored `work/evidence/`: `browser-report.json`, `unit-tests.txt`, `desktop.png`, `mobile.png`, and `source-manifest.json`. Regenerate them after changes. GitHub Actions uploads available evidence as the `test-evidence` artifact (14-day retention); see [deployment](deployment.md). A representative rendered [desktop screenshot](images/planner.png) is committed for the README.
 
 ## Build and data evidence
 
@@ -76,7 +68,7 @@ Known selected-class ordinary-perk unlocks now follow the selected rank, with al
 
 Named builds already included priority order and Required flags; this was retained and reverified. Clipboard/file transfers use the version-1 portable format, preserving all requests, flags, class, rank and ability choices. Real clipboard permissions, file chooser/download, denied clipboard/manual fallback, malformed/future/oversized file rejection, imported unknown IDs and named-save independence passed browser checks.
 
-Five seeded rank-10 Machinist examples now use only explicit Machinist rank-10-or-below grants, with 24 optional priorities each totaling 59–70 cells against 42 free cells. The Machinist-only files passed all 56 unit/integration tests and browser scenarios importing all five and waiting for proven optimal results. Refreshed reference layouts are non-overlapping, assign each modifier to one group, and are proven optimal within the implemented model. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
+Five seeded rank-10 Machinist examples now use only explicit Machinist rank-10-or-below grants, with 24 optional priorities each totaling 59–70 cells against 42 free cells. The Machinist-only files passed all 57 unit/integration tests and browser scenarios importing all five and waiting for proven optimal results. Refreshed reference layouts are non-overlapping, assign each modifier to one group, and are proven optimal within the implemented model. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
 
 ## Agile Practices and direct group search
 
@@ -101,3 +93,7 @@ The 25-case, one-second comparison reduced timeouts from 15 to 3. Medic catalog-
 Results are optimal within the implemented audited rule model when the search completes. A timeout is labeled Best found / search limit and never certifies optimality or impossibility. Full acquisition/catalog ownership membership and every runtime replacement/merge edge case are not certified by direct in-game instrumentation. Known selected-class ordinary-perk ranks are enforced; other-class and unknown/shared unlocks remain assumed available; there is no combat-power scoring or automatic filler selection.
 
 See `architecture.md`, `testing.md`, `native-chip-rules.md`, and root `AGENTS.md` for reproduction and future-agent guidance.
+
+## Public release preparation
+
+A fresh source-only copy installed successfully with pnpm --frozen-lockfile, without an installed game, research tools, raw assets, or pre-existing node_modules. All 57 unit/integration tests passed. The production build then passed all 23 browser scenarios under /afe2-pages-check/ using installed Edge, with no unexpected page errors or failed requests. This verifies project-path catalog and worker loading as well as normal build/save/import flows. The pinned Pages workflow passed actionlint 1.7.12. Hosted deployment validation is tracked separately in deployment.md.

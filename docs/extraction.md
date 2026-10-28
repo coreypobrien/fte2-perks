@@ -1,6 +1,6 @@
 # Extraction findings — build 26090957
 
-Inspected on 2026-10-26. Everything below comes from the locally installed game unless marked as an inference.
+Historical first-pass extraction report, inspected on 2026-10-26. Later native analysis resolved several initial gaps. Use [current data pipeline](perk-data.md), [native defaults](native-defaults.md), and [native rules](native-chip-rules.md) for the implemented model. Everything below comes from the locally installed game unless marked as an inference.
 
 ## Confirmed observations
 
@@ -10,7 +10,7 @@ Inspected on 2026-10-26. Everything below comes from the locally installed game 
 - 931 packages were converted from `/Game/Blueprints/Avocado_Classes/` with zero conversion failures.
 - 523 selected packages were exported to UAssetAPI JSON with zero process failures or raw/unparsed exports.
 - Of 510 packages named `Perk_*`, 509 inherit from `ModChipDef`. The remaining package inherits from `CoreProcAbility` and is excluded from the chip dataset.
-- All 509 chip records contain serialized name and description text. 483 contain explicit `PossibleShapes` masks. The other 26 omit that property and inherit native defaults that have not been decoded.
+- All 509 chip records contain serialized name and description text. 483 contain explicit `PossibleShapes` masks. The other 26 omit that property and inherit a 2x2 native constructor default recovered in the subsequent audit.
 - All 428 distinct chip references in the six class entitlement lists resolve to extracted records. This does not cover all acquisition paths or establish full equip eligibility.
 - Seven board definitions were exported: a base board and one for each class.
 
@@ -52,7 +52,7 @@ Interpreting the mask as column-major (`index = column * height + row`) yields:
 
 **User confirmed in game, 2026-10-26:** `-1` means an unusable board cell; the other numbers specify the rank at which that cell unlocks. This evidence is recorded separately in `data/verified/grid-rules.json`. The column-major coordinate interpretation remains an inference. With the fixed ability shapes (two 1x4 strips and a 4x1 passive strip), 60 total minus six blocked cells minus twelve ability cells leaves 42 cells for optional perks.
 
-The exported perk coordinate lists use this column-major interpretation and are explicitly marked as inferred. Source masks remain authoritative observations. Rotation, reflection, modifier connectivity, and replacement behavior still need verification.
+The exported perk coordinate lists use this column-major interpretation and are explicitly marked as inferred. Source masks remain authoritative observations. The planner uses fixed orientations by user agreement. Subsequent native analysis establishes modifier group rules and compatibility; exhaustive runtime parity remains unverified.
 
 Ten chip definitions have non-binary positive mask values: for example, Stack 'Em Up uses `[1,1,1,4]`, and several 10x1 strips use `[1,2,3,4,5,6,7,8,9,10]`. Their semantics are unresolved. The normalizer preserves these integers and lists them in the report; its derived cell coordinates provisionally treat nonzero values as occupied. Validation checks integer/nonnegative values without assuming masks are binary. Do not infer that every packaged 10x1 strip is a current selectable perk.
 
@@ -66,7 +66,7 @@ These are asset observations, not tests that every runtime effect matches its to
 
 ## Reproduce
 
-Requires Windows, PowerShell, Node.js 20+, and the installed game. Run from the repository root:
+Requires Windows, PowerShell, Node.js 22.14+, and the installed game. Run from the repository root:
 
 ```powershell
 .\scripts\Initialize-ResearchTools.ps1
@@ -74,7 +74,7 @@ Requires Windows, PowerShell, Node.js 20+, and the installed game. Run from the 
 node scripts/validate-catalog.mjs
 ```
 
-The extraction script accepts `-ArchiveKey`, `AFE2_AES_KEY`, or an ignored `work/archive-key.txt`. The validated public asset key is already saved in that local file on this checkout. It is not an account credential. Tool downloads, converted packages, raw JSON, and the local key file stay under ignored `work/`. Tools are pinned and SHA-256 verified; nothing is installed globally. Game files are opened for reading only.
+The extraction script accepts `-ArchiveKey`, `AFE2_AES_KEY`, or an ignored `work/archive-key.txt`. Supply your own local extraction input; never commit archive keys. Tool downloads, converted packages, raw JSON, and the local key file stay under ignored `work/`. Tools are pinned and SHA-256 verified; nothing is installed globally. Game files are opened for reading only.
 
 The complete extraction uses build-specific scratch directories to avoid mixing patches. To normalize existing JSON manually:
 
@@ -82,7 +82,7 @@ The complete extraction uses build-specific scratch directories to avoid mixing 
 node scripts/normalize-perks.mjs work/build-26090957/class-json data/extracted 26090957
 ```
 
-The short `npm run research:normalize` command uses the build recorded in `data/inventory/installed-game.json`. `npm test` validates the committed catalog without needing extraction tools or game files.
+The short `pnpm research:normalize` command uses the build recorded in `data/inventory/installed-game.json`. `pnpm test` validates the committed catalog without needing extraction tools or game files.
 
 ## Tool provenance and references
 
@@ -92,14 +92,13 @@ The short `npm run research:normalize` command uses the build recorded in `data/
 - [Firsthand community extraction notes](https://www.reddit.com/r/AliensFireteamElite/comments/1vzahm7/how_moddable_will_afe2_be/), used as a lead for the asset key and tool selection; success was checked locally.
 - [Official October 22 patch notes](https://www.daybreakgames.com/press/afe2/article/afe2-102226-patchnotes), useful for comparing changed descriptions and mechanics.
 
-## Next research tasks
+## Remaining research
 
-1. Recover or verify native defaults for the 26 missing shapes; do not silently assume 1x1.
-2. Trace common/shop/weapon/horde rewards to distinguish current selectable chips from unused assets. Class entitlements alone are incomplete.
-3. Board mask rank semantics are user-confirmed. Verify coordinate indexing, rotations, and modifier connection rules with representative in-game examples.
-4. Resolve effective compatibility tags, replacement relationships, and native restrictions.
-5. Define a planner-ready schema only after those rules are verified. Numerical optimization requires separate confirmation of stacking and conditions.
+1. Trace common/shop/weapon/horde rewards to complete acquisition rules and distinguish selectable chips from unused assets.
+2. Compare native-derived group, replacement, and shape rules against representative in-game layouts.
+3. Verify numerical effect stacking and conditions before adding combat-power scoring.
+4. Re-audit native recipes and assets for future builds; never bypass hash guards.
 
 ## Native-code follow-up
 
-The initial missing-footprint findings above describe the first asset-only export. Native constructor analysis now recovers the shared 2x2 default, resolving all 26 omitted footprints. `data/perks/catalog.json` has 509 game-derived footprints and uses no manual overrides. See `native-defaults.md` for instruction-level provenance and reproduction. User observations remain independent cross-checks. Native logic for other defaults and runtime rules is still being traced.
+The initial missing-footprint findings above describe the first asset-only export. Native constructor analysis now recovers the shared 2x2 default, resolving all 26 omitted footprints. `data/perks/catalog.json` has 509 game-derived footprints and uses no manual overrides. See `native-defaults.md` for instruction-level provenance and reproduction. User observations remain independent cross-checks. The subsequent [native rule audit](native-chip-rules.md) also resolves Type/restriction defaults, effective tags, matching, and single-host connected groups. See [known limitations](known-limitations.md) for remaining runtime limits.

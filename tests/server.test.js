@@ -13,3 +13,13 @@ test('static server serves modules/data with correct types and contains request 
     assert.equal((await fetch(url+'/%2e%2e%2fpackage.json')).status,403);
   }finally{await new Promise(r=>server.close(r));}
 });
+
+test('project-path hosting keeps assets scoped and canonicalizes the trailing slash',async()=>{
+  for(const prefix of ['repo','/repo','//repo/','/../','/./','/a%20b/'])assert.throws(()=>createServer(undefined,prefix));
+  const server=createServer(undefined,'/repo/');await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port;
+  try{
+    const redirect=await fetch(url+'/repo',{redirect:'manual'});assert.equal(redirect.status,308);assert.equal(redirect.headers.get('Location'),'/repo/');
+    assert.equal((await fetch(url+'/repo/')).status,200);assert.equal((await fetch(url+'/repo/core/solver.js')).status,200);assert.equal((await fetch(url+'/core/solver.js')).status,404);assert.equal((await fetch(url+'/other/')).status,404);
+    assert.equal((await fetch(url+'/repo/%2e%2e%2fpackage.json')).status,403);
+  }finally{await new Promise(r=>server.close(r));}
+});

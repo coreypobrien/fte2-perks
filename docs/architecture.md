@@ -87,3 +87,9 @@ See `docs/testing.md` for commands and the checked-in verification report for th
 5. Run catalog, unit, and browser tests. Update documentation and independently revalidate relevant in-game observation fixtures if their build context changes.
 
 The committed generated data lets ordinary development and testing run without the game installed. Only research regeneration needs the installed game and Python/native tools.
+
+## Static hosting and notices
+
+The build copies the project MIT license, game-data notice, and Vite runtime-helper license into dist/. Preserve these when changing packaging. Vite uses a relative base so HTML, catalog, and worker URLs resolve under a project prefix. The test server supports --base-path /repo/ to exercise this layout.
+
+The pinned Actions workflow validates every push/PR and deploys successful default-branch runs through the github-pages environment. Only the deployment job has Pages write/OIDC permissions. Repository Pages must use GitHub Actions as its source. See [deployment](deployment.md), [notice](../NOTICE.md), and [limitations](known-limitations.md).

@@ -1,5 +1,7 @@
 # Research log
 
+Chronological research log: earlier entries describe what was known at that time. For current conclusions, use [data pipeline](perk-data.md), [native rules](native-chip-rules.md), and [known limitations](known-limitations.md).
+
 ## 2026-10-26: initial inspection
 
 - Found the Steam installation under `C:\Program Files (x86)\Steam\steamapps\common\Aliens Fireteam Elite 2`.

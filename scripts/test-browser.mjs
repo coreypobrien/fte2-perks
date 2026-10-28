@@ -7,13 +7,13 @@ import {createConfig,availability} from '../app/core/model.js';
 import {exportBuild,importBuild} from '../app/core/transfer.js';
 const args=process.argv.slice(2),arg=(name,fallback=null)=>args.includes(name)?args[args.indexOf(name)+1]:fallback;
 let playwright;
-try{playwright=await import('playwright');}catch(error){const module=arg('--playwright-module');if(!module)throw new Error('Install dev dependencies (npm install), or pass --playwright-module PATH_TO_PLAYWRIGHT_INDEX_MJS.');playwright=await import(pathToFileURL(path.resolve(module)));}
+try{playwright=await import('playwright');}catch(error){const module=arg('--playwright-module');if(!module)throw new Error('Install dev dependencies (pnpm install --frozen-lockfile), or pass --playwright-module PATH_TO_PLAYWRIGHT_INDEX_MJS.');playwright=await import(pathToFileURL(path.resolve(module)));}
 const evidence=path.resolve(arg('--evidence','work/evidence'));fs.mkdirSync(evidence,{recursive:true});
 const report={startedAt:new Date().toISOString(),browser:'Chromium',checks:[],pageErrors:[],consoleErrors:[],failedRequests:[],coverage:[]};
 const check=async(name,run)=>{if(arg('--only')&&!name.includes(arg('--only')))return;try{await run();report.checks.push({name,status:'passed'});console.log('PASS '+name);}catch(error){report.checks.push({name,status:'failed'});const pages=browser?.contexts().flatMap(c=>c.pages())??[];const p=pages.at(-1);if(p){report.failurePage=await p.locator('body').innerText().catch(()=> 'Page unavailable');await p.screenshot({path:path.join(evidence,'failure.png'),fullPage:true}).catch(()=>{});}throw error;}};
 let ownedServer=null,browser;
 try{
-  let base=arg('--base-url');if(!base){ownedServer=createServer(arg('--directory')??undefined);await new Promise(r=>ownedServer.listen(0,'127.0.0.1',r));base='http://127.0.0.1:'+ownedServer.address().port+'/';}
+  let base=arg('--base-url');if(!base){ownedServer=createServer(arg('--directory')??undefined,arg('--base-path','/'));await new Promise(r=>ownedServer.listen(0,'127.0.0.1',r));base='http://127.0.0.1:'+ownedServer.address().port+arg('--base-path','/');}
   report.baseUrl=base;assert.equal((await fetch(base)).status,200);
   const executablePath=arg('--browser-path');browser=await playwright.chromium.launch({headless:true,...(executablePath?{executablePath}:{})});
   const context=await browser.newContext({viewport:{width:1440,height:1100}}),page=await context.newPage();

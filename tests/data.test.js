@@ -21,5 +21,6 @@ test('build-static produces ordinary deployable files with no observation or too
   const assets=fs.readdirSync('dist/assets');
   for(const pattern of [/^index-.*\.js$/,/^index-.*\.css$/,/^worker-.*\.js$/,/^game-.*\.json$/])assert.ok(assets.some(p=>pattern.test(p)),pattern);
   const data=assets.find(p=>/^game-.*\.json$/.test(p));assert.deepEqual(fs.readFileSync('dist/assets/'+data),fs.readFileSync('app/data/game.json'));
+  assert.equal(fs.readFileSync('dist/LICENSE.txt','utf8'),fs.readFileSync('LICENSE','utf8'));assert.equal(fs.readFileSync('dist/NOTICE.txt','utf8'),fs.readFileSync('NOTICE.md','utf8'));assert.equal(fs.readFileSync('dist/licenses/Vite.txt','utf8'),fs.readFileSync('licenses/Vite.txt','utf8'));
   assert.ok(!fs.existsSync('dist/data/verified'));assert.ok(!fs.existsSync('dist/work'));assert.ok(!fs.existsSync('dist/scripts'));
 });

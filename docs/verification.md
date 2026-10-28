@@ -10,12 +10,12 @@ Story verified: browser loads the versioned game catalog → player selects clas
 
 | Check | Result |
 | --- | --- |
-| Unit/integration cases | **47 passed, 0 failed** |
-| Instrumented total line coverage | **98.40%** |
-| Instrumented total branch coverage | **95.86%** |
-| Instrumented total function coverage | **97.98%** |
+| Unit/integration cases | **48 passed, 0 failed** |
+| Instrumented total line coverage | **98.45%** |
+| Instrumented total branch coverage | **95.96%** |
+| Instrumented total function coverage | **98.05%** |
 | Core model line / branch coverage | **100% / 95.60%** |
-| Solver line / branch coverage | **100% / 96.96%** |
+| Solver line / branch coverage | **100% / 97.10%** |
 | Storage line / branch coverage | **100% / 100%** |
 | Portable transfer line / branch coverage | **100% / 100%** |
 | Browser scenarios against Vite production output | **22 passed** |
@@ -66,7 +66,7 @@ The game catalog covers build 26090957. All 509 footprints are game-derived: 483
 
 ## Priority controls and effect linking
 
-Find arrangement appears above and below the priorities with a fixed 10-second limit, no budget selector, and a visible spinner/elapsed timer. Clear priorities cancels active work, resets requested tiles/descriptions/omissions and autosaves the empty draft while preserving named snapshots. A delayed-worker browser check verified the exact posted budget, progress visibility, clear/reload behavior and busy-state cleanup.
+Find arrangement appears above and below the priorities with a fixed 60-second limit, no budget selector, and a visible spinner/elapsed timer. Clear priorities cancels active work, resets requested tiles/descriptions/omissions and autosaves the empty draft while preserving named snapshots. A delayed-worker browser check verified the exact posted budget, progress visibility, clear/reload behavior and busy-state cleanup.
 
 Hovering a priority, tile, equipped effect or omission highlights its counterparts; keyboard focus provides the same association. Omitted perks show their sourced descriptions separately Below the line. Effects you get includes equipped requested perks only, excluding fixed abilities/passive. These interactions and worker error/cancel cleanup passed the production and dev browser suite.
 
@@ -76,7 +76,13 @@ Known selected-class ordinary-perk unlocks now follow the selected rank, with al
 
 Named builds already included priority order and Required flags; this was retained and reverified. Clipboard/file transfers use the version-1 portable format, preserving all requests, flags, class, rank and ability choices. Real clipboard permissions, file chooser/download, denied clipboard/manual fallback, malformed/future/oversized file rejection, imported unknown IDs and named-save independence passed browser checks.
 
-Five seeded rank-10 Machinist examples now use only explicit Machinist rank-10-or-below grants, with 24 optional priorities each totaling 59–70 cells against 42 free cells. The corrected Machinist-only files passed all 47 unit/integration tests and a targeted browser scenario importing all five and comparing their exact source configurations. Reference layouts are non-overlapping and group-valid in the implemented model, but all five reached the 10-second limit; they are best-found validation candidates. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
+Five seeded rank-10 Machinist examples now use only explicit Machinist rank-10-or-below grants, with 24 optional priorities each totaling 59–70 cells against 42 free cells. The corrected Machinist-only files passed all 48 unit/integration tests and a targeted browser scenario importing all five and comparing their exact source configurations. Reference layouts are non-overlapping and group-valid in the implemented model, but all five reached the 10-second limit; they are best-found validation candidates. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
+
+## Timer audit and current solver budget
+
+Six real-browser paired trials detected no timer slowdown (median 2.62 seconds disabled versus 2.57 enabled at identical state counts and included IDs). CPU profiling instead identified repeated compatibility/reachability work. Caching reduced the five fixed-work examples from 4.18–6.09 seconds to 0.35–1.30 seconds, about 4.5–16× faster. The UI uses a 60-second wall-time budget without the old practical node cap, and calls the counter search states to distinguish it from inner candidate checks.
+
+A full 60-second sample reached 339,072 states and retained 10 perks, still with a truthful timeout status. Work counters explain the former low state counts, and the final geometry/group rules remain unchanged. See solver-performance.md and the machine-readable profiling evidence for details.
 
 ## Solver investigation
 

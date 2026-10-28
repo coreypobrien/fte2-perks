@@ -54,10 +54,10 @@ export function connectedGroups(placements, tick = () => {}, preparedLinks = nul
 export function solve(problem, options = {}) {
   const now=options.now ?? (() => performance.now());
   const start=now(), budget=options.timeLimitMs ?? 2500, maxNodes=options.maxNodes ?? 350000;
-  let nodes=0, best=null; const STOP=Symbol('budget');
+  let nodes=0, best=null;const work={candidateChecks:0,reachabilityChecks:0,floodIterations:0}; const STOP=Symbol('budget');
   const tick=()=>{nodes++; if(nodes>maxNodes || (nodes===1 || nodes%64===0) && now()-start>=budget) throw STOP;};
   const result=(status, placements, omissions=[], error=null)=>({status,complete:status==='optimal'||status==='infeasible',placements,
-    included:placements?.map(p=>p.id)??[],omissions,error,nodes,elapsedMs:Math.max(0,now()-start)});
+    included:placements?.map(p=>p.id)??[],omissions,error,nodes,work:{...work},elapsedMs:Math.max(0,now()-start)});
   const {width,height,rank=10,rankMask,fixed=[],requests=[],perks=[]}=problem;
   if(!Number.isInteger(width)||!Number.isInteger(height)||width<1||height<1||width*height>256||rankMask?.length!==width*height || !Number.isInteger(rank)||rank<1||rank>10)
     return result('invalid',null,[],'Invalid board or rank.');
@@ -71,8 +71,10 @@ export function solve(problem, options = {}) {
   const leftEdge=Array.from({length:height},(_,y)=>bit(0,y)).reduce((a,b)=>a|b,0n);
   const rightEdge=leftEdge<<BigInt(width-1),boardBits=(1n<<BigInt(width*height))-1n;
   const neighbors=m=>((m&~rightEdge)<<1n)|((m&~leftEdge)>>1n)|(m<<BigInt(width))|(m>>BigInt(width));
+  const fixedMasks=new WeakMap(fixed.map(p=>[p,placementMask(p)])),maskOf=p=>p.mask??fixedMasks.get(p);
+  const fixedForSearch=fixed.map(p=>({...p,mask:fixedMasks.get(p)}));
   const edges=new WeakMap();
-  const edge=p=>{if(!edges.has(p))edges.set(p,neighbors(p.mask??placementMask(p)));return edges.get(p);};
+  const edge=p=>{if(!edges.has(p))edges.set(p,neighbors(maskOf(p)));return edges.get(p);};
   const fixedIds=new Set(fixed.map(p=>p.id));
   const invalid=requests.filter(r=>!byId.has(r.id)||fixedIds.has(r.id)||byId.get(r.id).unavailable);
   const invalidIds=new Set(invalid.map(r=>r.id));
@@ -96,29 +98,35 @@ export function solve(problem, options = {}) {
   const required=valid.filter(r=>r.required), optional=valid.filter(r=>!r.required), failed=new Set();
   const area=id=>Math.min(...(byId.get(id).shapes??[]).map(s=>s.cells.length));
   const bare=p=>{const {mask,...clean}=p;return clean;};
+  const definitions=[...fixed,...valid.map(r=>byId.get(r.id))];
+  // Candidate copies share their source ID and immutable compatibility metadata.
+  const compatibility=new Map(definitions.filter(p=>p.kind==='Core').map(core=>[core.id,new Set(definitions.filter(mod=>compatible(core,mod)).map(p=>p.id))]));
+  const matches=(core,mod)=>compatibility.get(core.id)?.has(mod.id)??false;
   const geometricallyImpossible=new Set();
   function pack(selected){
     tick(); const key=selected.map(r=>r.id).sort().join('|');if(failed.has(key))return null;
     if(selected.reduce((n,r)=>n+area(r.id),0)>free || selected.some(r=>!candidates.get(r.id).length)){failed.add(key);geometricallyImpossible.add(key);return null;}
     const all=[...fixed,...selected.map(r=>byId.get(r.id))];
-    if(all.some(p=>p.kind==='Modifier'&&!all.some(c=>compatible(c,p)))){failed.add(key);return null;}
-    const connectionRank=id=>{const p=byId.get(id);return p.kind==='Modifier'||all.some(m=>compatible(p,m))?0:1;};
+    if(all.some(p=>p.kind==='Modifier'&&!all.some(c=>matches(c,p)))){failed.add(key);return null;}
+    const connectionRank=id=>{const p=byId.get(id);return p.kind==='Modifier'||all.some(m=>matches(p,m))?0:1;};
     const order=[...selected].sort((a,b)=>connectionRank(a.id)-connectionRank(b.id)||candidates.get(a.id).length-candidates.get(b.id).length || Number(byId.get(a.id).kind!=='Core')-Number(byId.get(b.id).kind!=='Core') || a.id.localeCompare(b.id));
     const sparseFootprints=[...fixed,...selected.flatMap(r=>byId.get(r.id).shapes)].some(p=>{const cells=new Set(p.cells.map(([x,y])=>x+','+y)),seen=new Set(),queue=[p.cells[0]];while(queue.length){const [x,y]=queue.pop(),key=x+','+y;if(seen.has(key)||!cells.has(key))continue;seen.add(key);queue.push([x-1,y],[x+1,y],[x,y-1],[x,y+1]);}return seen.size!==cells.size;});
     function potentiallyConnected(n,mask,placed){
-      const mods=[...fixed.filter(p=>p.kind==='Modifier').map(p=>({...p,mask:placementMask(p)})),...placed.filter(p=>p.kind==='Modifier')];if(!mods.length)return true;
+      work.reachabilityChecks++;
+      const mods=[...fixedForSearch.filter(p=>p.kind==='Modifier'),...placed.filter(p=>p.kind==='Modifier')];if(!mods.length)return true;
       if(sparseFootprints)return true;
-      const domains=order.slice(n).map(r=>({perk:byId.get(r.id),positions:candidates.get(r.id).filter(p=>!(mask&p.mask))}));
-      const roots=[...fixed,...placed].filter(p=>p.kind==='Core').map(p=>({perk:p,mask:p.mask??placementMask(p)}));
-      for(const d of domains)if(d.perk.kind==='Core')roots.push({perk:d.perk,mask:d.positions.reduce((m,p)=>m|p.mask,0n)});
+      const domains=order.slice(n).map(r=>{let union=0n;for(const p of candidates.get(r.id)){work.candidateChecks++;if(!(mask&p.mask))union|=p.mask;}return {perk:byId.get(r.id),mask:union};});
+      const roots=[...fixedForSearch,...placed].filter(p=>p.kind==='Core').map(p=>({perk:p,mask:p.mask}));
+      for(const d of domains)if(d.perk.kind==='Core')roots.push({perk:d.perk,mask:d.mask});
       const reached=new Set();
       for(const root of roots){
+        if(!mods.some(p=>matches(root.perk,p)))continue;
         let space=root.mask;
-        for(const p of mods)if(compatible(root.perk,p))space|=p.mask;
-        for(const d of domains)if(compatible(root.perk,d.perk))for(const p of d.positions)space|=p.mask;
+        for(const p of mods)if(matches(root.perk,p))space|=p.mask;
+        for(const d of domains)if(matches(root.perk,d.perk))space|=d.mask;
         let flood=root.mask,previous;
-        do{previous=flood;flood|=neighbors(flood)&space&boardBits;}while(previous!==flood);
-        for(const p of mods)if(compatible(root.perk,p)&&(flood&p.mask))reached.add(p.id);
+        do{work.floodIterations++;previous=flood;flood|=neighbors(flood)&space&boardBits;}while(previous!==flood);
+        for(const p of mods)if(matches(root.perk,p)&&(flood&p.mask))reached.add(p.id);
       }
       return mods.every(p=>reached.has(p.id));
     }
@@ -126,18 +134,21 @@ export function solve(problem, options = {}) {
     const dead=new Set();
     function place(n,mask,placed){
       tick();if(n===order.length){geometryFound=true;const all=[...fixed,...placed];
-        const links=all.map(a=>all.map(b=>a!==b&&!!(edge(a)&(b.mask??placementMask(b)))));
+        const links=all.map(a=>all.map(b=>a!==b&&!!(edge(a)&maskOf(b))));
         return connectedGroups(all,tick,links)?placed.map(bare):null;}
       // Standalone cores are interchangeable obstacles. Connection-bearing pieces retain
       // their identities and positions so occupancy memoization cannot merge group states.
       const state=n+':'+mask+':'+placed.filter(p=>p.kind==='Modifier'||p.accepts?.length).map(p=>p.id+'@'+p.mask).join(';');
       if(dead.has(state))return null;
-      for(const p of candidates.get(order[n].id))if(!(mask&p.mask)){
+      for(const p of candidates.get(order[n].id)){work.candidateChecks++;if(!(mask&p.mask)){
         const next=[...placed,p];
         if(n+1<order.length&&!potentiallyConnected(n+1,mask|p.mask,next)){geometryFound=true;continue;}
         const found=place(n+1,mask|p.mask,next);if(found)return found;
       }
-      dead.add(state);return null;
+      }
+      // Memoization is optional; cap it so a longer time budget cannot retain an
+      // unbounded number of large semantic-state strings in one packing attempt.
+      if(dead.size<50000)dead.add(state);return null;
     }
     const found=place(0,occupied,[]);if(!found){failed.add(key);if(!geometryFound)geometricallyImpossible.add(key);}return found;
   }
@@ -151,7 +162,7 @@ export function solve(problem, options = {}) {
     function choose(index, selected, usedArea){
       tick();if(usedArea>free)return null;
       const possible=[...fixed,...selected.map(r=>byId.get(r.id)),...optional.slice(index).map(r=>byId.get(r.id))];
-      if(selected.some(r=>byId.get(r.id).kind==='Modifier'&&!possible.some(c=>compatible(c,byId.get(r.id)))))return null;
+      if(selected.some(r=>byId.get(r.id).kind==='Modifier'&&!possible.some(c=>matches(c,byId.get(r.id)))))return null;
       const current=pack(selected);improve(current);
       // Adding chips cannot rescue geometric impossibility. Connectivity failure alone
       // is not monotone: a later requested core or bridge may repair it.
@@ -161,7 +172,7 @@ export function solve(problem, options = {}) {
     }
     const found=choose(0,required,required.reduce((n,r)=>n+area(r.id),0));
     const possibleCores=[...fixed,...valid.map(r=>byId.get(r.id))].filter(p=>p.kind==='Core');
-    const missingParent=id=>byId.get(id).kind==='Modifier'&&!possibleCores.some(c=>compatible(c,byId.get(id)));
+    const missingParent=id=>byId.get(id).kind==='Modifier'&&!possibleCores.some(c=>matches(c,byId.get(id)));
     if(found===null)return result('infeasible',null,[...omissions,...required.map(r=>({id:r.id,reason:missingParent(r.id)?'Requires a compatible equipped ability or a core in your priority list.':!candidates.get(r.id).length?'No fixed-orientation placement fits the unlocked grid.':'Cannot be jointly placed with the other required perks under the connection rules.'}))],'Required perks cannot form an arrangement.');
     const ids=new Set(found.map(p=>p.id));
     const omitted=optional.filter(r=>!ids.has(r.id)).map(r=>({id:r.id,reason:missingParent(r.id)?'Requires a compatible equipped ability or a core in your priority list.':!candidates.get(r.id).length?'No fixed-orientation placement fits the unlocked grid.':'Omitted to preserve higher-priority perks and their connections.'}));

@@ -115,3 +115,9 @@ test('independent geometry and group-assignment oracle checks mixed requests and
     const r=solve(board(3,2,order,order.map(p=>({id:p.id,required:p.id===required}))));assert.equal(r.status,expected?'optimal':'infeasible');if(expected)assert.deepEqual(new Set(r.included),new Set(expected));
   }
 });
+
+test('diagnostic work counters distinguish candidate checks from recursive search states',()=>{
+  const p=board(4,2,[chip('a',2),chip('b',1,1,{kind:'Modifier',tags:['M']})],undefined,{fixed:[placed(chip('root',1,1,{accepts:['M']}))]});
+  const r=solve(p);assert.equal(r.status,'optimal');assert.ok(r.work.candidateChecks>0);assert.ok(r.work.reachabilityChecks>0);assert.ok(r.work.floodIterations>0);
+  for(const count of Object.values(r.work))assert.ok(Number.isSafeInteger(count)&&count>=0);
+});

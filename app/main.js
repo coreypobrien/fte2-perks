@@ -99,7 +99,7 @@ function renderResults(){
   let label='Ready',kind='';
   if(activeJob!==null){label='Solving…';}else if(stale){label='Out of date';kind='warning';}else if(result?.status==='optimal'){label='Optimal fit';kind='success';}else if(result?.status==='timeout'){label='Search limit';kind='warning';}else if(result&&!result.placements){label='No arrangement';kind='error';}
   $('result-badge').textContent=label;$('result-badge').className='badge '+kind;
-  $('grid-summary').textContent=stale?'Previous arrangement. Solve again to update the grid, checks, and descriptions.':result?.placements?`${result.included.length} of ${displayConfig.requests.length} requested perks included · ${result.nodes} search steps · ${Math.round(result.elapsedMs)} ms`:'Fixed ability slots shown. Add perks and find an arrangement.';
+  $('grid-summary').textContent=stale?'Previous arrangement. Solve again to update the grid, checks, and descriptions.':result?.placements?`${result.included.length} of ${displayConfig.requests.length} requested perks included · ${result.nodes} search states · ${Math.round(result.elapsedMs)} ms`:'Fixed ability slots shown. Add perks and find an arrangement.';
   $('effects-list').replaceChildren();
   const effects=equippedEffects(game,displayConfig,result);$('effect-count').textContent=effects.length?String(effects.length):'';
   $('effects-note').textContent=stale?'Descriptions from the previous arrangement · out of date.':'Game descriptions from equipped perks. Conditional effects retain their conditions.';
@@ -114,11 +114,11 @@ function renderResults(){
 function renderSaves(){const select=$('saved-builds');select.replaceChildren(...(builds.length?builds.map(b=>new Option(b.name,b.id)):[new Option('No saved builds','')]));if(selectedSaveId)select.value=selectedSaveId;$('load-build').disabled=!builds.length;select.disabled=!builds.length;}
 function startSolve(){
   stopWorker();const current=cloneConfig(config),problem=prepareProblem(game,current);job++;activeJob=job;const thisJob=job;
-  $('solve').disabled=true;$('solve-bottom').disabled=true;$('cancel').hidden=false;$('solver-progress').hidden=false;$('grid').setAttribute('aria-busy','true');const started=performance.now();const updateElapsed=()=>{$('solver-elapsed').textContent=((performance.now()-started)/1000).toFixed(1)+' s / 10 s';};updateElapsed();solveTimer=setInterval(updateElapsed,250);$('solve-status').textContent='Searching fixed-orientation placements and compatible groups…';renderResults();
+  $('solve').disabled=true;$('solve-bottom').disabled=true;$('cancel').hidden=false;$('solver-progress').hidden=false;$('grid').setAttribute('aria-busy','true');const started=performance.now();const updateElapsed=()=>{$('solver-elapsed').textContent=((performance.now()-started)/1000).toFixed(1)+' s / 60 s';};updateElapsed();solveTimer=setInterval(updateElapsed,250);$('solve-status').textContent='Searching fixed-orientation placements and compatible groups…';renderResults();
   worker=new Worker(new URL('./worker.js',import.meta.url),{type:'module'});
   worker.onmessage=event=>{if(activeJob!==thisJob||event.data.jobId!==thisJob)return;const next=event.data.result;stopWorker();result=next;resultConfig=current;stale=false;$('solve-status').textContent=next.error??'Search complete. Higher-priority optional perks were preferred.';renderPriorities();renderResults();};
   worker.onerror=()=>{if(activeJob!==thisJob)return;stopWorker();notice('The solver worker could not start. Serve this folder over HTTP; do not open index.html as a file.');$('solve-status').textContent='Search could not start.';renderResults();};
-  worker.postMessage({jobId:thisJob,problem,options:{timeLimitMs:10000,maxNodes:1400000}});
+  worker.postMessage({jobId:thisJob,problem,options:{timeLimitMs:60000,maxNodes:Number.MAX_SAFE_INTEGER}});
 }
 function namedSave(copy){try{const next=saveNamed(builds,$('build-name').value,config,game.version,{existingId:copy?null:selectedSaveId});const previous=builds;builds=next;if(persist()){selectedSaveId=next.at(-1).id;renderSaves();saveStatus('Saved in this browser · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));}else builds=previous;}catch(error){saveStatus(error.message,true);}}
 function transferStatus(message,error=false){$('transfer-status').textContent=message;$('transfer-status').classList.toggle('error-text',error);}

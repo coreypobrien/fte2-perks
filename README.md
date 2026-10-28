@@ -19,7 +19,7 @@ The application is under `app/`; Vite provides development/build tooling. The cu
 
 1. Choose a class, rank, and fixed-slot abilities. Medic is the default; all six class setups are available.
 2. Search the game-derived perk library, filter by granting class and Core/Modifier, and toggle cross-class universal perks. Add desired perks and drag or use arrow controls to prioritize them.
-3. Mark hard requirements as Required, then select Find arrangement above or below the list. Search has a fixed 10-second limit, spinner/elapsed indicator, and Cancel. Clear priorities starts over without changing your named saves.
+3. Mark hard requirements as Required, then select Find arrangement above or below the list. Search has a fixed 60-second limit, spinner/elapsed indicator, and Cancel. Clear priorities starts over without changing your named saves.
 4. Review the grid, In grid checks, equipped-perk descriptions, and Below the line descriptions of omitted perks. Fixed abilities/passive stay out of Effects you get. Hover or focus a perk to highlight its matching row, tile and description. Changing inputs marks all prior results stale.
 5. Name and save a build, save a copy, or load a named snapshot. Every save preserves priority order and Required flags, including omitted perks. The working draft autosaves separately.
 6. Open Import / export build to copy/paste JSON or export/import a .afe2.json file. Manual JSON controls work when clipboard access is denied. Import loads a draft without replacing named saves.

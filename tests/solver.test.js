@@ -129,9 +129,49 @@ test('dual-compatible modifiers choose one group and explicit host constraints a
   problem.requests=[{id:'dual',required:false,coreId:'missing'}];assert.equal(solve(problem).included.length,0);assert.match(solve(problem).omissions[0].reason,/selected core/);
   const pinned=placed(dual,1);pinned.groupCoreId='missing';assert.equal(assignGroups([...problem.fixed,pinned]),null);
 });
-test('host pinning can depend on a lower requested core and survives position-first fallback',()=>{
+test('host pinning can depend on a lower requested core',()=>{
   const core=chip('core',1,1,{accepts:['A']}),mod=chip('mod',1,1,{kind:'Modifier',tags:['A']});
   const p=board(2,1,[mod,core],[{id:'mod',required:true,coreId:'core'},{id:'core',required:false}]);const r=solve(p);assert.equal(r.status,'optimal');assert.equal(r.placements.find(p=>p.id==='mod').groupCoreId,'core');
+});
+
+test('independent exhaustive oracle checks movable roots, host pins and override exclusions',()=>{
+  const root=chip('root',1,1,{accepts:['B'],override:'root'}),fixed=placed(chip('fixed',1,1,{accepts:['A']}));
+  const items=[chip('dual',2,1,{kind:'Modifier',tags:['A','B']}),chip('onlyB',1,1,{kind:'Modifier',tags:['B'],override:'mod'}),root,chip('bridge',1,2,{kind:'Modifier',tags:['B']})];
+  const permutations=arr=>arr.length?arr.flatMap((p,i)=>permutations(arr.filter((q,j)=>j!==i)).map(rest=>[p,...rest])):[[]];
+  function legal(ps,target){
+    const cores=ps.filter(p=>p.kind==='Core'),mods=ps.filter(p=>p.kind==='Modifier'),groups=cores.map(()=>[]);
+    const touches=(a,b)=>a.points.some(([x,y])=>b.points.some(([u,v])=>Math.abs(x-u)+Math.abs(y-v)===1));
+    function assign(i){
+      if(i===mods.length)return groups.every((group,k)=>{
+        if(Number(!!cores[k].override)+group.filter(p=>p.override).length>1)return false;
+        const seen=new Set([cores[k]]);let changed=true;
+        while(changed){changed=false;for(const p of group)if(!seen.has(p)&&[...seen].some(q=>touches(p,q))){seen.add(p);changed=true;}}
+        return group.every(p=>seen.has(p));
+      });
+      const m=mods[i];for(let g=0;g<cores.length;g++){
+        if(m.id==='dual'&&target&&cores[g].id!==target||!cores[g].accepts.some(t=>m.tags.includes(t)))continue;
+        groups[g].push(m);if(assign(i+1))return true;groups[g].pop();
+      }return false;
+    }return assign(0);
+  }
+  function fits(selected,target,i=0,ps=[{...fixed,points:[[0,0]]}],used=new Set(['0,0'])){
+    if(i===selected.length)return legal(ps,target);
+    const p=selected[i],s=p.shapes[0];
+    for(let y=0;y<=2-s.height;y++)for(let x=0;x<=3-s.width;x++){
+      const points=s.cells.map(([u,v])=>[x+u,y+v]),keys=points.map(([x,y])=>x+','+y);
+      if(keys.every(k=>!used.has(k))&&fits(selected,target,i+1,[...ps,{...p,points}],new Set([...used,...keys])))return true;
+    }return false;
+  }
+  for(const order of permutations(items))for(const target of [null,'root','fixed'])for(const required of [null,'dual']){
+    let expected=null;for(let bits=15;bits>=0;bits--){
+      const subset=order.filter((p,i)=>bits&(1<<(3-i)));
+      if(required&&!subset.some(p=>p.id===required))continue;
+      if(fits(subset,target)){expected=subset.map(p=>p.id);break;}
+    }
+    const requests=order.map(p=>({id:p.id,required:p.id===required,...(p.id==='dual'&&target?{coreId:target}:{})}));
+    const r=solve(board(3,2,order,requests,{fixed:[fixed]}));
+    assert.equal(r.status,expected?'optimal':'infeasible');if(expected)assert.deepEqual(new Set(r.included),new Set(expected));
+  }
 });
 test('group growth cannot reuse a shared fixed bridge for two core groups',()=>{
   const a=placed(chip('A',1,1,{accepts:['common','a']}),0,1),b=placed(chip('B',1,1,{accepts:['common','b']}),2,1),bridge=placed(chip('bridge',1,1,{kind:'Modifier',tags:['common']}),1,1),x=placed(chip('x',1,1,{kind:'Modifier',tags:['a']}),1,0),y=placed(chip('y',1,1,{kind:'Modifier',tags:['b']}),1,2);

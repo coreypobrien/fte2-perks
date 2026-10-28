@@ -1,6 +1,18 @@
-# Solver performance investigation — 2026-10-27
+# Solver performance investigation — 2026-10-28
 
 Current solver: all five Machinist-only examples now prove optimality in roughly 0.03–1.3 seconds locally. See the connected-group search section at the end; the earlier timeout measurements below document previous implementations.
+
+## Reported movable-root timeout — October 28
+
+The exact 25-request player input is preserved in `tests/fixtures/machinist-movable-roots.afe2.json`. Artificial Overclock is explicitly pinned to Sentry Turret; Collaborative Analytics needs the lower-priority requested Cross-Platform Synergy core. Selecting that movable root previously sent the entire pack through position-first search, repeatedly scanning future candidate placements and testing disconnected geometries. This build is valid; it is a search-performance problem.
+
+In a sequential Node 24.22.1 comparison on the same machine, the prior solver completed in **54,116 ms**, with **522,651 states**. That is close to the browser's 60-second ceiling and does not contradict the reported browser timeout. The revised solver completed in **649 ms / 5,918 states**, about **83× faster**. Both prove the same optimum: the first 14 requests included, the remaining 11 omitted. Different geometry is allowed; the explicit host pin is preserved. These are local timings, not device-independent guarantees.
+
+Movable-root packs now use a short position-first trial, then constrained connected growth that interleaves root placement with already-rooted modifier placement. Future root candidate unions overestimate reachable space for capacity pruning; exact placement chooses one root position and every Modifier still belongs to exactly one compatible group. A bounded unsuccessful trial falls back to the original position-first exact algorithm. Completed failures alone enter caches. Fixed-root search and the UI's 60-second budget are unchanged.
+
+The original 25 benchmark cases plus this reported build all finish within the default one-second budget locally (25 optimal, one deliberately infeasible). Tests retain the independent two-root oracle, add a movable-root/host-pin/override oracle, and require this exact input to prove optimality within 50,000 states. All five prior Machinist examples retain their 200,000-state bounds. The browser suite imports the exact file and checks the real worker's inclusion vector, 11 omissions, persisted inputs and turret assignment.
+
+Reproduce with `git show 37b22e6:app/core/solver.js | Set-Content work/solver-timeout-before.mjs`, then `node scripts/benchmark-solver.mjs --only reported --budget-ms 60000 --baseline work/solver-timeout-before.mjs`. Evidence is in `work/evidence/solver-benchmarks-60000.json`; the full current benchmark is `work/evidence/solver-benchmarks.json`. Arbitrary crowded or ambiguous inputs can still time out.
 
 The old search had two independent problems: it enumerated optional subsets until their leaves even when a modifier could not have any requested compatible root, and placement search explored disconnected configurations and permutations of interchangeable standalone cores. It also retained only a required-only incumbent. A timeout could therefore return zero optional perks after examining many valid smaller possibilities indirectly.
 

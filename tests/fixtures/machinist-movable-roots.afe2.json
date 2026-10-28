@@ -1,0 +1,118 @@
+{
+  "format": "afe2-perk-build",
+  "version": 1,
+  "name": "",
+  "gameVersion": "26090957",
+  "config": {
+    "classId": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+    "rank": 10,
+    "abilities": {
+      "primary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Base",
+      "secondary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Replacer_GrenadeLauncher",
+      "passive": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg"
+    },
+    "requests": [
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+        "required": false,
+        "coreId": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Base"
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Mod_CollaborativeAnalytics",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CompatibilityMatrix_Mod",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_CryoShell",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_DynamicDeliverySystems",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Shock",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_BigExplosion",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_FragmentingShell",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Turret_Mod_GroupEffort",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Mod_HyperlocalLogistics",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ScalableMachineLearning_Mod_ModularIntegration",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship02",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship03",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireRate",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ScalableMachineLearning_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ShrapnelShot",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_SelfApplied",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Slow",
+        "required": false
+      }
+    ]
+  }
+}

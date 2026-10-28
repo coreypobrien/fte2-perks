@@ -13,6 +13,8 @@ export function benchmarkCases(){
   cases.push({name:'overcapacity-60-dots',problem:board(6,6,Array.from({length:60},(_,i)=>chip('dot-'+i)))});
   cases.push({name:'fragmented-12-squares',problem:board(7,5,Array.from({length:12},(_,i)=>chip('square-'+i,2,2)))});
   cases.push({name:'required-overcapacity',problem:board(4,4,Array.from({length:5},(_,i)=>chip('required-'+i,2,2)),Array.from({length:5},(_,i)=>({id:'required-'+i,required:true})))});
+  const reported=JSON.parse(fs.readFileSync(new URL('../tests/fixtures/machinist-movable-roots.afe2.json',import.meta.url)));
+  cases.push({name:'Machinist-reported-movable-roots',problem:prepareProblem(game,reported.config)});
   return cases;
 }
 const baselineIndex=process.argv.indexOf('--baseline');

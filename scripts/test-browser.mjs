@@ -165,6 +165,22 @@ try{
     }
     await c.close();
   });
+  await check('reported movable-root timeout imports and completes optimally in the real worker',async()=>{
+    const buffer=fs.readFileSync(new URL('../tests/fixtures/machinist-movable-roots.afe2.json',import.meta.url)),build=importBuild(buffer.toString('utf8'));
+    const c=await browser.newContext(),p=await c.newPage();p.on('pageerror',e=>report.pageErrors.push(e.message));
+    await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#transfer-panel > summary').click();
+    await p.locator('#build-file').setInputFiles({name:'reported.afe2.json',mimeType:'application/json',buffer});
+    await p.waitForFunction(()=>document.querySelectorAll('.priority-row').length===25);
+    await p.locator('#cancel').waitFor({state:'hidden',timeout:15000});
+    assert.equal(await p.locator('#result-badge').innerText(),'Optimal fit');
+    const included=await p.locator('.priority-row.included').evaluateAll(ns=>ns.map(n=>n.dataset.perkId));
+    assert.deepEqual(included,build.config.requests.slice(0,14).map(r=>r.id));
+    assert.equal(await p.locator('#below-list .below-row').count(),11);
+    assert.deepEqual(await p.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')).draft),build.config);
+    const tile=p.locator('#grid .tile').filter({hasText:'Artificial Overclock'});
+    assert.equal(await tile.getAttribute('title'),'Connected to Sentry Turret');
+    await c.close();
+  });
   await check('Agile Practices chooses exactly one host, with optional pins saved and exported',async()=>{
     const catalog=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url))),klass=catalog.classes.find(k=>k.name==='Machinist'),config=createConfig(catalog,klass.id),agile=catalog.perks.find(p=>p.name==='Agile Practices'),rumble=catalog.perks.find(p=>p.name==='Rumble Turret'),bodyguard=catalog.perks.find(p=>p.id===config.abilities.secondary);config.abilities.primary=rumble.id;config.requests=[{id:agile.id,required:true}];
     const c=await browser.newContext();await c.addInitScript(state=>{if(!localStorage.getItem('afe2.perk-planner.v0'))localStorage.setItem('afe2.perk-planner.v0',JSON.stringify(state));},{schemaVersion:1,gameVersion:catalog.version,draft:config,builds:[]});

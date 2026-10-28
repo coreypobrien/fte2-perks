@@ -111,9 +111,11 @@ export function solve(problem, options = {}) {
     const all=[...fixed,...selected.map(r=>byId.get(r.id))];
     if(all.some(p=>p.kind==='Modifier'&&!all.some(c=>matches(c,p)))){failed.add(key);return null;}
     const hosts=selected.filter(r=>byId.get(r.id).kind==='Core'&&all.some(m=>matches(byId.get(r.id),m)));
-    // Movable roots have coupled geometry; retain the position-first exact search
-    // for that case. Fixed-root builds use direct connected-group growth below.
-    if(hosts.length){
+    // A brief position-first trial retains its advantage on easy movable-root
+    // packs. Harder packs try connected growth before returning to this fallback.
+    const GROUPS=Symbol('connected search');
+    function positionPack(trial=Infinity){
+    const positionStart=nodes;
     const connectionRank=id=>{const p=byId.get(id);return p.kind==='Modifier'||all.some(m=>matches(p,m))?0:1;};
     const order=[...selected].sort((a,b)=>connectionRank(a.id)-connectionRank(b.id)||candidates.get(a.id).length-candidates.get(b.id).length || Number(byId.get(a.id).kind!=='Core')-Number(byId.get(b.id).kind!=='Core') || a.id.localeCompare(b.id));
     const sparseFootprints=[...fixed,...selected.flatMap(r=>byId.get(r.id).shapes)].some(p=>{const cells=new Set(p.cells.map(([x,y])=>x+','+y)),seen=new Set(),queue=[p.cells[0]];while(queue.length){const [x,y]=queue.pop(),key=x+','+y;if(seen.has(key)||!cells.has(key))continue;seen.add(key);queue.push([x-1,y],[x+1,y],[x,y-1],[x,y+1]);}return seen.size!==cells.size;});
@@ -139,7 +141,8 @@ export function solve(problem, options = {}) {
     let geometryFound=false;
     const dead=new Set();
     function place(n,mask,placed){
-      tick();if(n===order.length){geometryFound=true;const all=[...fixed,...placed];
+      tick();if(nodes-positionStart>trial)throw GROUPS;
+      if(n===order.length){geometryFound=true;const all=[...fixed,...placed];
         const links=all.map(a=>all.map(b=>a!==b&&!!(edge(a)&maskOf(b))));
         const assignments=assignGroups(all,tick,links);return assignments===null?null:placed.map(p=>p.kind==='Modifier'?{...bare(p),groupCoreId:assignments[p.id]}:bare(p));}
       // Standalone cores are interchangeable obstacles. Connection-bearing pieces retain
@@ -158,10 +161,11 @@ export function solve(problem, options = {}) {
     }
     const found=place(0,occupied,[]);if(!found){failed.add(key);if(!geometryFound)geometricallyImpossible.add(key);}return found;
     }
+    if(hosts.length){try{return positionPack(256);}catch(error){if(error!==GROUPS)throw error;}}
     const loose=selected.filter(r=>byId.get(r.id).kind==='Core'&&!hosts.includes(r));
     loose.sort((a,b)=>candidates.get(a.id).length-candidates.get(b.id).length||a.id.localeCompare(b.id));
-    const roots=fixedForSearch.filter(p=>p.kind==='Core');
-    const pieces=[...fixedForSearch.filter(p=>p.kind==='Modifier').map(p=>({id:p.id,perk:p,positions:[p],fixed:true})),...selected.filter(r=>byId.get(r.id).kind==='Modifier').map(r=>({id:r.id,perk:byId.get(r.id),positions:candidates.get(r.id),fixed:false}))];
+    const roots=[...fixedForSearch.filter(p=>p.kind==='Core'),...hosts.map(r=>({...byId.get(r.id),mask:0n}))];
+    const pieces=[...fixedForSearch.filter(p=>p.kind==='Modifier').map(p=>({id:p.id,perk:p,positions:[p],fixed:true})),...selected.filter(r=>byId.get(r.id).kind==='Modifier'||hosts.includes(r)).map(r=>({id:r.id,perk:byId.get(r.id),positions:candidates.get(r.id),fixed:false}))];
     const rectangular=[...fixed,...selected.flatMap(r=>byId.get(r.id).shapes)].every(p=>p.cells.length===p.width*p.height);
     const looseDead=new Set(),groupDead=new Set();
     const countBits=value=>{let count=0;while(value){value&=value-1n;count++;}return count;};
@@ -176,12 +180,16 @@ export function solve(problem, options = {}) {
     function domainsFor(remaining,mask,groups){
       const domains=remaining.map(index=>({index,piece:pieces[index],positions:pieces[index].positions.filter(p=>{work.candidateChecks++;return pieces[index].fixed||!(p.mask&mask);})}));
       if(domains.some(d=>!d.positions.length))return null;
-      for(const d of domains)d.allowed=groups.map((g,i)=>matches(g.core,d.piece.perk)&&!(d.piece.perk.override&&g.override)?i:-1).filter(i=>i>=0);
+      for(const d of domains)d.allowed=groups.map((g,i)=>(d.piece.perk.kind==='Core'?g.core.id===d.piece.id:matches(g.core,d.piece.perk)&&!(d.piece.perk.override&&g.override))?i:-1).filter(i=>i>=0);
       if(!rectangular)return domains;
       const reachable=groups.map((group,g)=>{
-        let space=group.mask;
+        // An unplaced requested root may start at any surviving candidate. Their
+        // union is a relaxation, never a commitment to several root positions.
+        let seed=group.mask;
+        if(!seed)for(const p of domains.find(d=>d.piece.id===group.core.id).positions)seed|=p.mask;
+        let space=seed;
         for(const d of domains)if(d.allowed.includes(g))for(const p of d.positions)space|=p.mask;
-        let reached=group.mask,previous;do{work.floodIterations++;previous=reached;reached|=neighbors(reached)&space&boardBits;}while(reached!==previous);
+        let reached=seed,previous;do{work.floodIterations++;previous=reached;reached|=neighbors(reached)&space&boardBits;}while(reached!==previous);
         return reached;
       });
       for(const d of domains){d.allowed=d.allowed.filter(g=>d.positions.some(p=>!!(p.mask&reachable[g])));if(!d.allowed.length)return null;}
@@ -195,9 +203,10 @@ export function solve(problem, options = {}) {
       }
       return domains;
     }
-    const SWITCH=Symbol('ordering');let constrained=false,trialStart=nodes;
+    const SWITCH=Symbol('ordering'),FALLBACK=Symbol('position search');let constrained=hosts.length>0,trialStart=nodes;
     function grow(remaining,mask,groups,placed){
-      tick();if(!constrained&&nodes-trialStart>10000)throw SWITCH;
+      tick();if(hosts.length&&constrained&&nodes-trialStart>20000)throw FALLBACK;
+      if(!constrained&&nodes-trialStart>10000)throw SWITCH;
       if(!remaining.length)return placeLoose(0,mask,placed);
       const state=remaining.join(',')+':'+mask+':'+groups.map(g=>g.mask+','+Number(g.override)).join(';');
       if(groupDead.has(state))return null;
@@ -206,13 +215,13 @@ export function solve(problem, options = {}) {
       const seenTypes=new Set();
       // Grow one rooted group at a time. A modifier chooses exactly one host.
       for(const {index,piece,allowed,positions} of domains){
-        const type=JSON.stringify([piece.fixed?positions[0].mask.toString():piece.perk.shapes,allowed,!!piece.perk.override]);
+        const type=JSON.stringify([piece.perk.kind,piece.fixed?positions[0].mask.toString():piece.perk.shapes,allowed,!!piece.perk.override]);
         if(seenTypes.has(type))continue;seenTypes.add(type);
         const nextRemaining=remaining.filter(i=>i!==index);
         for(const p of positions){work.candidateChecks++;
-          for(const g of allowed){work.reachabilityChecks++;if(!(edge(p)&groups[g].mask))continue;
+          for(const g of allowed){work.reachabilityChecks++;if(piece.perk.kind!=='Core'&&!(edge(p)&groups[g].mask))continue;
             const nextGroups=groups.map((group,i)=>i===g?{...group,mask:group.mask|p.mask,override:group.override||!!p.override}:group);
-            const nextPlaced=piece.fixed?placed:[...placed,{...p,groupCoreId:groups[g].core.id}];
+            const nextPlaced=piece.fixed?placed:[...placed,piece.perk.kind==='Core'?p:{...p,groupCoreId:groups[g].core.id}];
             const found=grow(nextRemaining,mask|p.mask,nextGroups,nextPlaced);if(found)return found;
           }
         }
@@ -221,7 +230,9 @@ export function solve(problem, options = {}) {
     }
     const initial=roots.map(core=>({core,mask:core.mask,override:!!core.override}));
     let found;
-    try{found=grow(pieces.map((p,i)=>i),occupied,initial,[]);}catch(error){if(error!==SWITCH)throw error;constrained=true;found=grow(pieces.map((p,i)=>i),occupied,initial,[]);}
+    try{
+      try{found=grow(pieces.map((p,i)=>i),occupied,initial,[]);}catch(error){if(error!==SWITCH)throw error;constrained=true;found=grow(pieces.map((p,i)=>i),occupied,initial,[]);}
+    }catch(error){if(error!==FALLBACK)throw error;return positionPack();}
     if(!found){failed.add(key);if(!pieces.length)geometricallyImpossible.add(key);}return found;
   }
   try {

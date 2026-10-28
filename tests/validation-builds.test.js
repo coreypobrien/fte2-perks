@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {importBuild} from '../app/core/transfer.js';
 import {availability,prepareProblem} from '../app/core/model.js';
-import {compatible,connectedGroups,cellsOf} from '../app/core/solver.js';
+import {solve,compatible,connectedGroups,cellsOf} from '../app/core/solver.js';
 const game=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url)));
 test('five portable lists contain only explicit rank-10 Machinist grants and exceed available area',()=>{
   const signatures=new Set(),klass=game.classes.find(k=>k.name==='Machinist');
@@ -26,4 +26,21 @@ test('five portable lists contain only explicit rank-10 Machinist grants and exc
 test('all five oversized Machinist examples prove optimality within a bounded search',async()=>{
   const {solve}=await import('../app/core/solver.js');
   for(let i=1;i<=5;i++){const build=importBuild(fs.readFileSync(new URL('../examples/machinist-validation/machinist-'+i+'.afe2.json',import.meta.url),'utf8')),problem=prepareProblem(game,build.config),r=solve(problem,{timeLimitMs:10000,maxNodes:200000});assert.equal(r.status,'optimal','example '+i);assert.ok(r.included.length>=14);assert.ok(connectedGroups([...problem.fixed,...r.placements]));assert.ok(r.placements.filter(p=>p.kind==='Modifier').every(p=>typeof p.groupCoreId==='string'));}
+});
+
+test('reported movable-root timeout proves the same priority optimum within a bounded search',()=>{
+  const build=importBuild(fs.readFileSync(new URL('./fixtures/machinist-movable-roots.afe2.json',import.meta.url),'utf8'));
+  assert.equal(build.config.requests.length,25);
+  const problem=prepareProblem(game,build.config),r=solve(problem,{timeLimitMs:10000,maxNodes:50000});
+  assert.equal(r.status,'optimal');
+  assert.deepEqual(new Set(r.included),new Set(build.config.requests.slice(0,14).map(r=>r.id)));
+  assert.equal(r.omissions.length,11);
+  assert.ok(connectedGroups([...problem.fixed,...r.placements]));
+  assert.equal(r.placements.find(p=>p.id===build.config.requests[0].id).groupCoreId,build.config.abilities.primary);
+  const occupied=new Set();
+  for(const p of [...problem.fixed,...r.placements])for(const [x,y] of cellsOf(p)){
+    assert.ok(x>=0&&y>=0&&x<problem.width&&y<problem.height);
+    assert.ok(problem.rankMask[x*problem.height+y]>=0&&problem.rankMask[x*problem.height+y]<=problem.rank);
+    const key=x+','+y;assert.ok(!occupied.has(key));occupied.add(key);
+  }
 });

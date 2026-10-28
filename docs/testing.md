@@ -60,7 +60,7 @@ Fault-injection tests run in isolated browser contexts. Expected failed catalog/
 
 ## Solver performance regressions
 
-Run `node scripts/benchmark-solver.mjs` for 25 deterministic cases across all six classes, rank 5/10 compatible Medic lists, oversubscription, fragmentation, and impossible requirements. Output is `work/evidence/solver-benchmarks.json`. Use `--budget-ms 10000 --only Medic-connected` for the longer search cases; output then has a budget suffix. `--baseline work/solver-before.mjs` optionally compares an older solver module. See solver-performance.md for baseline reproduction and measured limits.
+Run `node scripts/benchmark-solver.mjs` for 26 deterministic cases across all six classes, rank 5/10 compatible Medic lists, oversubscription, fragmentation, impossible requirements, and the reported movable-root timeout. Output is `work/evidence/solver-benchmarks.json`. Use `--budget-ms 10000 --only Medic-connected` for the longer search cases or `--only reported` for the exact timeout input; output then has a budget suffix. `--baseline work/solver-before.mjs` optionally compares an older solver module. See solver-performance.md for baseline reproduction and measured limits.
 
 Retain deterministic node-bound game-data regressions, timeout incumbent checks, fixed-modifier/sparse-footprint checks, and the independent mixed geometry/group-assignment oracle. Browser tests also cover granting/type/universal filters, expansion preservation, blank initial name, real drag-and-drop persistence/staleness, and a real 40-request worker flow.
 
@@ -83,6 +83,8 @@ Machinist example validation also directly checks that every requested ID has an
 The independent two-root exhaustive oracle checks all 24 priority orders, both explicit host choices plus Auto, required flags, exact geometry and one-group-per-modifier assignment. Fixed shared bridges, sparse footprints, movable lower-priority roots, overrides, stale targets and unknown targets remain covered. All five unchanged Machinist input files must prove optimum within 200,000 counted states; the browser suite now waits for each to complete optimally instead of immediately cancelling them. A separate Agile Practices flow pins each side, checks displayed assignments, round-trips the constraint through save/download, and preserves an unavailable old ability until Auto is selected.
 
 `node scripts/benchmark-group-solver.mjs --baseline work/solver-before-groups.mjs` compares the same five inputs with a 10-second budget on both versions, validates new assignments and checks their inclusion vectors are no worse than old incumbents. Capture the prior solver with `git show 0d4f545:app/core/solver.js | Set-Content work/solver-before-groups.mjs`. This compares different search strategies, so identical node counts are not equivalent work; profile-solver.mjs now makes strict identical-result assertions opt-in with --require-identical.
+
+The reported 25-request movable-root build is preserved in `tests/fixtures/machinist-movable-roots.afe2.json`. It must prove the first 14 priorities optimal within 50,000 states, keep the turret host pin, and return legal non-overlapping groups. An additional independent small-board oracle enumerates movable roots, host choices, required flags and per-group overrides. The browser imports the same file, verifies exact included IDs and 11 omissions, and checks unchanged persisted inputs and the actual host tooltip.
 
 ## Pages and clean-checkout verification
 

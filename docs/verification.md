@@ -1,5 +1,13 @@
 # Local v0 verification — 2026-10-27
 
+## October 28 movable-root performance follow-up
+
+The exact reported 25-request build now proves the same 14-priority optimum in 649 ms locally versus 54,116 ms with the previous solver, using sequential Node 24.22.1 runs. The revised search uses 5,918 counted states versus 522,651. These are local measurements; arbitrary inputs and slower devices can still reach the unchanged 60-second UI budget. See solver-performance.md for strategy details and reproduction.
+
+Validation after the change: `pnpm test` passed all 59 tests, including catalog provenance/isolation, independent fixed/movable-root exhaustive oracles and the exact timeout fixture. Instrumented total coverage was 98.54% lines / 96.75% branches / 98.00% functions; this excludes DOM/worker-entry coverage claims. All 26 deterministic benchmarks completed within their one-second budgets (25 optimal, one deliberately infeasible). `pnpm build` passed. The production build passed all 24 real-browser scenarios using installed Edge under `/afe2-pages-check/`, with no unexpected page/console errors or failed requests. The new browser scenario imports the exact build and checks the priority inclusion vector, omissions, draft inputs and turret assignment.
+
+The first sandboxed test run could not connect to its loopback HTTP servers; the full rerun with loopback access passed. The pinned Playwright browser binary was absent, so browser checks used installed Edge. This follow-up is local verification only; it makes no new hosted CI or deployment claim. No publication was requested.
+
 ## Outcome
 
 Working local static web application, built with Vite 8.3.5. The production `dist/` output and the Vite development server both passed the real-browser suite. The site is deployed on GitHub Pages; see the hosted validation record below.

@@ -7,7 +7,7 @@
 3. Run **Validate and deploy Pages** from the Actions tab on the default branch, or push another commit. If the first run happened before Pages was enabled, enable it and rerun that workflow.
 4. Open the URL shown by the github-pages deployment environment.
 
-No personal access token or repository-specific URL is needed in the source. The workflow uses GitHub's built-in token and Pages OIDC deployment flow. Repository Pages/environment policies still apply. No remote or hosted deployment was configured during local preparation.
+No personal access token or repository-specific URL is needed in the source. The workflow uses GitHub's built-in token and Pages OIDC deployment flow. Repository Pages/environment policies still apply. The configured remote is git@github.com:coreypobrien/fte2-perks.git. Pages has been set to GitHub Actions in that repository.
 
 ## Workflow behavior
 
@@ -43,7 +43,7 @@ Browser saves are origin-bound. Export from localhost and import on the hosted s
 
 Update action pins from their official repositories and review the corresponding release notes. Keep the lockfile and Playwright browser install in sync. The default-branch build must pass before deployment; an existing healthy site remains in place when validation fails.
 
-Local Windows checks and workflow linting do not prove that a GitHub-hosted Ubuntu run or Pages publication has succeeded. The first hosted run remains the final integration check after a remote is supplied and Pages is enabled. This is an experimental, AI-assisted project with no support or availability commitment; see ../SUPPORT.md and known-limitations.md.
+Local Windows checks and workflow linting do not prove that a GitHub-hosted Ubuntu run or Pages publication has succeeded. The first successful hosted run and a live-site browser check remain the final integration checks. This is an experimental, AI-assisted project with no support or availability commitment; see ../SUPPORT.md and known-limitations.md.
 
 ## Official references
 
@@ -51,3 +51,16 @@ Local Windows checks and workflow linting do not prove that a GitHub-hosted Ubun
 - [Vite static deployment](https://vite.dev/guide/static-deploy.html#github-pages) describes Pages hosting and asset base paths.
 - [Playwright CI setup](https://playwright.dev/docs/ci-intro) describes installing browser/system dependencies on CI.
 - [MIT license text](https://opensource.org/license/mit) is the source of the original-code license.
+
+## Current publication status
+
+Local release preparation passed a clean frozen install, 57 unit/integration tests, all 23 production browser scenarios under a project URL prefix, and actionlint 1.7.12. The remote is configured and Pages source is GitHub Actions. Initial publication is waiting on local SSH-agent signing: direct SSH authenticates as coreypobrien, but Git push requests fail with an agent communication error. No successful push, Actions run, or live-site validation has been recorded yet.
+
+Once the machine's SSH signing approval is working, push master to origin. On this Windows checkout Git 2.9 defaults to a different SSH client; Windows OpenSSH sees the loaded agent identities:
+
+~~~powershell
+$env:GIT_SSH = 'C:\Windows\System32\OpenSSH\ssh.exe'
+git push -u origin master
+~~~
+
+Then inspect the Validate and deploy Pages workflow, resolve any hosted failures, and run the browser suite against the deployed URL shown by GitHub. Record the run link and live-browser result here after success.

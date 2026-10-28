@@ -7,3 +7,5 @@
 @media(pointer:coarse){button,select,.priority-actions button,.below-row button,.row-actions button{min-height:44px}.priority-actions{flex-wrap:wrap}.tile{min-height:0}}
 
 .filters fieldset{display:flex;gap:12px;border:1px solid var(--line);border-radius:5px;margin:0;padding:0 8px;min-width:0}.filters legend{font-size:12px;color:var(--muted)}.priority-row[draggable=true]{cursor:grab}.priority-row.dragging{opacity:.45}.priority-row.drop-target{border-color:var(--accent);box-shadow:0 -3px var(--accent)}
+
+.transfer-panel{flex-basis:100%;font-size:12px;color:var(--muted);padding-top:8px}.transfer-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.transfer-panel p{margin:8px 0}.transfer-panel details{margin-top:12px}.transfer-panel textarea{width:100%;resize:vertical;min-width:0;padding:10px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:5px;font:12px monospace}.transfer-panel label{margin:10px 0}.library-note{margin:-7px 0 15px}

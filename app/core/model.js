@@ -7,12 +7,17 @@ export function canEquip(perk,klass){
   const lineage=new Set([klass.id,...(klass.lineage??[])]);
   return lineage.has(pathOf(perk.kitRestriction))||(perk.alternativeKits??[]).some(id=>lineage.has(pathOf(id)));
 }
-export function availability(perk,klass){
+export function rankUnlockReason(perk,klass,rank){
+  const sources=(perk.unlockSources??[]).filter(s=>s.class===klass.name);
+  if(!sources.length||sources.some(s=>!Number.isInteger(s.requiredRank)||s.requiredRank<=rank))return null;
+  return 'Unlocks in '+klass.name+' at rank '+Math.min(...sources.map(s=>s.requiredRank))+'.';
+}
+export function availability(perk,klass,rank=10){
   if(!perk)return 'Missing from the current catalog.';
   if(perk.legacy)return 'Legacy/internal asset; not part of the active library.';
   if(!canEquip(perk,klass))return 'Not usable by the selected class.';
   if(perk.slot)return 'Choose this ability in its fixed slot.';
-  return null;
+  return rankUnlockReason(perk,klass,rank);
 }
 export function createConfig(game,classId){
   const klass=game.classes.find(c=>c.id===classId)??game.classes.find(c=>c.name==='Medic')??game.classes[0];
@@ -38,7 +43,7 @@ export function prepareProblem(game,config){
     const p=byId.get(config.abilities[slot.key]);if(!p||!canEquip(p,klass)||p.slot!==slot.key)throw new Error('Selected ability is incompatible with its class or slot.');
     const shape=p.shapes[0];return {...p,x:slot.x,y:slot.y,width:shape.width,height:shape.height,cells:shape.cells};
   });
-  const perks=config.requests.map(r=>{const p=byId.get(r.id);return p?{...p,unavailable:fixed.some(f=>f.id===p.id)?'Already in an ability slot.':availability(p,klass)}:{id:r.id,unavailable:'Missing from current game catalog.',kind:'Core',shapes:[]};});
+  const perks=config.requests.map(r=>{const p=byId.get(r.id);return p?{...p,unavailable:fixed.some(f=>f.id===p.id)?'Already in an ability slot.':availability(p,klass,config.rank)}:{id:r.id,unavailable:'Missing from current game catalog.',kind:'Core',shapes:[]};});
   return {width:game.board.width,height:game.board.height,rankMask:game.board.rankMask,rank:config.rank,fixed,requests:config.requests.map(r=>({...r})),perks};
 }
 export function dependencyHint(perk,equipped){

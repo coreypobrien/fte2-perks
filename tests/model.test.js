@@ -68,3 +68,10 @@ test('40-request game-data loadouts finish within a deterministic search-step bo
     assert.equal(result.status,'optimal',name);assert.ok(result.included.length>=10,name);assert.ok(result.nodes<10000,name);
   }
 });
+
+test('selected-class unlock ranks respect alternate grants and preserve cross-class universal access',()=>{
+  const resil=byName('Resiliency');assert.match(availability(resil,medic,5),/rank 10/);assert.equal(availability(resil,medic,10),null);assert.equal(availability(resil,marauder,1),null);
+  const p={kind:'Core',restriction:'None',unlockSources:[{class:'Medic',requiredRank:8},{class:'Medic',requiredRank:3}]};assert.equal(availability(p,medic,3),null);assert.match(availability(p,medic,2),/rank 3/);
+  p.unlockSources.push({class:'Medic',requiredRank:null});assert.equal(availability(p,medic,1),null);delete p.unlockSources;assert.equal(availability(p,medic,1),null);
+  const c=createConfig(game);c.rank=5;c.requests=[{id:resil.id,required:false}];const problem=prepareProblem(game,c);assert.match(problem.perks[0].unavailable,/rank 10/);assert.equal(problem.requests.length,1);assert.equal(solve(problem).included.length,0);
+});

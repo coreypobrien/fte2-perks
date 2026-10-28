@@ -4,6 +4,7 @@ import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {createServer} from './serve.mjs';
 import {createConfig,availability} from '../app/core/model.js';
+import {exportBuild,importBuild} from '../app/core/transfer.js';
 const args=process.argv.slice(2),arg=(name,fallback=null)=>args.includes(name)?args[args.indexOf(name)+1]:fallback;
 let playwright;
 try{playwright=await import('playwright');}catch(error){const module=arg('--playwright-module');if(!module)throw new Error('Install dev dependencies (npm install), or pass --playwright-module PATH_TO_PLAYWRIGHT_INDEX_MJS.');playwright=await import(pathToFileURL(path.resolve(module)));}
@@ -41,6 +42,14 @@ try{
     assert.ok(await doctor.locator('details').evaluate(n=>n.open));assert.ok(await formula.locator('details').evaluate(n=>n.open));
     await page.getByRole('button',{name:"Remove Doctor's Orders",exact:true}).click();
     await page.locator('#search').fill('Doctor');
+  });
+  await check('selected-class rank filtering hides future grants and leaves cross-class unlocks available',async()=>{
+    await page.locator('#search').fill('Resiliency');await page.locator('#rank-select').selectOption('9');assert.equal(await page.locator('.library-row').count(),0);
+    await page.locator('#show-unavailable').check();assert.ok(await page.getByRole('button',{name:'Add Resiliency',exact:true}).isDisabled());assert.match(await page.locator('#library-list').innerText(),/rank 10/);
+    await page.locator('#rank-select').selectOption('10');assert.ok(await page.getByRole('button',{name:'Add Resiliency',exact:true}).isEnabled());await page.locator('#show-unavailable').uncheck();
+    await page.locator('#rank-select').selectOption('1');await page.locator('#search').fill('Drive');assert.ok(await page.getByRole('button',{name:'Add Drive',exact:true}).isEnabled());
+    await page.locator('#search').fill("Doctor's Orders");assert.equal(await page.locator('.library-row').count(),0);await page.locator('#rank-select').selectOption('3');assert.ok(await page.getByRole('button',{name:"Add Doctor's Orders",exact:true}).isEnabled());
+    await page.locator('#rank-select').selectOption('10');await page.locator('#search').fill('Doctor');
   });
   await check('empty build names are rejected without creating a saved snapshot',async()=>{
     await page.locator('#build-name').fill(' ');await page.locator('#save-build').click();assert.match(await page.locator('#save-status').innerText(),/Enter a build name/);assert.equal(await page.locator('#saved-builds').inputValue(),'');
@@ -107,6 +116,42 @@ try{
   const coverage=await page.coverage.stopJSCoverage(),functions=new Map();
   for(const file of coverage.filter(f=>f.url.endsWith('/main.js')||/\/assets\/index-[\w-]+\.js$/.test(f.url)))for(const fn of file.functions){const key=fn.functionName+':'+fn.ranges[0].startOffset;functions.set(key,(functions.get(key)??false)||fn.ranges[0].count>0);}
   report.coverage.push({module:'browser entry (source or Vite bundle)',metric:'browser V8 function coverage across normal-flow navigations; not statement/branch coverage',totalFunctions:functions.size,executedFunctions:[...functions.values()].filter(Boolean).length});
+  await check('portable file and real clipboard round trips preserve priorities and separate named saves',async()=>{
+    const catalog=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url))),config=createConfig(catalog);
+    config.requests=[{id:catalog.perks.find(p=>p.name==="Doctor's Orders").id,required:true},{id:catalog.perks.find(p=>p.name==='Resiliency').id,required:false},{id:'/Unknown/FuturePerk',required:false}];
+    const text=exportBuild('Portable priorities',config,'older-game'),c=await browser.newContext();await c.grantPermissions(['clipboard-read','clipboard-write'],{origin:new URL(base).origin});
+    const p=await c.newPage();p.on('pageerror',e=>report.pageErrors.push(e.message));await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#transfer-panel > summary').click();
+    const choose=p.waitForEvent('filechooser');await p.locator('#import-file').click();await (await choose).setFiles({name:'portable.afe2.json',mimeType:'application/json',buffer:Buffer.from(text)});
+    await p.locator('.priority-row').nth(2).waitFor();await p.locator('#cancel').waitFor({state:'hidden'});assert.equal(await p.locator('#build-name').inputValue(),'Portable priorities');assert.match(await p.locator('#notice').innerText(),/different game-data version/);
+    const inputs=()=>p.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')).draft);
+    assert.deepEqual(await inputs(),config);assert.ok(await p.getByRole('checkbox',{name:"Require Doctor's Orders",exact:true}).isChecked());
+    await p.locator('#save-build').click();const named=await p.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')).builds);assert.equal(named.length,1);assert.deepEqual(named[0].config.requests,config.requests);
+    const downloadEvent=p.waitForEvent('download');await p.locator('#export-file').click();const download=await downloadEvent;assert.equal(download.suggestedFilename(),'portable-priorities.afe2.json');const target=path.join(evidence,'portable-download.afe2.json');await download.saveAs(target);assert.deepEqual(importBuild(fs.readFileSync(target,'utf8')).config,config);
+    await p.bringToFront();await p.locator('#copy-build').click();await p.waitForFunction(()=>document.getElementById('transfer-status').textContent.includes('Build copied'));assert.match(await p.locator('#transfer-status').innerText(),/Build copied/);const clipboard=await p.evaluate(()=>navigator.clipboard.readText());assert.deepEqual(importBuild(clipboard).config,config);
+    await p.getByRole('button',{name:'Move Resiliency up',exact:true}).click();await p.getByRole('checkbox',{name:"Require Doctor's Orders",exact:true}).uncheck();await p.locator('#paste-build').click();await p.waitForFunction(()=>document.getElementById('transfer-status').textContent.includes('Build loaded'));await p.locator('#cancel').waitFor({state:'hidden'});assert.deepEqual(await inputs(),config);
+    assert.deepEqual(await p.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')).builds),named);
+    await p.locator('#build-file').setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{broken')});await p.waitForFunction(()=>document.getElementById('transfer-status').textContent.includes('not valid JSON'));assert.match(await p.locator('#transfer-status').innerText(),/not valid JSON/);assert.deepEqual(await inputs(),config);
+    await p.locator('#build-file').setInputFiles({name:'large.json',mimeType:'application/json',buffer:Buffer.alloc(1048577,32)});await p.waitForFunction(()=>document.getElementById('transfer-status').textContent.includes('exceeds 1 MiB'));assert.deepEqual(await inputs(),config);
+    await p.locator('#manual-transfer > summary').click();await p.locator('#build-json').fill(JSON.stringify({format:'afe2-perk-build',version:99}));await p.locator('#load-json').click();assert.match(await p.locator('#transfer-status').innerText(),/Unsupported/);assert.deepEqual(await inputs(),config);
+    await c.close();
+  });
+  await check('denied clipboard access has manual copy/paste recovery without losing priorities',async()=>{
+    const c=await browser.newContext();await c.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:async()=>{throw new Error('denied');},readText:async()=>{throw new Error('denied');}}}));
+    const p=await c.newPage();await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#transfer-panel > summary').click();
+    await p.locator('#copy-build').click();await p.waitForFunction(()=>document.getElementById('transfer-status').textContent.includes('Clipboard copy unavailable'));assert.ok(await p.locator('#manual-transfer').evaluate(n=>n.open));const text=await p.locator('#build-json').inputValue();assert.equal(importBuild(text).config.rank,10);
+    await p.locator('#paste-build').click();await p.waitForFunction(()=>document.getElementById('transfer-status').textContent.includes('Could not load from clipboard'));assert.match(await p.locator('#transfer-status').innerText(),/paste JSON below/);await p.locator('#load-json').click();assert.match(await p.locator('#transfer-status').innerText(),/Build loaded/);await c.close();
+  });
+  await check('all five generated Machinist files load their exact 24-item priority lists',async()=>{
+    const c=await browser.newContext(),p=await c.newPage();p.on('pageerror',e=>report.pageErrors.push(e.message));await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#transfer-panel > summary').click();
+    for(let i=1;i<=5;i++){
+      const filename='machinist-'+i+'.afe2.json',buffer=fs.readFileSync(new URL('../examples/machinist-validation/'+filename,import.meta.url)),build=importBuild(buffer.toString('utf8'));
+      await p.locator('#build-file').setInputFiles({name:filename,mimeType:'application/json',buffer});await p.waitForFunction(name=>document.getElementById('build-name').value===name,build.name);
+      assert.equal(await p.locator('#rank-select').inputValue(),'10');assert.equal(await p.locator('.priority-row').count(),24);
+      const draft=await p.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')).draft);assert.deepEqual(draft,build.config);
+      if(await p.locator('#cancel').isVisible())await p.locator('#cancel').click();
+    }
+    await c.close();
+  });
   await check('40-request loadout completes through the real worker and retains all omitted requests',async()=>{
     const catalog=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url))),config=createConfig(catalog),klass=catalog.classes.find(k=>k.id===config.classId);
     config.requests=catalog.perks.filter(p=>!availability(p,klass)).slice(0,40).map(p=>({id:p.id,required:false}));

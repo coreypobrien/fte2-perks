@@ -21,9 +21,14 @@ The application is under `app/`; Vite provides development/build tooling. The cu
 2. Search the game-derived perk library, filter by granting class and Core/Modifier, and toggle cross-class universal perks. Add desired perks and drag or use arrow controls to prioritize them.
 3. Mark hard requirements as Required, then select Find arrangement.
 4. Review the grid, In grid checks, Effects you get descriptions, and Below the line omissions. Changing inputs marks all prior results stale.
-5. Name and save a build, save a copy, or load a named snapshot. The working draft autosaves separately.
+5. Name and save a build, save a copy, or load a named snapshot. Every save preserves priority order and Required flags, including omitted perks. The working draft autosaves separately.
+6. Open Import / export build to copy/paste JSON or export/import a .afe2.json file. Manual JSON controls work when clipboard access is denied. Import loads a draft without replacing named saves.
 
-All perks are assumed unlocked in v0. Universal-use eligibility is independent of unlock origin; class restrictions and alternative classes still apply. The app arranges user choices; it does not score combat strength or add unrequested filler perks.
+Known selected-class perk grants follow the selected rank. Other-class and unknown/shared unlocks are assumed available. Universal-use eligibility is independent of unlock origin; class restrictions and alternative classes still apply. The app arranges user choices; it does not score combat strength or add unrequested filler perks.
+
+## Machinist validation examples
+
+Five oversized rank-10 lists are in [examples/machinist-validation](examples/machinist-validation/README.md). Import any of the five .afe2.json files through Import file. Each has 24 requests covering 61–75 cells against 42 available cells. Reference placements and omissions are best-found results at the 10-second limit, not certified optima. Regenerate with `node scripts/generate-validation-builds.mjs`.
 
 ## Static output
 

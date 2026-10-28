@@ -1,4 +1,5 @@
 import {createConfig,reconcileConfig,canEquip,availability,slotOptions,prepareProblem,dependencyHint,equippedEffects} from './core/model.js';
+import {exportBuild,importBuild,buildFilename,MAX_BUILD_SIZE} from './core/transfer.js';
 import {loadState,persistState,saveNamed,cloneConfig} from './core/storage.js';
 const $=id=>document.getElementById(id);
 function element(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
@@ -8,7 +9,7 @@ function notice(text){$('notice').textContent=text;$('notice').hidden=!text;}
 function saveStatus(text,error=false){$('save-status').textContent=text;$('save-status').classList.toggle('error-text',error);}
 function persist(){if(storageBlocked){saveStatus('Existing saves could not be read. Saving is disabled to preserve them.',true);return false;}const value=persistState(storage,{draft:config,builds},game.version);if(!value.ok)saveStatus(value.error,true);return value.ok;}
 function stopWorker(){if(worker){worker.terminate();worker=null;}activeJob=null;$('cancel').hidden=true;$('solve').disabled=false;}
-function change(){stopWorker();stale=true;if(!storageBlocked)notice('');$('solve-status').textContent='Inputs changed. Find a new arrangement.';renderPriorities();renderResults();persist();}
+function change(){stopWorker();stale=true;if(!storageBlocked)notice('');$('solve-status').textContent='Inputs changed. Find a new arrangement.';renderPriorities();renderResults();return persist();}
 function klass(){return game.classes.find(c=>c.id===config.classId);}
 function fixedCurrent(){return prepareProblem(game,{...config,requests:[]}).fixed;}
 function selectPerk(id){selectedPerk=id;document.querySelectorAll('[data-perk-id]').forEach(n=>n.classList.toggle('highlighted',n.dataset.perkId===id));const perk=byId.get(id);$('selected-detail').hidden=!perk;if(perk){$('selected-detail').replaceChildren(element('h3',perk.name),element('p',perk.description),element('p',dependencyHint(perk,[...fixedCurrent(),...config.requests.map(r=>byId.get(r.id)).filter(Boolean)]),'secondary'));}}
@@ -21,7 +22,7 @@ const expandedPerks=new Set();
 function renderLibrary(){
   for(const row of $('library-list').children){const details=row.querySelector('details');if(details){if(details.open)expandedPerks.add(row.dataset.perkId);else expandedPerks.delete(row.dataset.perkId);}}
   const query=$('search').value.trim().toLowerCase(),grant=$('granting-class').value,show=$('show-unavailable').checked;
-  let list=game.perks.filter(p=>!p.slot && (!availability(p,klass())||show));
+  let list=game.perks.filter(p=>!p.slot && (!availability(p,klass(),config.rank)||show));
   list=list.filter(p=>$(p.kind==='Core'?'type-core':'type-modifier').checked);
   const sources=p=>p.unlockSources.map(s=>s.class);
   const fromClass=(p,name)=>sources(p).length?sources(p).includes(name):p.originKit?.split('.')[0]===game.classes.find(c=>c.name===name)?.id;
@@ -31,7 +32,7 @@ function renderLibrary(){
   list.sort((a,b)=>a.name.localeCompare(b.name));$('library-count').textContent=String(list.length);$('library-list').replaceChildren();
   if(!list.length)$('library-list').append(element('p','No matching perks. Try another search or include unavailable perks.','empty'));
   for(const p of list){
-    const unavailable=availability(p,klass()),added=config.requests.some(r=>r.id===p.id),row=element('article',undefined,'library-row');row.dataset.perkId=p.id;
+    const unavailable=availability(p,klass(),config.rank),added=config.requests.some(r=>r.id===p.id),row=element('article',undefined,'library-row');row.dataset.perkId=p.id;
     const heading=element('div',undefined,'row-title');heading.append(element('h3',p.name),element('span',p.shapes.map(s=>s.width+'×'+s.height).join(' / '),'size'));row.append(heading);
     const details=element('details');details.open=expandedPerks.has(p.id);details.ontoggle=()=>{if(details.isConnected){if(details.open)expandedPerks.add(p.id);else expandedPerks.delete(p.id);}};details.append(element('summary',p.kind+' · '+(p.restriction==='None'?'Universal use':'Class restricted')));
     details.append(element('p',p.description),element('p',dependencyHint(p,[...fixedCurrent(),...config.requests.map(r=>byId.get(r.id)).filter(Boolean)])));
@@ -102,6 +103,23 @@ function startSolve(){
   worker.postMessage({jobId:thisJob,problem,options:{timeLimitMs:Number($('search-budget').value),maxNodes:Number($('search-budget').value)>2500?1400000:350000}});
 }
 function namedSave(copy){try{const next=saveNamed(builds,$('build-name').value,config,game.version,{existingId:copy?null:selectedSaveId});const previous=builds;builds=next;if(persist()){selectedSaveId=next.at(-1).id;renderSaves();saveStatus('Saved in this browser · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));}else builds=previous;}catch(error){saveStatus(error.message,true);}}
+function transferStatus(message,error=false){$('transfer-status').textContent=message;$('transfer-status').classList.toggle('error-text',error);}
+function currentExport(){return exportBuild($('build-name').value,config,game.version);}
+function loadPortable(text){
+  const build=importBuild(text),reconciled=reconcileConfig(game,build.config);
+  config=reconciled.config;selectedSaveId=null;$('build-name').value=build.name;
+  change();renderSetup();renderLibrary();renderSaves();
+  notice([build.gameVersion!==game.version?'Imported from a different game-data version; inputs are being revalidated.':null,...reconciled.notices].filter(Boolean).join(' '));
+  transferStatus('Build loaded with '+config.requests.length+' priorities. Use Save build to keep a named snapshot.');startSolve();
+}
+function setupTransfer(){
+  $('copy-build').onclick=async()=>{try{const text=currentExport();$('build-json').value=text;await navigator.clipboard.writeText(text);transferStatus('Build copied, including priorities and Required flags.');}catch(error){$('manual-transfer').open=true;transferStatus('Clipboard copy unavailable. Copy the build JSON below manually.',true);}};
+  $('paste-build').onclick=async()=>{try{const text=await navigator.clipboard.readText();$('build-json').value=text;loadPortable(text);}catch(error){$('manual-transfer').open=true;transferStatus('Could not load from clipboard: '+error.message+' You can paste JSON below.',true);}};
+  $('load-json').onclick=()=>{try{loadPortable($('build-json').value);}catch(error){transferStatus(error.message,true);}};
+  $('export-file').onclick=()=>{try{const blob=new Blob([currentExport()],{type:'application/json'}),url=URL.createObjectURL(blob),link=element('a');link.href=url;link.download=buildFilename($('build-name').value,klass().name,config.rank);link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);transferStatus('Build file exported, including all priorities.');}catch(error){transferStatus(error.message,true);}};
+  $('import-file').onclick=()=>$('build-file').click();
+  $('build-file').onchange=async()=>{try{const file=$('build-file').files[0];if(!file)return;if(file.size>MAX_BUILD_SIZE)throw new Error('Build file exceeds 1 MiB.');loadPortable(await file.text());}catch(error){transferStatus(error.message,true);}finally{$('build-file').value='';}};
+}
 async function init(){
   document.body.classList.add('loading');
   const response=await fetch(new URL('./data/game.json',import.meta.url));if(!response.ok)throw new Error('Game catalog returned HTTP '+response.status);game=await response.json();byId=new Map(game.perks.map(p=>[p.id,p]));
@@ -111,10 +129,11 @@ async function init(){
   $('granting-class').append(...game.classes.map(c=>new Option(c.name,c.name)));
   renderSetup();renderSaves();renderLibrary();renderPriorities();renderResults();
   $('class-select').onchange=()=>{const requests=config.requests;config={...createConfig(game,$('class-select').value),rank:config.rank,requests};renderSetup();renderLibrary();change();};
-  $('rank-select').onchange=()=>{config.rank=Number($('rank-select').value);change();};
+  $('rank-select').onchange=()=>{config.rank=Number($('rank-select').value);change();renderLibrary();};
   for(const slot of ['primary','secondary','passive'])$(slot+'-select').onchange=()=>{config.abilities[slot]=$(slot+'-select').value;change();renderLibrary();};
   for(const id of ['search','granting-class','type-core','type-modifier','show-universal','show-unavailable'])$(id).addEventListener(id==='search'?'input':'change',renderLibrary);
   $('solve').onclick=startSolve;$('cancel').onclick=()=>{stopWorker();$('solve-status').textContent='Search cancelled. No optimality claim was made.';renderResults();};
+  setupTransfer();
   $('save-build').onclick=()=>namedSave(false);$('save-copy').onclick=()=>namedSave(true);
   $('load-build').onclick=()=>{const saved=builds.find(b=>b.id===$('saved-builds').value);if(!saved)return;const reconciled=reconcileConfig(game,cloneConfig(saved.config));config=reconciled.config;selectedSaveId=saved.id;$('build-name').value=saved.name;notice([saved.gameVersion!==game.version?'Saved with a different game-data version. Inputs were preserved and are being revalidated.':null,...reconciled.notices].filter(Boolean).join(' '));renderSetup();renderLibrary();renderPriorities();persist();startSolve();};
   startSolve();document.body.classList.remove('loading');

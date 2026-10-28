@@ -15,18 +15,24 @@
     <label>Primary ability<select id="primary-select"></select></label>
     <label>Secondary ability<select id="secondary-select"></select></label>
     <label>Passive<select id="passive-select"></select></label>
-    <span class="setup-note">All perks unlocked<br>Fixed orientations</span>
+    <span class="setup-note">Class-rank unlocks<br>Fixed orientations</span>
   </section>
   <section class="save-bar" aria-label="Local saved builds">
     <label>Build name<input id="build-name" maxlength="80" placeholder="Name this build"></label>
     <button id="save-build">Save build</button><label>Saved builds<select id="saved-builds"><option value="">No saved builds</option></select></label><button id="load-build">Load</button><button id="save-copy" class="quiet">Save copy</button>
     <span id="save-status" class="secondary" role="status">Stored in this browser only.</span>
+    <details id="transfer-panel" class="transfer-panel"><summary>Import / export build</summary>
+      <div class="transfer-actions"><button id="copy-build">Copy build</button><button id="paste-build">Paste build</button><button id="export-file">Export file</button><button id="import-file">Import file</button><input id="build-file" type="file" accept=".json,application/json" hidden></div>
+      <p class="secondary">Includes class, rank, abilities, priority order, and Required flags. Loading replaces your working draft; named saves stay separate.</p>
+      <details id="manual-transfer"><summary>Paste or copy JSON manually</summary><label>Build JSON<textarea id="build-json" rows="5" maxlength="1048576" spellcheck="false" placeholder="Paste an exported build here…"></textarea></label><button id="load-json">Load pasted JSON</button></details>
+      <p id="transfer-status" class="secondary" role="status"></p>
+    </details>
   </section>
   <div id="notice" class="notice" role="status" hidden></div>
   <div class="workspace">
     <section class="library pane" aria-labelledby="library-title"><div class="section-heading"><h2 id="library-title">Perk library</h2><span id="library-count" class="counter"></span></div>
       <label class="search-label">Search perks<input id="search" type="search" placeholder="Name or effect…" autocomplete="off"></label>
-      <div class="filters"><label>Granting class<select id="granting-class"><option value="all">All classes</option></select></label><fieldset><legend>Type</legend><label class="check-row"><input id="type-core" type="checkbox" checked>Core</label><label class="check-row"><input id="type-modifier" type="checkbox" checked>Modifier</label></fieldset><label class="check-row"><input id="show-universal" title="Include universal-use perks from other classes and shared progression" type="checkbox" checked>Show universal</label><label class="check-row"><input id="show-unavailable" type="checkbox">Show unavailable</label></div>
+      <div class="filters"><label>Granting class<select id="granting-class"><option value="all">All classes</option></select></label><fieldset><legend>Type</legend><label class="check-row"><input id="type-core" type="checkbox" checked>Core</label><label class="check-row"><input id="type-modifier" type="checkbox" checked>Modifier</label></fieldset><label class="check-row"><input id="show-universal" title="Include universal-use perks from other classes and shared progression" type="checkbox" checked>Show universal</label><label class="check-row"><input id="show-unavailable" type="checkbox">Show unavailable</label></div><p class="secondary library-note">Selected-class perks follow this rank. Other-class unlocks are assumed available.</p>
       <div id="library-list" class="library-list"></div>
     </section>
     <section class="priorities pane" aria-labelledby="priorities-title"><div class="section-heading"><h2 id="priorities-title">Your priorities</h2><span id="priority-count" class="counter">0</span></div><p class="secondary intro">Higher perks take priority. Required perks are never dropped.<br>Drag to reorder, or use the arrow buttons.</p>

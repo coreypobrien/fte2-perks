@@ -13,6 +13,7 @@ The production app is static HTML, CSS, and ES modules under `app/`. `node scrip
 | `app/main.js` | DOM UI, one current input configuration, a separate solved snapshot, worker job IDs/cancellation, named saves and stale states. |
 | `app/core/model.js` | Native-derived class eligibility, ability-slot options, configuration reconciliation, problem assembly, and sourced effect descriptions. |
 | `app/core/solver.js` | Pure fixed-orientation packing, required constraints, lexicographic optional choices, unique connected group assignment, and truthful budget statuses. |
+| `app/core/transfer.js` | Validated versioned portable build JSON, priority/Required preservation, safe download filenames. |
 | `app/core/storage.js` | Versioned localStorage serialization, validation, defensive loading, independent draft and named snapshots. |
 | `app/worker.js` | Runs the pure solver away from the UI thread and returns errors as structured responses. |
 | `scripts/build-web-data.mjs` | Joins serialized properties, resolved shapes, native enum defaults/rules, class definitions, and board metadata. |
@@ -37,13 +38,13 @@ Budget checks use both elapsed time and node limits. `optimal` means the inclusi
 
 Native Type defaults to Core; native RestrictionType defaults to None. None bypasses the class restriction check. Kit uses the selected class (or subclass) against KitRestriction OR explicit AlternativeKitsAllowed. OriginKit remains acquisition metadata. There are no explicit Role restrictions in this catalog; that unsupported case fails closed.
 
-The browser catalog preserves all 509 packaged chip definitions, 6 class boards, and fixed ability alternatives. Ability-slot entries appear in pickers rather than as ordinary requests. All 29 PerksOld records are retained because current entitlements reference them. Shared generic/weapon/reward acquisition membership remains incompletely traced; the UI assumes everything unlocked and reports this scope in Data & validation.
+The browser catalog preserves all 509 packaged chip definitions, 6 class boards, and fixed ability alternatives. Ability-slot entries appear in pickers rather than as ordinary requests. All 29 PerksOld records are retained because current entitlements reference them. Shared generic/weapon/reward acquisition membership remains incompletely traced; known grants in the selected class now follow its rank; other-class and unknown/shared unlock paths remain assumed available.
 
 This is static native-code translation plus asset extraction, not direct runtime instrumentation. Replacement shape and group-merge edge cases, full acquisition/ownership progression, combat stacking arithmetic, and automated runtime parity remain research limits. Do not claim that every possible in-game case is certified.
 
 ## Library and priority interactions
 
-Granting class uses known unlock-source class names, falling back to OriginKit only when no unlock source is recorded. It is a discovery filter, never an equip restriction. Core and Modifier checkboxes are independent. Show universal is checked initially; disabling it hides universal-use perks from other classes and shared progression while retaining known selected-class grants. Granting class still narrows results when Show universal is enabled. Show unavailable independently exposes disabled class-ineligible entries. Filter state is transient.
+Granting class uses known unlock-source class names, falling back to OriginKit only when no unlock source is recorded. It is a discovery filter, never an equip restriction. Core and Modifier checkboxes are independent. Show universal is checked initially; disabling it hides universal-use perks from other classes and shared progression while retaining known selected-class grants. Granting class still narrows results when Show universal is enabled. Show unavailable independently exposes disabled class-ineligible entries. Filter state is transient. Known ordinary-perk selected-class unlock sources are hidden below their earliest rank unless Show unavailable is checked, which exposes a disabled row with its rank reason. Changing rank refreshes the library immediately. Saved/imported future-rank requests remain visible in priorities and become solver omissions (or required failures), never silently deleted. A perk with no selected-class grant is not locked by another class’s rank. An unknown-rank selected-class path prevents assuming a lock. Fixed ability pickers retain their existing slot-option rules.
 
 Expanded library descriptions are tracked by stable perk ID and survive adding/removing requests and filtering away/back. Priorities support native drag-and-drop plus keyboard-operable arrow buttons. Both reorder paths use the same stale-result and draft-save flow. New sessions start with an empty build-name field; loading a named snapshot fills its explicit name.
 
@@ -54,6 +55,10 @@ The storage key is `afe2.perk-planner.v0`, schema version 1. It holds the workin
 Autosave only replaces the draft; saving a named build clones inputs. Save copy creates another ID. Failed writes report errors and do not add a pretend saved item. Unknown/future or malformed storage is preserved and further writes are blocked. Unknown catalog IDs remain editable requests; loading an older game's named build revalidates inputs and reruns the solver.
 
 Local browser saves are bound to the browser profile and origin (host + scheme + port). Use the same development port to keep the same saves. There is no cross-device synchronization.
+
+## Portable builds
+
+Import/export uses the independent `afe2-perk-build` version-1 format. It contains a name, game-data version, and full input configuration; request order and Required flags are authoritative. Cached placements are never imported. Files and clipboard share the same parser, validation and one-MiB limit. The UI imports into the draft, clears the selected named-save identity, reconciles stale catalog IDs, and reruns the worker. Existing named snapshots are untouched. Invalid/future documents leave inputs unchanged. Clipboard failure expands a manual JSON fallback. See build-transfer.md for the schema and exact behavior.
 
 ## Tests
 

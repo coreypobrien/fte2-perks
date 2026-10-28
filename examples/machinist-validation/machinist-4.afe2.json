@@ -1,0 +1,113 @@
+{
+  "format": "afe2-perk-build",
+  "version": 1,
+  "name": "Machinist validation 4",
+  "gameVersion": "26090957",
+  "config": {
+    "classId": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+    "rank": 10,
+    "abilities": {
+      "primary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Base",
+      "secondary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Base",
+      "passive": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg"
+    },
+    "requests": [
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_MaxHealthBonus_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ShockAmmo",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_PrecisionWeaponTraining_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsSynth",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageOnSlow_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Rare",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_Physician_Base",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireRate",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthBonus_2",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_TempHealthOnKill",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AmmoMaxBonus_2",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_2",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotHealth_WoundBonus",
+        "required": false
+      }
+    ]
+  }
+}

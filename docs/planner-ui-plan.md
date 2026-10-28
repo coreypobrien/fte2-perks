@@ -73,7 +73,7 @@ Build the active library from equip eligibility, then apply ownership/progressio
 
 Current extraction clues include `OriginKit`, `RestrictionType`, `KitRestriction`, `AlternativeKitsAllowed`, `ChipEntitlements`, and `GrantedBy`. These are observations, not a complete eligibility algorithm. An omitted `RestrictionType` is an unresolved native default, not proof of universal use. An explicit alternative class does not automatically mean every class is allowed. Recover native predicates before presenting these as confirmed choices.
 
-v0 retains **All perks unlocked** as its planning mode, avoiding a manual ownership checklist. It must still apply actual equip restrictions and expose universal-use perks correctly. If progression tracking is added, record all class ranks in one player profile and evaluate each unlock path independently of the active build's class rank.
+Known ordinary-perk grants in the selected class now follow its selected rank. Cross-class and unknown/shared acquisition remain assumed unlocked, avoiding a manual ownership checklist. It must still apply actual equip restrictions and expose universal-use perks correctly. If progression tracking is added, record all class ranks in one player profile and evaluate each unlock path independently of the active build's class rank.
 
 ## Local browser saves in v0
 
@@ -85,7 +85,7 @@ v0 retains **All perks unlocked** as its planning mode, avoiding a manual owners
 - Autosave the working draft after meaningful changes, but keep named snapshots separate so editing a draft does not silently overwrite a named build.
 - Show Saved only after storage succeeds. If storage is blocked, full, or contains malformed data, keep the current work usable and show a clear local-save error. Never clear existing saves automatically to recover.
 - Browser saves belong to that browser profile and site origin; v0 does not imply cross-device synchronization. Include this concise note near saved-build controls.
-- Full import/export and cloud sharing remain follow-up features; the schema should allow them later.
+- Local clipboard and file import/export are implemented in the independent afe2-perk-build version-1 format. Include every priority and Required flag; load into the draft, preserve named saves, validate before mutation, and recompute results. Cloud sharing remains deferred.
 
 ## Priority semantics
 

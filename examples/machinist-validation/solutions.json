@@ -1,0 +1,2175 @@
+[
+  {
+    "filename": "machinist-1.afe2.json",
+    "seed": 1310300639,
+    "gameVersion": "26090957",
+    "freeCells": 42,
+    "requestedCells": 64,
+    "config": {
+      "classId": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+      "rank": 10,
+      "abilities": {
+        "primary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Replacer_Rumble",
+        "secondary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Base",
+        "passive": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg"
+      },
+      "requests": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ScalableMachineLearning_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_Taunt",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_LastWoundReloadBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship02",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AutoRevive",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Core_Cooldown",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_StoppingPower",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ShrapnelShot",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Rare",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Exotic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotDamage_DamageBonus",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_AgilePractices_Mod",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_TempHealthOnKill",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Custom",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthReviveBonus",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_SelfApplied",
+          "required": false
+        }
+      ]
+    },
+    "result": {
+      "status": "timeout",
+      "complete": false,
+      "placements": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "kind": "Modifier",
+          "tags": [
+            "Perk.Technician.Bodyguard.BaseOnly",
+            "Perk.Technician.Bodyguard.Replacer.Shotgun"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 2,
+          "y": 1,
+          "width": 4,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+          "kind": "Modifier",
+          "tags": [
+            "Perk.Technician.Bodyguard.Base",
+            "Item.Chip.Modifier.Kit.Gunner.Gun.Firerate"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 6,
+          "y": 1,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 3,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship02",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 2,
+          "y": 4,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_Taunt",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.RumbleTurret"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 2,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 0,
+          "y": 0,
+          "width": 10,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AutoRevive",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [
+            "Item.Chip.Core.Generic.AutoRevive"
+          ],
+          "override": null,
+          "x": 3,
+          "y": 2,
+          "width": 2,
+          "height": 2,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Core_Cooldown",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [
+            "Item.Chip.Modifier.Kit.Lancer.OnKillElite"
+          ],
+          "override": null,
+          "x": 5,
+          "y": 2,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ScalableMachineLearning_Core",
+          "kind": "Core",
+          "tags": [
+            "Item.Chip.Core.Passive"
+          ],
+          "accepts": [
+            "Item.Chip.Modifier.Kit.Technician.MachineLearning"
+          ],
+          "override": null,
+          "x": 5,
+          "y": 3,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_LastWoundReloadBonus_Core",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 4,
+          "y": 4,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "included": [
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship02",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_Taunt",
+        "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AutoRevive",
+        "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_OnEliteKill_Core_Cooldown",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ScalableMachineLearning_Core",
+        "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_LastWoundReloadBonus_Core"
+      ],
+      "omissions": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/BlastCannon/Perk_Demolisher_BlastCannon_Mod_StoppingPower",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ShrapnelShot",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Rare",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Exotic",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotDamage_DamageBonus",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_AgilePractices_Mod",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_TempHealthOnKill",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Custom",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthReviveBonus",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_SelfApplied",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        }
+      ],
+      "error": "Search limit reached; this result is not proven optimal.",
+      "nodes": 21568,
+      "elapsedMs": 10023.7691
+    }
+  },
+  {
+    "filename": "machinist-2.afe2.json",
+    "seed": 3964736408,
+    "gameVersion": "26090957",
+    "freeCells": 42,
+    "requestedCells": 61,
+    "config": {
+      "classId": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+      "rank": 10,
+      "abilities": {
+        "primary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Base",
+        "secondary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Base",
+        "passive": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg"
+      },
+      "requests": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageResist_2",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ElectricAmmo",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_MaxHealthBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_SelfDestruct",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireAura",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Exotic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_2",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_DownDefense",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_AlwaysDestroy",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeSpeedBonus",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Damage",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_CrouchMovementSpeed",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Common",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Exotic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaDrainWhileSprinting",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotHealth_HealthBonus",
+          "required": false
+        }
+      ]
+    },
+    "result": {
+      "status": "timeout",
+      "complete": false,
+      "placements": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+          "kind": "Modifier",
+          "tags": [
+            "Perk.Technician.Bodyguard.Base",
+            "Item.Chip.Modifier.Kit.Gunner.Gun.Firerate"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 1,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 2,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 3,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 2,
+          "y": 4,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 0,
+          "y": 0,
+          "width": 10,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageResist_2",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 4,
+          "y": 1,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 6,
+          "y": 1,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "included": [
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth",
+        "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageResist_2",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth"
+      ],
+      "omissions": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ElectricAmmo",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_MaxHealthBonus_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_SelfDestruct",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireAura",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Exotic",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_2",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_DownDefense",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_AlwaysDestroy",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeSpeedBonus",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Damage",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_CrouchMovementSpeed",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Common",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Exotic",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaDrainWhileSprinting",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotHealth_HealthBonus",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        }
+      ],
+      "error": "Search limit reached; this result is not proven optimal.",
+      "nodes": 14144,
+      "elapsedMs": 10004.0392
+    }
+  },
+  {
+    "filename": "machinist-3.afe2.json",
+    "seed": 2324204881,
+    "gameVersion": "26090957",
+    "freeCells": 42,
+    "requestedCells": 69,
+    "config": {
+      "classId": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+      "rank": 10,
+      "abilities": {
+        "primary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Replacer_Rumble",
+        "secondary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Base",
+        "passive": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg"
+      },
+      "requests": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Slow",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Lancer",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CompatibilityMatrix_Mod",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_CQWWeaponTraining_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Campaign",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Shock",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_Taunt",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Mastery_Duration",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HandlingBonus",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_Cover_TempHealthGain",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship03",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_LastWoundReloadBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_MedkitToStart",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Rare",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Exotic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Core_SpecialReload",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+          "required": false
+        }
+      ]
+    },
+    "result": {
+      "status": "timeout",
+      "complete": false,
+      "placements": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Mastery_Duration",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Duration"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 0,
+          "y": 0,
+          "width": 10,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Slow",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 2,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CompatibilityMatrix_Mod",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.AbilityType.Ultimate",
+            "Item.Chip.AbilityType.Tactical",
+            "Item.Chip.Modifier.Duration",
+            "Item.Chip.Modifier.Kit.Doc.Trauma",
+            "Item.Chip.Modifier.Kit.Demolisher.MicroRockets",
+            "Item.Chip.Modifier.Kit.Demolisher.Tactical",
+            "Perk.Gunner.Gun"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 1,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 3,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Shock",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 2,
+          "y": 4,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_Taunt",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.RumbleTurret"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 4,
+          "y": 1,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Campaign",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 4,
+          "y": 2,
+          "width": 4,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_CQWWeaponTraining_Core",
+          "kind": "Core",
+          "tags": [
+            "Item.Chip.Core.Passive"
+          ],
+          "accepts": [
+            "Item.Chip.Modifier.Gun.CQW"
+          ],
+          "override": null,
+          "x": 4,
+          "y": 3,
+          "width": 2,
+          "height": 2,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HandlingBonus",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 6,
+          "y": 1,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core",
+          "kind": "Core",
+          "tags": [
+            "Item.Chip.Core.Passive"
+          ],
+          "accepts": [
+            "Item.Chip.Modifier.Kit.Doc.Bedside"
+          ],
+          "override": null,
+          "x": 6,
+          "y": 3,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Lancer",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 6,
+          "y": 4,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "included": [
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Mastery_Duration",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Slow",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CompatibilityMatrix_Mod",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Shock",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_Taunt",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Campaign",
+        "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_CQWWeaponTraining_Core",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HandlingBonus",
+        "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Lancer"
+      ],
+      "omissions": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_Cover_TempHealthGain",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship03",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_LastWoundReloadBonus_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_MedkitToStart",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Rare",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Duration_Exotic",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Perk_Generic_Core_SpecialReload",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        }
+      ],
+      "error": "Search limit reached; this result is not proven optimal.",
+      "nodes": 9344,
+      "elapsedMs": 10016.1218
+    }
+  },
+  {
+    "filename": "machinist-4.afe2.json",
+    "seed": 683673354,
+    "gameVersion": "26090957",
+    "freeCells": 42,
+    "requestedCells": 75,
+    "config": {
+      "classId": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+      "rank": 10,
+      "abilities": {
+        "primary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Base",
+        "secondary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Base",
+        "passive": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg"
+      },
+      "requests": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_MaxHealthBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ShockAmmo",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_PrecisionWeaponTraining_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsSynth",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageOnSlow_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Rare",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_Physician_Base",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireRate",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthBonus_2",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_TempHealthOnKill",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AmmoMaxBonus_2",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_2",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotHealth_WoundBonus",
+          "required": false
+        }
+      ]
+    },
+    "result": {
+      "status": "timeout",
+      "complete": false,
+      "placements": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+          "kind": "Modifier",
+          "tags": [
+            "Perk.Technician.Bodyguard.Base",
+            "Item.Chip.Modifier.Kit.Gunner.Gun.Firerate"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 1,
+          "width": 3,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 3,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.TurretBonusDmg"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 2,
+          "y": 4,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ShockAmmo",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifer.Kit.Technician.BaseTurret"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 4,
+          "y": 1,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsSynth",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 0,
+          "y": 0,
+          "width": 10,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_PrecisionWeaponTraining_Core",
+          "kind": "Core",
+          "tags": [
+            "Item.Chip.Core.Passive"
+          ],
+          "accepts": [
+            "Item.Chip.Modifier.Gun.Precision"
+          ],
+          "override": null,
+          "x": 6,
+          "y": 1,
+          "width": 2,
+          "height": 2,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_MaxHealthBonus_Core",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 1,
+          "y": 2,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "included": [
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Overclocked",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_ExtraDamage",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Knockback",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ShockAmmo",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DamageBonusVsSynth",
+        "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_PrecisionWeaponTraining_Core",
+        "/Game/Blueprints/Avocado_Classes/Demolisher/Perks/Perk_Demolisher_MaxHealthBonus_Core"
+      ],
+      "omissions": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthRegeneration",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageOnSlow_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Lancer/Perks/Perk_Lancer_WeakPointDamageBonus_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_Medic",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Rare",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_Physician_Base",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_FireRate",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthBonus_2",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_TempHealthOnKill",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_AmmoMaxBonus_2",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_2",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_BotHealth_WoundBonus",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        }
+      ],
+      "error": "Search limit reached; this result is not proven optimal.",
+      "nodes": 15232,
+      "elapsedMs": 10071.004100000002
+    }
+  },
+  {
+    "filename": "machinist-5.afe2.json",
+    "seed": 3338109123,
+    "gameVersion": "26090957",
+    "freeCells": 42,
+    "requestedCells": 66,
+    "config": {
+      "classId": "/Game/Blueprints/Avocado_Classes/Technician/Player_Technician_V2",
+      "rank": 10,
+      "abilities": {
+        "primary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Replacer_Rumble",
+        "secondary": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Replacer_Shotgun",
+        "passive": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg"
+      },
+      "requests": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_ADSMovementSpeed",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Shockwave",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Exotic",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaDrainWhileSprinting",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Common",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ThermalAmmo",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship02",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Shockwave",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_SelfDestruct",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HeavyWeaponTraining_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Technician",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthReviveBonus",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_3",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_Cooldown_Mod",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_HealingBonus_Core",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Common",
+          "required": false
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Electrocute",
+          "required": false
+        }
+      ]
+    },
+    "result": {
+      "status": "timeout",
+      "complete": false,
+      "placements": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Shockwave",
+          "kind": "Modifier",
+          "tags": [
+            "Perk.Technician.Bodyguard.Base"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 6,
+          "y": 0,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Kit.Technician.Turret"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 0,
+          "y": 0,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Exotic",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.Cooldown"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 8,
+          "y": 0,
+          "width": 1,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Common",
+          "kind": "Modifier",
+          "tags": [
+            "Item.Chip.Modifier.StoppingPower"
+          ],
+          "accepts": [],
+          "override": null,
+          "x": 9,
+          "y": 0,
+          "width": 1,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+          "kind": "Core",
+          "tags": [
+            "Item.Chip.Core.Passive"
+          ],
+          "accepts": [
+            "Item.Chip.Modifier.Kit.Technician.Synergy"
+          ],
+          "override": null,
+          "x": 2,
+          "y": 0,
+          "width": 2,
+          "height": 2,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core",
+          "kind": "Core",
+          "tags": [
+            "Item.Chip.Core.Passive"
+          ],
+          "accepts": [
+            "Item.Chip.Modifier.Kit.Doc.Bedside"
+          ],
+          "override": null,
+          "x": 4,
+          "y": 0,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_ADSMovementSpeed",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 4,
+          "y": 1,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaDrainWhileSprinting",
+          "kind": "Core",
+          "tags": [],
+          "accepts": [],
+          "override": null,
+          "x": 6,
+          "y": 1,
+          "width": 2,
+          "height": 1,
+          "cells": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "included": [
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Shockwave",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
+        "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Exotic",
+        "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Common",
+        "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+        "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_ADSMovementSpeed",
+        "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaDrainWhileSprinting"
+      ],
+      "omissions": [
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ThermalAmmo",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship02",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Shockwave",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_SelfDestruct",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HeavyWeaponTraining_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_XPBonus_Technician",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthReviveBonus",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_3",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_Cooldown_Mod",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_HealingBonus_Core",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Common",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        },
+        {
+          "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Electrocute",
+          "reason": "Not in the best result before the search limit; fit is not disproven."
+        }
+      ],
+      "error": "Search limit reached; this result is not proven optimal.",
+      "nodes": 10368,
+      "elapsedMs": 10038.830499999996
+    }
+  }
+]

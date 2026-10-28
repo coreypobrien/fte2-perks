@@ -27,7 +27,7 @@ const perks=source.map(raw=>{
     source:{asset:raw.assetPath,build:raw.source.buildId,nativeDefaults:!p.Type||!p.RestrictionType}};
 });
 const output={schemaVersion:1,version:catalog.buildId,rulesVersion:'native-groups-v1',
-  scope:'All perks assumed unlocked. Native class restrictions and modifier group compatibility are translated for the installed build. Runtime parity for all catalog/replacement edge cases is not certified.',
+  scope:'Known selected-class perk unlock ranks are enforced; other-class and unknown/shared unlocks are assumed available. Native class restrictions and modifier group compatibility are translated for the installed build. Runtime parity for all catalog/replacement edge cases is not certified.',
   rulesSource:{executableSha256:rules.source.executableSha256,document:'docs/native-chip-rules.md'},
   board:{width:base.Width,height:base.Height,rankMask:base.CollisionMask},
   classes:classes.map(c=>{const board=boards.find(b=>b.assetPath===packageOf(c.board));return {id:c.assetPath,name:c.name,lineage:[],slots:board.properties.BoardLockedPlacements.map(s=>({key:s.Column===0?'primary':s.Column===9?'secondary':'passive',label:s.Column===0?'Primary':s.Column===9?'Secondary':'Passive',x:s.Column,y:s.Row,defaultId:packageOf(s.LockedSpecificChip)}))};}),perks};

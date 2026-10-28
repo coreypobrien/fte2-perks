@@ -11,8 +11,8 @@ Read `README.md`, `docs/architecture.md`, `docs/native-chip-rules.md`, and `docs
 - Show effect descriptions for the equipped build, not another perk-name catalog. Conditional bonuses retain conditions. Omitted perks contribute no descriptions.
 - Keep requested perks visible when excluded or incompatible. Inclusion checkmarks, grid, descriptions, and omissions must use one solved input snapshot and become stale together after edits.
 - Library granting-class filters use unlock metadata independently of equip eligibility. Preserve expanded descriptions across list updates. Keep drag reorder and keyboard arrows using the same autosave/stale-result behavior. New build names start blank.
-- All perks are assumed unlocked in v0, but class/alternative-class restrictions still apply. Unlock origin is NOT equip scope.
-- Save only to local browser storage. Preserve unknown IDs; do not overwrite malformed/future-version saves during recovery. Named snapshots must not alias autosaved drafts.
+- Known ordinary-perk grants in the selected class obey its rank. Other-class and unknown/shared unlocks remain assumed available. Alternate selected-class unlock paths use the earliest known qualifying grant; an unknown-rank path is not proof of a lock. Equip restrictions remain independent of origin. Preserve locked requests and report their reason.
+- Save locally to browser storage or a portable clipboard/JSON file. Import/export schema is independent of browser storage; validate before changing any input, preserve order/Required flags/unknown IDs, import only into the draft, and recompute layouts. Never overwrite named saves on import. Preserve unknown IDs; do not overwrite malformed/future-version saves during recovery. Named snapshots must not alias autosaved drafts.
 
 ## Source data and native research
 
@@ -46,3 +46,5 @@ When changing solver semantics, retain the independent exhaustive small-board or
 Keep future-agent documentation current, record tests and limitations, and commit coherent changes using the repository-local Git identity. Do not publish or deploy without a user request.
 
 For solver changes, read docs/solver-performance.md and run scripts/benchmark-solver.mjs. Never treat connectivity failure as geometric impossibility: later requested connectors may repair it. Reachability pruning is a relaxation and must retain fixed modifiers and sparse-footprint safeguards. Occupancy memo keys must preserve connection-bearing identity and footprint masks.
+
+Portable format and rank-filter rules are in docs/build-transfer.md. Retain clipboard success/denial recovery, file round trips, invalid/future input preservation, and imported unknown IDs in browser tests. Five seeded Machinist validation inputs live in examples/machinist-validation; their recorded timeout layouts are best found, not optimality certificates.

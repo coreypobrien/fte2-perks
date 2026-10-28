@@ -1,6 +1,18 @@
 # Solver performance investigation — 2026-10-28
 
-Current solver: all five Machinist-only examples now prove optimality in roughly 0.03–1.3 seconds locally. See the connected-group search section at the end; the earlier timeout measurements below document previous implementations.
+Current solver: all five Machinist-only examples prove optimality in roughly 0.02–1.9 seconds in the latest local comparison. See the connected-group search sections; earlier timeout measurements below document previous implementations.
+
+## FireRate-Survive-Team: exclusive-host groups — October 28
+
+The second exact 25-request input is preserved in `tests/fixtures/machinist-fire-rate-survive-team.afe2.json`. It requires Hyperlocal Logistics, includes Cross-Platform Synergy as the first optional priority, and pins Artificial Overclock and Compatibility Matrix to Sentry Turret. The previous movable-root improvement still timed out at 60 seconds on this build. Its connected-growth trial reached the strategy limit on a crowded subset, then the position-first fallback spent the remaining budget exploring that subset.
+
+Most modifiers in this build have exactly one host. The group solver previously enumerated many interleavings of independent groups. Now, when every remaining piece has one possible group, it completes one group before starting another, choosing the greatest remaining area first. Within a group, every frontier piece/position still branches; a forced piece order would be unsafe because a connector may need to precede another modifier. A final arrangement with exclusive hosts always admits whole-group replay. Ambiguous host assignments continue using unrestricted growth, and fixed bridges, sparse shapes, overrides, geometry-failure distinctions and budget statuses retain their existing rules.
+
+An uncapped sequential comparison recorded **timeout at 60,001 ms / 1,352,832 states** before and **optimal at 674 ms / 5,146 states** after. An isolated new-solver run took **480 ms**. The optimum contains **15 requests**: request positions 1–14 and 16 (Electrified), including required Hyperlocal Logistics. Both explicit pins remain in the input. The original reported build also remains optimal with the same 14 IDs. The full benchmark now contains 27 cases, including both reported builds; all completed within their one-second budgets in the recorded run. Timings vary with machine load and do not guarantee arbitrary builds will finish.
+
+The five unchanged Machinist examples still prove their original optima within 200,000 states. In a sequential before/after comparison, examples 2, 4 and 5 improved; example 1 was similar, while example 3 increased from 929 to 1,913 ms (113,205 to 138,588 states). Whole-group scheduling is a heuristic improvement, not a universal speedup. Independent exhaustive fixed/movable-root oracles still agree with the solver. The exact new fixture must prove its inclusion vector within 50,000 states, retain required perks on a budget-limited incumbent, and return legal non-overlapping groups. The browser imports that same file and checks its required flag, host pins, assigned groups, 15 included IDs and 10 omissions.
+
+For baseline reproduction, save `git show 98952a7:app/core/solver.js` to an ignored `work/solver-before-team.mjs`, then use `node scripts/benchmark-solver.mjs --only FireRate --budget-ms 60000 --baseline work/solver-before-team.mjs` (the standard benchmark also has a 1,400,000-state cap). The uncapped 60-second comparison is recorded in `work/evidence/team-comparison.json`; five-example comparison results are in `work/evidence/group-solver-benchmarks.json`.
 
 ## Reported movable-root timeout — October 28
 

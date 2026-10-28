@@ -44,3 +44,28 @@ test('reported movable-root timeout proves the same priority optimum within a bo
     const key=x+','+y;assert.ok(!occupied.has(key));occupied.add(key);
   }
 });
+
+test('FireRate-Survive-Team proves priority optimality with the required modifier and both host pins',()=>{
+  const build=importBuild(fs.readFileSync(new URL('./fixtures/machinist-fire-rate-survive-team.afe2.json',import.meta.url),'utf8'));
+  assert.equal(build.name,'FireRate-Survive-Team');assert.equal(build.config.requests.length,25);
+  assert.deepEqual(build.config.requests.filter(r=>r.required).map(r=>r.id),[build.config.requests[3].id]);
+  for(const index of [1,16])assert.equal(build.config.requests[index].coreId,build.config.abilities.primary);
+  const problem=prepareProblem(game,build.config),r=solve(problem,{timeLimitMs:10000,maxNodes:50000});
+  assert.equal(r.status,'optimal');assert.equal(r.omissions.length,10);
+  const expected=build.config.requests.filter((request,i)=>i<14||i===15).map(r=>r.id);
+  assert.deepEqual(new Set(r.included),new Set(expected));
+  assert.ok(r.included.includes(build.config.requests[3].id));
+  assert.ok(connectedGroups([...problem.fixed,...r.placements]));
+  assert.equal(r.placements.find(p=>p.id===build.config.requests[1].id).groupCoreId,build.config.abilities.primary);
+  assert.equal(r.placements.find(p=>p.id===build.config.requests[3].id).groupCoreId,build.config.requests[0].id);
+  const occupied=new Set();
+  for(const p of [...problem.fixed,...r.placements])for(const [x,y] of cellsOf(p)){
+    assert.ok(x>=0&&y>=0&&x<problem.width&&y<problem.height);
+    assert.ok(problem.rankMask[x*problem.height+y]>=0&&problem.rankMask[x*problem.height+y]<=problem.rank);
+    const key=x+','+y;assert.ok(!occupied.has(key));occupied.add(key);
+  }
+  const limited=solve(problem,{timeLimitMs:10000,maxNodes:1000});
+  assert.equal(limited.status,'timeout');assert.equal(limited.complete,false);
+  assert.ok(limited.included.includes(build.config.requests[3].id));
+  assert.ok(connectedGroups([...problem.fixed,...limited.placements]));
+});

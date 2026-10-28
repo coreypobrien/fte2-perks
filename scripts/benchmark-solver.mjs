@@ -15,6 +15,8 @@ export function benchmarkCases(){
   cases.push({name:'required-overcapacity',problem:board(4,4,Array.from({length:5},(_,i)=>chip('required-'+i,2,2)),Array.from({length:5},(_,i)=>({id:'required-'+i,required:true})))});
   const reported=JSON.parse(fs.readFileSync(new URL('../tests/fixtures/machinist-movable-roots.afe2.json',import.meta.url)));
   cases.push({name:'Machinist-reported-movable-roots',problem:prepareProblem(game,reported.config)});
+  const team=JSON.parse(fs.readFileSync(new URL('../tests/fixtures/machinist-fire-rate-survive-team.afe2.json',import.meta.url)));
+  cases.push({name:'Machinist-FireRate-Survive-Team',problem:prepareProblem(game,team.config)});
   return cases;
 }
 const baselineIndex=process.argv.indexOf('--baseline');

@@ -1,5 +1,11 @@
 # Local v0 verification — 2026-10-27
 
+## October 28 FireRate-Survive-Team follow-up
+
+The second reported build timed out with the previous solver after 60,001 ms. The revised exclusive-host group scheduling proved the 15-request optimum in 674 ms in the uncapped sequential comparison, and 480 ms in an isolated run. The included requests are positions 1–14 and 16 (Electrified), including required Hyperlocal Logistics. Explicit turret host pins remain unchanged. Evidence is in `work/evidence/team-comparison.json`; performance tradeoffs and reproduction are in solver-performance.md.
+
+`pnpm test` passed all 60 tests and catalog provenance/isolation checks. Instrumented total coverage was 98.56% lines / 96.94% branches / 98.02% functions, excluding DOM/worker-entry coverage claims. The independent exhaustive oracles, fixed-bridge/sparse-shape checks, previous reported input, and five 200,000-state Machinist example bounds passed. All 27 benchmark cases completed within the recorded one-second budgets (26 optimal, one deliberately infeasible). `pnpm build` passed. The production bundle passed all 25 browser scenarios in installed Edge under `/afe2-pages-check/`, with no unexpected page/console errors or failed requests. This includes exact file import, 15 included IDs, 10 omissions, required flag, persisted inputs, turret pins and assigned groups. This is local verification; no new hosted CI or deployment result is asserted.
+
 ## October 28 movable-root performance follow-up
 
 The exact reported 25-request build now proves the same 14-priority optimum in 649 ms locally versus 54,116 ms with the previous solver, using sequential Node 24.22.1 runs. The revised search uses 5,918 counted states versus 522,651. These are local measurements; arbitrary inputs and slower devices can still reach the unchanged 60-second UI budget. See solver-performance.md for strategy details and reproduction.

@@ -204,13 +204,23 @@ export function solve(problem, options = {}) {
       return domains;
     }
     const SWITCH=Symbol('ordering'),FALLBACK=Symbol('position search');let constrained=hosts.length>0,trialStart=nodes;
-    function grow(remaining,mask,groups,placed){
+    function grow(remaining,mask,groups,placed,focus=null){
       tick();if(hosts.length&&constrained&&nodes-trialStart>20000)throw FALLBACK;
       if(!constrained&&nodes-trialStart>10000)throw SWITCH;
       if(!remaining.length)return placeLoose(0,mask,placed);
+      // Exclusive-host focus only schedules a complete search of this state;
+      // failed states remain valid regardless of the chosen group order.
       const state=remaining.join(',')+':'+mask+':'+groups.map(g=>g.mask+','+Number(g.override)).join(';');
       if(groupDead.has(state))return null;
-      const domains=domainsFor(remaining,mask,groups);if(!domains){if(groupDead.size<50000)groupDead.add(state);return null;}
+      let domains=domainsFor(remaining,mask,groups);if(!domains){if(groupDead.size<50000)groupDead.add(state);return null;}
+      // With one possible host per remaining piece, groups need no interleaved
+      // growth orders. Any completion can be replayed one whole group at a time.
+      // Keep branching over every frontier piece/position within that group.
+      if(domains.every(d=>d.allowed.length===1)){
+        const demand=new Map();for(const d of domains){const g=d.allowed[0];demand.set(g,(demand.get(g)??0)+(d.piece.fixed?d.piece.perk.cells.length:area(d.piece.id)));}
+        if(!demand.has(focus))focus=[...demand].sort((a,b)=>b[1]-a[1])[0][0];
+        domains=domains.filter(d=>d.allowed[0]===focus);
+      }else focus=null;
       if(constrained)domains.sort((a,b)=>a.allowed.length-b.allowed.length||a.positions.length-b.positions.length||area(b.piece.id)-area(a.piece.id));
       const seenTypes=new Set();
       // Grow one rooted group at a time. A modifier chooses exactly one host.
@@ -222,7 +232,7 @@ export function solve(problem, options = {}) {
           for(const g of allowed){work.reachabilityChecks++;if(piece.perk.kind!=='Core'&&!(edge(p)&groups[g].mask))continue;
             const nextGroups=groups.map((group,i)=>i===g?{...group,mask:group.mask|p.mask,override:group.override||!!p.override}:group);
             const nextPlaced=piece.fixed?placed:[...placed,piece.perk.kind==='Core'?p:{...p,groupCoreId:groups[g].core.id}];
-            const found=grow(nextRemaining,mask|p.mask,nextGroups,nextPlaced);if(found)return found;
+            const found=grow(nextRemaining,mask|p.mask,nextGroups,nextPlaced,focus);if(found)return found;
           }
         }
       }

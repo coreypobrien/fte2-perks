@@ -29,3 +29,8 @@ test('unknown extra fields cannot import old placements or a result as authorita
 test('portable filenames are safe and use class/rank when the name is blank',()=>{
   assert.equal(buildFilename('Medic <local>','Medic',5),'medic-local.afe2.json');assert.equal(buildFilename('','Machinist',10),'machinist-rank-10.afe2.json');assert.equal(buildFilename('☃','Medic',5),'perk-build.afe2.json');
 });
+
+test('portable connection choices preserve unknown host IDs and reject malformed host choices',()=>{
+  const c=config();c.requests[0].coreId='/Missing/Host';const text=exportBuild('Pinned',c,'v1');assert.deepEqual(importBuild(text).config,c);
+  for(const coreId of [null,0,'','x'.repeat(600)]){const p=config();p.requests[0].coreId=coreId;assert.throws(()=>exportBuild('Bad target',p,'v1'));}
+});

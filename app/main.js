@@ -1,4 +1,5 @@
 import {createConfig,reconcileConfig,canEquip,availability,slotOptions,prepareProblem,dependencyHint,equippedEffects} from './core/model.js';
+import {compatible as dependencyParent} from './core/solver.js';
 import {exportBuild,importBuild,buildFilename,MAX_BUILD_SIZE} from './core/transfer.js';
 import {loadState,persistState,saveNamed,cloneConfig} from './core/storage.js';
 const $=id=>document.getElementById(id);
@@ -28,7 +29,7 @@ function clearPriorities(){
   stopWorker();config.requests=[];result=null;resultConfig=null;stale=false;selectedPerk=null;hoveredRow=null;$('selected-detail').hidden=true;
   renderPriorities();renderResults();renderLibrary();persist();$('solve-status').textContent='Priority list cleared.';
 }
-function selectPerk(id){selectedPerk=id;highlightPerks();const perk=byId.get(id);$('selected-detail').hidden=!perk;if(perk){$('selected-detail').replaceChildren(element('h3',perk.name),element('p',perk.description),element('p',dependencyHint(perk,[...fixedCurrent(),...config.requests.map(r=>byId.get(r.id)).filter(Boolean)]),'secondary'));}}
+function selectPerk(id){selectedPerk=id;highlightPerks();const perk=byId.get(id);$('selected-detail').hidden=!perk;if(perk){$('selected-detail').replaceChildren(element('h3',perk.name),element('p',perk.description),element('p',dependencyHint(perk,[...fixedCurrent(),...config.requests.map(r=>byId.get(r.id)).filter(Boolean)]),'secondary'));const groupId=result?.placements?.find(p=>p.id===id)?.groupCoreId;if(groupId)$('selected-detail').append(element('p',(stale?'Previous arrangement: ':'')+'Attached to '+(byId.get(groupId)?.name??'core')+'.'));}}
 function renderSetup(){
   $('class-select').replaceChildren(...game.classes.map(c=>new Option(c.name,c.id)));$('class-select').value=config.classId;
   $('rank-select').replaceChildren(...Array.from({length:10},(_,i)=>new Option(String(i+1),String(i+1))));$('rank-select').value=String(config.rank);
@@ -65,6 +66,7 @@ function renderPriorities(){
   const focus=document.activeElement?.dataset,restore=focus?.action&&focus?.perkId?{...focus}:null;
   $('clear-priorities').disabled=!config.requests.length;$('priority-count').textContent=String(config.requests.length);$('priority-list').replaceChildren();
   if(!config.requests.length)$('priority-list').append(element('li','Add perks from the library, then put the most important ones first.','empty'));
+  const connectionCores=[...fixedCurrent(),...config.requests.map(r=>byId.get(r.id)).filter(p=>p?.kind==='Core'&&!availability(p,klass(),config.rank))];
   config.requests.forEach((request,index)=>{
     const p=byId.get(request.id),included=result?.included?.includes(request.id),row=element('li',undefined,'priority-row'+(included&&!stale?' included':''));row.dataset.perkId=request.id;
     row.draggable=true;row.title='Drag to reorder; arrow buttons also available';
@@ -75,7 +77,9 @@ function renderPriorities(){
     row.ondrop=e=>{e.preventDefault();const from=config.requests.findIndex(r=>r.id===e.dataTransfer.getData('text/plain'));if(from<0||from===index)return;const [moved]=config.requests.splice(from,1);config.requests.splice(index,0,moved);change();};
     const heading=element('div',undefined,'row-title'),name=element('h3',`${index+1}. ${p?.name??'Missing catalog perk'}`);heading.append(name,element('span',p?p.shapes.map(s=>s.width+'×'+s.height).join('/'):'Unknown','size'));row.append(heading);
     const reason=result?.omissions?.find(o=>o.id===request.id)?.reason;
-    row.append(element('span',stale?'Previous result · out of date':included?'✓ In grid':reason??(!result?'Not solved yet':result.placements?'Below the line':'No successful arrangement'),'row-state'));
+    const groupId=result?.placements?.find(p=>p.id===request.id)?.groupCoreId,groupName=byId.get(groupId)?.name;
+    row.append(element('span',stale?'Previous result · out of date':included?'✓ In grid'+(groupName?' · '+groupName:''):reason??(!result?'Not solved yet':result.placements?'Below the line':'No successful arrangement'),'row-state'));
+    if(p?.kind==='Modifier'){const parents=connectionCores.filter(c=>c.id!==p.id&&dependencyParent(c,p));if(parents.length>1||request.coreId){const label=element('label',undefined,'connection-choice'),select=element('select');label.append(document.createTextNode('Attach to'),select);select.setAttribute('aria-label','Attach '+p.name+' to');select.dataset.action='core';select.dataset.perkId=request.id;select.append(new Option(parents.length===2?'Either (auto)':'Any compatible core (auto)',''),...parents.map(c=>new Option(c.name,c.id)));if(request.coreId&&!parents.some(c=>c.id===request.coreId))select.append(new Option((byId.get(request.coreId)?.name??'Missing core')+' · unavailable',request.coreId));select.value=request.coreId??'';select.onchange=()=>{if(select.value)request.coreId=select.value;else delete request.coreId;change();renderLibrary();};row.append(label);}}
     const actions=element('div',undefined,'priority-actions'),label=element('label',undefined,'check-row'),check=element('input');check.type='checkbox';check.checked=request.required;check.dataset.action='required';check.dataset.perkId=request.id;check.setAttribute('aria-label','Require '+(p?.name??request.id));check.onchange=()=>{request.required=check.checked;change();};label.append(check,document.createTextNode('Required'));actions.append(label);
     for(const [action,text,disabled,callback] of [
       ['up','↑',index===0,()=>{[config.requests[index-1],config.requests[index]]=[config.requests[index],config.requests[index-1]];}],
@@ -94,7 +98,7 @@ function renderResults(){
     const rank=game.board.rankMask[x*game.board.height+y],cell=element('div',rank>displayConfig.rank?'R'+rank:'','cell'+(rank<0?' void':rank>displayConfig.rank?' locked':''));cell.style.gridArea=`${y+1}/${x+1}`;cell.setAttribute('aria-label',rank<0?'Unusable':rank>displayConfig.rank?'Unlocks at rank '+rank:'Available cell');grid.append(cell);
   }
   for(const placement of [...problem.fixed,...(result?.placements??[])]){
-    const p=byId.get(placement.id),fixed=problem.fixed.some(f=>f.id===placement.id),tile=element('button',p?.name??'Unknown','tile'+(fixed?' fixed':'')+(placement.width===1?' vertical':''));tile.style.gridArea=`${placement.y+1}/${placement.x+1}/span ${placement.height}/span ${placement.width}`;tile.dataset.perkId=placement.id;tile.setAttribute('aria-label',(p?.name??placement.id)+`, column ${placement.x+1}, row ${placement.y+1}, ${placement.width} by ${placement.height}`);tile.onclick=()=>selectPerk(placement.id);grid.append(tile);
+    const p=byId.get(placement.id),fixed=problem.fixed.some(f=>f.id===placement.id),tile=element('button',p?.name??'Unknown','tile'+(fixed?' fixed':'')+(placement.width===1?' vertical':''));tile.style.gridArea=`${placement.y+1}/${placement.x+1}/span ${placement.height}/span ${placement.width}`;tile.dataset.perkId=placement.id;tile.setAttribute('aria-label',(p?.name??placement.id)+`, column ${placement.x+1}, row ${placement.y+1}, ${placement.width} by ${placement.height}`);if(placement.groupCoreId){tile.title='Connected to '+(byId.get(placement.groupCoreId)?.name??'core');tile.setAttribute('aria-label',tile.getAttribute('aria-label')+', '+tile.title);}tile.onclick=()=>selectPerk(placement.id);grid.append(tile);
   }
   let label='Ready',kind='';
   if(activeJob!==null){label='Solving…';}else if(stale){label='Out of date';kind='warning';}else if(result?.status==='optimal'){label='Optimal fit';kind='success';}else if(result?.status==='timeout'){label='Search limit';kind='warning';}else if(result&&!result.placements){label='No arrangement';kind='error';}
@@ -103,7 +107,7 @@ function renderResults(){
   $('effects-list').replaceChildren();
   const effects=equippedEffects(game,displayConfig,result);$('effect-count').textContent=effects.length?String(effects.length):'';
   $('effects-note').textContent=stale?'Descriptions from the previous arrangement · out of date.':'Game descriptions from equipped perks. Conditional effects retain their conditions.';
-  for(const effect of effects){const li=element('li',undefined,'effect-row'),button=element('button',effect.description);li.dataset.perkId=effect.id;button.dataset.perkId=effect.id;button.setAttribute('aria-label',effect.description+' Source: '+effect.source);button.onclick=()=>selectPerk(effect.id);li.append(button);$('effects-list').append(li);}
+  for(const effect of effects){const li=element('li',undefined,'effect-row'),button=element('button',effect.description);li.dataset.perkId=effect.id;button.dataset.perkId=effect.id;button.setAttribute('aria-label',effect.description+' Source: '+effect.source);const groupId=result?.placements?.find(p=>p.id===effect.id)?.groupCoreId;if(groupId)button.title='Attached to '+(byId.get(groupId)?.name??'core');button.onclick=()=>selectPerk(effect.id);li.append(button);$('effects-list').append(li);}
   if(!effects.length)$('effects-list').append(element('li',result?.placements?'No requested perks are equipped.':'Find an arrangement to see equipped perk effects.','empty'));
   $('below-list').replaceChildren();const omissions=result?.omissions??[];$('below-count').textContent=omissions.length?String(omissions.length):'';
   if(result&&!result.placements)$('below-list').append(element('p',result.error??'No arrangement found. Required perks were not dropped.','error-text'));

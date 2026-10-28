@@ -22,3 +22,8 @@ test('five portable lists contain only explicit rank-10 Machinist grants and exc
   }
   assert.equal(signatures.size,5);
 });
+
+test('all five oversized Machinist examples prove optimality within a bounded search',async()=>{
+  const {solve}=await import('../app/core/solver.js');
+  for(let i=1;i<=5;i++){const build=importBuild(fs.readFileSync(new URL('../examples/machinist-validation/machinist-'+i+'.afe2.json',import.meta.url),'utf8')),problem=prepareProblem(game,build.config),r=solve(problem,{timeLimitMs:10000,maxNodes:200000});assert.equal(r.status,'optimal','example '+i);assert.ok(r.included.length>=14);assert.ok(connectedGroups([...problem.fixed,...r.placements]));assert.ok(r.placements.filter(p=>p.kind==='Modifier').every(p=>typeof p.groupCoreId==='string'));}
+});

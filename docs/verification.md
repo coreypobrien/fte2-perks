@@ -10,16 +10,16 @@ Story verified: browser loads the versioned game catalog → player selects clas
 
 | Check | Result |
 | --- | --- |
-| Unit/integration cases | **48 passed, 0 failed** |
-| Instrumented total line coverage | **98.45%** |
-| Instrumented total branch coverage | **95.96%** |
-| Instrumented total function coverage | **98.05%** |
-| Core model line / branch coverage | **100% / 95.60%** |
-| Solver line / branch coverage | **100% / 97.10%** |
+| Unit/integration cases | **56 passed, 0 failed** |
+| Instrumented total line coverage | **98.69%** |
+| Instrumented total branch coverage | **96.46%** |
+| Instrumented total function coverage | **97.97%** |
+| Core model line / branch coverage | **100% / 95.79%** |
+| Solver line / branch coverage | **100% / 97.49%** |
 | Storage line / branch coverage | **100% / 100%** |
 | Portable transfer line / branch coverage | **100% / 100%** |
-| Browser scenarios against Vite production output | **22 passed** |
-| Browser scenarios against Vite dev server | **22 passed** |
+| Browser scenarios against Vite production output | **23 passed** |
+| Browser scenarios against Vite dev server | **23 passed** |
 | Unexpected page errors, console errors, or failed requests in normal-flow browser checks | **0** |
 | Catalog provenance / no-observation-input isolation | **Passed** |
 | Native shape and rule recipes against audited executable | **Passed** |
@@ -60,7 +60,7 @@ These artifacts are local test outputs under ignored `work/`. The chat handoff i
 
 ## Build and data evidence
 
-Vite emits static HTML, hashed JavaScript/CSS, a bundled worker, and a 457KB JSON catalog (about 33KB gzip). The browser entry bundle is about 22KB before gzip. No application backend, runtime remote API, external CDN, login, or cloud-save service is needed.
+Vite emits static HTML, hashed JavaScript/CSS, a bundled worker, and a 457KB JSON catalog (about 33KB gzip). The browser entry bundle is about 24KB before gzip. No application backend, runtime remote API, external CDN, login, or cloud-save service is needed.
 
 The game catalog covers build 26090957. All 509 footprints are game-derived: 483 explicit masks plus 26 native constructor defaults. Native Type/restriction defaults, alternative classes, effective tags, hierarchical matching, orthogonal groups, unique group membership, and per-group override exclusions have executable-backed provenance. User observations are tests, never production overrides.
 
@@ -76,13 +76,21 @@ Known selected-class ordinary-perk unlocks now follow the selected rank, with al
 
 Named builds already included priority order and Required flags; this was retained and reverified. Clipboard/file transfers use the version-1 portable format, preserving all requests, flags, class, rank and ability choices. Real clipboard permissions, file chooser/download, denied clipboard/manual fallback, malformed/future/oversized file rejection, imported unknown IDs and named-save independence passed browser checks.
 
-Five seeded rank-10 Machinist examples now use only explicit Machinist rank-10-or-below grants, with 24 optional priorities each totaling 59–70 cells against 42 free cells. The corrected Machinist-only files passed all 48 unit/integration tests and a targeted browser scenario importing all five and comparing their exact source configurations. Reference layouts are non-overlapping and group-valid in the implemented model, but all five reached the 10-second limit; they are best-found validation candidates. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
+Five seeded rank-10 Machinist examples now use only explicit Machinist rank-10-or-below grants, with 24 optional priorities each totaling 59–70 cells against 42 free cells. The Machinist-only files passed all 56 unit/integration tests and browser scenarios importing all five and waiting for proven optimal results. Refreshed reference layouts are non-overlapping, assign each modifier to one group, and are proven optimal within the implemented model. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
 
-## Timer audit and current solver budget
+## Agile Practices and direct group search
+
+The native-derived model treats Agile Practices as matching either Ultimate or Tactical, with exactly one selected Core group. UI hints now explicitly say ONE of. Attach to defaults to Either/Any and can pin one exact core; the chosen host appears in priority inclusion text and tile/effect tooltips. Named saves and portable files preserve the optional request.coreId; missing selected hosts remain explicit until the user changes the choice.
+
+Fixed-root packing now constructs legal groups directly, with exact one-host assignments, geometry/type symmetry pruning and safe reachable-capacity bounds. A position-first fallback preserves performance for movable requested cores. Independent exhaustive enumeration covers two roots, all priority orders, required flags and host choices; shared bridges and overrides retain their regressions.
+
+All five unchanged Machinist inputs now prove optimum in approximately 26–1,313 ms locally, versus timing out at 10 seconds on the prior solver. They include 15, 15, 14, 17 and 15 requested perks respectively. Browser tests now wait for each to complete optimally under ten seconds. The full 25-case benchmark completed within its one-second per-case budget: 24 optimal and one deliberate required-overcapacity failure. These are measured samples within the audited model, not a guarantee for arbitrary builds or complete in-game parity.
+
+## Historical timer audit
 
 Six real-browser paired trials detected no timer slowdown (median 2.62 seconds disabled versus 2.57 enabled at identical state counts and included IDs). CPU profiling instead identified repeated compatibility/reachability work. Caching reduced the five fixed-work examples from 4.18–6.09 seconds to 0.35–1.30 seconds, about 4.5–16× faster. The UI uses a 60-second wall-time budget without the old practical node cap, and calls the counter search states to distinguish it from inner candidate checks.
 
-A full 60-second sample reached 339,072 states and retained 10 perks, still with a truthful timeout status. Work counters explain the former low state counts, and the final geometry/group rules remain unchanged. See solver-performance.md and the machine-readable profiling evidence for details.
+Before direct group search, a full 60-second sample reached 339,072 states and retained 10 perks with a truthful timeout status. The new solver proves a 15-perk optimum for that same input in about 26 ms. Work counters explain the former low state counts, and the final geometry/group rules remain unchanged. See solver-performance.md and the machine-readable profiling evidence for details.
 
 ## Solver investigation
 

@@ -2,7 +2,7 @@ import {validConfig} from './storage.js';
 export const BUILD_FORMAT='afe2-perk-build';
 export const BUILD_VERSION=1;
 export const MAX_BUILD_SIZE=1024*1024;
-const portableConfig=config=>({classId:config.classId,rank:config.rank,abilities:{...config.abilities},requests:config.requests.map(r=>({id:r.id,required:r.required}))});
+const portableConfig=config=>({classId:config.classId,rank:config.rank,abilities:{...config.abilities},requests:config.requests.map(r=>({id:r.id,required:r.required,...(r.coreId!==undefined?{coreId:r.coreId}:{})}))});
 function validate(build){
   if(!build||build.format!==BUILD_FORMAT)throw new Error('This is not an AFE2 perk build file.');
   if(build.version!==BUILD_VERSION)throw new Error('Unsupported build format version. Your current build was kept.');

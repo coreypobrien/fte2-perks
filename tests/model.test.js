@@ -77,3 +77,9 @@ test('selected-class unlock ranks respect alternate grants and preserve cross-cl
   p.unlockSources.push({class:'Medic',requiredRank:null});assert.equal(availability(p,medic,1),null);delete p.unlockSources;assert.equal(availability(p,medic,1),null);
   const c=createConfig(game);c.rank=5;c.requests=[{id:resil.id,required:false}];const problem=prepareProblem(game,c);assert.match(problem.perks[0].unavailable,/rank 10/);assert.equal(problem.requests.length,1);assert.equal(solve(problem).included.length,0);
 });
+
+test('Agile Practices matches either Machinist ability, never requiring both',()=>{
+  const klass=game.classes.find(k=>k.name==='Machinist'),config=createConfig(game,klass.id),agile=byName('Agile Practices');config.abilities.primary=byName('Rumble Turret').id;
+  const fixed=prepareProblem(game,config).fixed,hosts=fixed.filter(core=>compatible(core,agile));assert.deepEqual(hosts.map(p=>p.name),['Rumble Turret','Bodyguard']);assert.match(dependencyHint(agile,fixed),/ONE of: Rumble Turret or Bodyguard/);
+  for(const host of hosts){config.requests=[{id:agile.id,required:true,coreId:host.id}];const r=solve(prepareProblem(game,config));assert.equal(r.status,'optimal');assert.equal(r.placements[0].groupCoreId,host.id);}
+});

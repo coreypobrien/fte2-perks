@@ -1,5 +1,7 @@
 # Solver performance investigation — 2026-10-27
 
+Current solver: all five Machinist-only examples now prove optimality in roughly 0.03–1.3 seconds locally. See the connected-group search section at the end; the earlier timeout measurements below document previous implementations.
+
 The old search had two independent problems: it enumerated optional subsets until their leaves even when a modifier could not have any requested compatible root, and placement search explored disconnected configurations and permutations of interchangeable standalone cores. It also retained only a required-only incumbent. A timeout could therefore return zero optional perks after examining many valid smaller possibilities indirectly.
 
 The revised search packs partial subsets to retain progressively better valid arrangements, prunes missing roots against selected plus undecided requests, and prunes supersets only for geometric impossibility. It places connection-bearing pieces first, memoizes semantic occupancy states, checks relaxed future reachability during placement, and caches geometry for exact group validation. Strict lexicographic priorities, required perks, fixed orientation, unique group membership, and per-group overrides are unchanged.
@@ -66,3 +68,23 @@ These local Node measurements compare identical included IDs and state counts, a
 The full-budget case 1 ran for 60001 ms and explored 339,072 states, retaining 10 perks. It still timed out: the longer budget is not an optimality guarantee. Cancellation, stale-state handling, and valid best-found results remain intact.
 
 Reproduction commands are in testing.md. Evidence: timer-profile-before.json, machinist-fixed-work.json, machinist-60-seconds.json, and the raw CPU profiles under work/. The earlier 25-case comparison above is historical; the current 25-case suite was rerun after caching changes with truthful timeout states retained.
+
+## Direct connected-group search and single-host audit
+
+The previous position-first search still enumerated many floating modifiers and relied on a relaxed cell flood to reject them. The fixed-root search now grows connected groups directly, assigning every Modifier to exactly one Core. Equivalent modifier geometry/host choices share one identity order, and Hall-style reachable-capacity bounds prune impossible group allocations. A short priority-first trial precedes a constrained-order retry; only completed failures are reused. Movable requested roots retain the position-first fallback because putting all free roots first regressed other kits.
+
+Agile Practices was already an either/or compatibility match, not an AND requirement. The UI wording and hidden group assignment made that unclear. The solver now returns groupCoreId; the UI names the assigned side and offers an optional Attach to constraint. Default Auto explores either host. The constraint is preserved in draft/named/portable saves, and a missing selected host is explicit rather than silently changed.
+
+The benchmark used the same 10-second wall budget and five unchanged Machinist-only priority inputs for both versions:
+
+| Case | Previous result | New result | New time | Included perks |
+| --- | --- | --- | --- | --- |
+| 1 | timeout after 10005 ms | optimal | 26 ms | 15 |
+| 2 | timeout after 10006 ms | optimal | 1313 ms | 15 |
+| 3 | timeout after 10005 ms | optimal | 1242 ms | 14 |
+| 4 | timeout after 10018 ms | optimal | 105 ms | 17 |
+| 5 | timeout after 10004 ms | optimal | 134 ms | 15 |
+
+All five new inclusion vectors dominate or equal the old valid incumbents and all five optima were proven within the implemented rule model. The 25-case standard suite also completed every case within its one-second per-case budget (24 optimal, one deliberately infeasible). These results are measured samples, not a guarantee for arbitrary requests or devices. The 60-second production ceiling and cancellation remain.
+
+The independently enumerated tiny-board oracle now includes two roots, dual-compatible modifiers, explicit targets and required requests. It agrees with the solver across all tested priority orders. The earlier 60-second sample is superseded by this search. Refreshed examples/solutions.json and the human-readable guide now record optimal placements and a single named group for every modifier, for in-game validation.

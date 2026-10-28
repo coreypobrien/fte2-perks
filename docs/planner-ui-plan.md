@@ -39,7 +39,7 @@ Changing the setup preserves requested perks and marks affected requests as inco
 - Each row has Required, move up, move down, and remove controls. Drag-to-reorder supplements these and preserves autosave/stale-result behavior.
 - **Required** means the solver must include the perk or report failure. It does not fix the perk to a board position.
 - Other entries are optional preferences in strict order. Start newly added perks as optional.
-- Show the footprint and any unmet dependency next to each selected perk.
+- Show the footprint and any unmet dependency next to each selected perk. Multi-host modifiers default to Either/Any and offer Attach to for a specific root. Solved rows identify the single chosen core; missing old targets remain visible and editable.
 - Highlight requests included in the solved grid with a subtle background, checkmark, and **In grid** text. Mark other requests **Below the line** or the specific blocked state; do not rely on color alone. After editing, change these markers to previous-result status until the next solve.
 - **Find arrangement** above and below the priority list, using a fixed 60-second limit with a spinner, elapsed time and Cancel. No budget selector. **Clear priorities** empties the draft list, cancels work and clears the displayed result while preserving named saves.
 - After an input change, label the previous result **Out of date**. Keep it visible until the next solve; never present it as the result of the new inputs.

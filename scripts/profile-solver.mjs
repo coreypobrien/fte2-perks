@@ -6,7 +6,7 @@ const baseline=arg('--baseline',null),previous=baseline?(await import(pathToFile
 for(let i=1;i<=5;i++){
   const build=JSON.parse(fs.readFileSync('examples/machinist-validation/machinist-'+i+'.afe2.json')),problem=prepareProblem(game,build.config);
   const run=fn=>{const r=fn(problem,{timeLimitMs:60000,maxNodes:nodeLimit});return {status:r.status,nodes:r.nodes,included:r.included,ms:r.elapsedMs,work:r.work};};
-  const before=previous?run(previous):null,after=run(solve);if(before&&JSON.stringify(before.included)!==JSON.stringify(after.included))throw new Error('Fixed-work inclusion changed for case '+i);
+  const before=previous?run(previous):null,after=run(solve);if(args.includes('--require-identical')&&before&&JSON.stringify(before.included)!==JSON.stringify(after.included))throw new Error('Fixed-work inclusion changed for case '+i);
   const row={case:i,...(before?{before}:{}),after};rows.push(row);console.log(JSON.stringify({case:i,beforeMs:before?.ms,afterMs:after.ms,nodes:after.nodes,work:after.work}));
 }
 fs.mkdirSync('work/evidence',{recursive:true});fs.writeFileSync('work/evidence/machinist-fixed-work.json',JSON.stringify({nodeLimit,cases:rows},null,2)+'\n');

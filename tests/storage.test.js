@@ -33,3 +33,7 @@ test('blocked reads, quota failures and invalid writes report errors without fal
   assert.equal(persistState(memory(),{draft:null,builds:[{}]},'v1').ok,false);
   assert.equal(persistState(memory(),{draft:null,builds:[]},'v1').ok,true);
 });
+
+test('named and draft saves preserve optional modifier host choices independently',()=>{
+  const c=config();c.requests[0].coreId='/Chosen/Core';const builds=saveNamed([],'Host choice',c,'v1',{id:()=> 'host'});delete c.requests[0].coreId;const s=memory();assert.ok(persistState(s,{draft:c,builds},'v1').ok);const loaded=loadState(s);assert.equal(loaded.builds[0].config.requests[0].coreId,'/Chosen/Core');assert.equal(loaded.draft.requests[0].coreId,undefined);
+});

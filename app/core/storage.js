@@ -4,7 +4,7 @@ export function validConfig(value) {
   return value && typeof value.classId==='string' && Number.isInteger(value.rank) && value.rank>=1&&value.rank<=10 &&
     value.abilities && typeof value.abilities==='object' && !Array.isArray(value.abilities) &&
     Object.values(value.abilities).every(v=>typeof v==='string') && Array.isArray(value.requests) && value.requests.length<=100 &&
-    value.requests.every(r=>r&&typeof r.id==='string'&&r.id.length<600&&typeof r.required==='boolean') &&
+    value.requests.every(r=>r&&typeof r.id==='string'&&r.id.length<600&&typeof r.required==='boolean'&&(r.coreId===undefined||typeof r.coreId==='string'&&r.coreId.length>0&&r.coreId.length<600)) &&
     new Set(value.requests.map(r=>r.id)).size===value.requests.length;
 }
 const clone=value=>JSON.parse(JSON.stringify(value));

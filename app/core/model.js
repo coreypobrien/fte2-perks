@@ -43,13 +43,13 @@ export function prepareProblem(game,config){
     const p=byId.get(config.abilities[slot.key]);if(!p||!canEquip(p,klass)||p.slot!==slot.key)throw new Error('Selected ability is incompatible with its class or slot.');
     const shape=p.shapes[0];return {...p,x:slot.x,y:slot.y,width:shape.width,height:shape.height,cells:shape.cells};
   });
-  const perks=config.requests.map(r=>{const p=byId.get(r.id);return p?{...p,unavailable:fixed.some(f=>f.id===p.id)?'Already in an ability slot.':availability(p,klass,config.rank)}:{id:r.id,unavailable:'Missing from current game catalog.',kind:'Core',shapes:[]};});
+  const perks=config.requests.map(r=>{const p=byId.get(r.id);return p?{...p,targetCoreName:r.coreId?byId.get(r.coreId)?.name:undefined,unavailable:fixed.some(f=>f.id===p.id)?'Already in an ability slot.':availability(p,klass,config.rank)}:{id:r.id,unavailable:'Missing from current game catalog.',kind:'Core',shapes:[]};});
   return {width:game.board.width,height:game.board.height,rankMask:game.board.rankMask,rank:config.rank,fixed,requests:config.requests.map(r=>({...r})),perks};
 }
 export function dependencyHint(perk,equipped){
   if(perk.kind!=='Modifier')return 'No connection required';
   const parents=equipped.filter(p=>compatible(p,perk));
-  return parents.length?'Connects to '+parents.map(p=>p.name).join(', '):'Needs a compatible core or ability';
+  return parents.length>1?'Connect to ONE of: '+parents.map(p=>p.name).join(' or ')+'. One group only.':parents.length?'Connects to '+parents[0].name:'Needs a compatible core or ability';
 }
 export function equippedEffects(game,config,result){
   if(!result?.placements)return [];

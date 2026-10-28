@@ -13,16 +13,16 @@ export function adjacent(a, b) {
 }
 /** Each modifier belongs to an orthogonally connected group rooted at a compatible Core.
  * Native rule: no group may contain two GrantedAbilityOverride chips. */
-export function connectedGroups(placements, tick = () => {}, preparedLinks = null) {
+export function assignGroups(placements, tick = () => {}, preparedLinks = null) {
   const cores = placements.filter(p => p.kind === 'Core');
   const mods = placements.filter(p => p.kind === 'Modifier');
-  if (!mods.length) return true;
-  if (!cores.length) return false;
+  if (!mods.length) return {};
+  if (!cores.length) return null;
   const occupiedCells=preparedLinks?[]:placements.map(p=>new Set(cellsOf(p).map(([x,y])=>x+','+y)));
   const perimeter=preparedLinks?[]:placements.map(p=>cellsOf(p).flatMap(([x,y])=>[[x-1,y],[x+1,y],[x,y-1],[x,y+1]]).map(([x,y])=>x+','+y));
   const links=preparedLinks??placements.map((a,i)=>placements.map((b,j)=>i!==j&&perimeter[i].some(cell=>occupiedCells[j].has(cell))));
   const indices = new Map(placements.map((p,i) => [p.id,i]));
-  const can = cores.map(c => mods.map(m => compatible(c,m)));
+  const can = cores.map(c => mods.map(m => compatible(c,m)&&(!m.groupCoreId||m.groupCoreId===c.id)));
   // Reachability is a necessary pruning check, not a proof: a shared bridge
   // cannot simultaneously belong to two different core groups.
   const reachable=cores.map((core,g)=>{
@@ -30,8 +30,8 @@ export function connectedGroups(placements, tick = () => {}, preparedLinks = nul
     while(queue.length){tick();const i=queue.shift();mods.forEach((m,k)=>{const j=indices.get(m.id);if(can[g][k]&&!seen.has(j)&&links[i][j]){seen.add(j);queue.push(j);}});}
     return mods.map(m=>seen.has(indices.get(m.id)));
   });
-  if(mods.some((m,k)=>!reachable.some(group=>group[k])))return false;
-  if(cores.length===1)return !cores[0].override&&!mods.some(m=>m.override) || Number(!!cores[0].override)+mods.filter(m=>m.override).length<=1;
+  if(mods.some((m,k)=>!reachable.some(group=>group[k])))return null;
+  if(cores.length===1)return Number(!!cores[0].override)+mods.filter(m=>m.override).length<=1?Object.fromEntries(mods.map(m=>[m.id,cores[0].id])):null;
   // A modifier can be reachable from multiple groups. Search assignments rather than
   // rejecting a shared component or prematurely assigning a bridge to the wrong core.
   const assignment = mods.map(() => -1), seen = new Set();
@@ -48,8 +48,9 @@ export function connectedGroups(placements, tick = () => {}, preparedLinks = nul
     }
     return false;
   }
-  return grow(mods.length);
+  return grow(mods.length)?Object.fromEntries(mods.map((m,k)=>[m.id,cores[assignment[k]].id])):null;
 }
+export function connectedGroups(placements,tick=()=>{},preparedLinks=null){return assignGroups(placements,tick,preparedLinks)!==null;}
 
 export function solve(problem, options = {}) {
   const now=options.now ?? (() => performance.now());
@@ -89,7 +90,7 @@ export function solve(problem, options = {}) {
       if(!shape.cells?.length || !Number.isInteger(shape.width)||!Number.isInteger(shape.height) || shape.width<1||shape.height<1 || shape.cells.some(([x,y])=>!Number.isInteger(x)||!Number.isInteger(y)||x<0||y<0||x>=shape.width||y>=shape.height))
         return result('invalid',null,[],'Malformed perk footprint.');
       for(let y=0;y<=height-shape.height;y++)for(let x=0;x<=width-shape.width;x++){
-        const v={id:p.id,kind:p.kind,tags:p.tags,accepts:p.accepts,override:p.override,x,y,width:shape.width,height:shape.height,cells:shape.cells};
+        const v={id:p.id,kind:p.kind,tags:p.tags,accepts:p.accepts,override:p.override,x,y,width:shape.width,height:shape.height,cells:shape.cells,...(p.kind==='Modifier'&&request.coreId?{groupCoreId:request.coreId}:{})};
         const mask=placementMask(v);if(mask!==null&&!(mask&occupied))possible.push({...v,mask});
       }
     }
@@ -101,13 +102,18 @@ export function solve(problem, options = {}) {
   const definitions=[...fixed,...valid.map(r=>byId.get(r.id))];
   // Candidate copies share their source ID and immutable compatibility metadata.
   const compatibility=new Map(definitions.filter(p=>p.kind==='Core').map(core=>[core.id,new Set(definitions.filter(mod=>compatible(core,mod)).map(p=>p.id))]));
-  const matches=(core,mod)=>compatibility.get(core.id)?.has(mod.id)??false;
+  const targets=new Map(valid.filter(r=>r.coreId).map(r=>[r.id,r.coreId]));
+  const matches=(core,mod)=>(!targets.has(mod.id)||targets.get(mod.id)===core.id)&&(compatibility.get(core.id)?.has(mod.id)??false);
   const geometricallyImpossible=new Set();
   function pack(selected){
     tick(); const key=selected.map(r=>r.id).sort().join('|');if(failed.has(key))return null;
     if(selected.reduce((n,r)=>n+area(r.id),0)>free || selected.some(r=>!candidates.get(r.id).length)){failed.add(key);geometricallyImpossible.add(key);return null;}
     const all=[...fixed,...selected.map(r=>byId.get(r.id))];
     if(all.some(p=>p.kind==='Modifier'&&!all.some(c=>matches(c,p)))){failed.add(key);return null;}
+    const hosts=selected.filter(r=>byId.get(r.id).kind==='Core'&&all.some(m=>matches(byId.get(r.id),m)));
+    // Movable roots have coupled geometry; retain the position-first exact search
+    // for that case. Fixed-root builds use direct connected-group growth below.
+    if(hosts.length){
     const connectionRank=id=>{const p=byId.get(id);return p.kind==='Modifier'||all.some(m=>matches(p,m))?0:1;};
     const order=[...selected].sort((a,b)=>connectionRank(a.id)-connectionRank(b.id)||candidates.get(a.id).length-candidates.get(b.id).length || Number(byId.get(a.id).kind!=='Core')-Number(byId.get(b.id).kind!=='Core') || a.id.localeCompare(b.id));
     const sparseFootprints=[...fixed,...selected.flatMap(r=>byId.get(r.id).shapes)].some(p=>{const cells=new Set(p.cells.map(([x,y])=>x+','+y)),seen=new Set(),queue=[p.cells[0]];while(queue.length){const [x,y]=queue.pop(),key=x+','+y;if(seen.has(key)||!cells.has(key))continue;seen.add(key);queue.push([x-1,y],[x+1,y],[x,y-1],[x,y+1]);}return seen.size!==cells.size;});
@@ -135,7 +141,7 @@ export function solve(problem, options = {}) {
     function place(n,mask,placed){
       tick();if(n===order.length){geometryFound=true;const all=[...fixed,...placed];
         const links=all.map(a=>all.map(b=>a!==b&&!!(edge(a)&maskOf(b))));
-        return connectedGroups(all,tick,links)?placed.map(bare):null;}
+        const assignments=assignGroups(all,tick,links);return assignments===null?null:placed.map(p=>p.kind==='Modifier'?{...bare(p),groupCoreId:assignments[p.id]}:bare(p));}
       // Standalone cores are interchangeable obstacles. Connection-bearing pieces retain
       // their identities and positions so occupancy memoization cannot merge group states.
       const state=n+':'+mask+':'+placed.filter(p=>p.kind==='Modifier'||p.accepts?.length).map(p=>p.id+'@'+p.mask).join(';');
@@ -151,6 +157,72 @@ export function solve(problem, options = {}) {
       if(dead.size<50000)dead.add(state);return null;
     }
     const found=place(0,occupied,[]);if(!found){failed.add(key);if(!geometryFound)geometricallyImpossible.add(key);}return found;
+    }
+    const loose=selected.filter(r=>byId.get(r.id).kind==='Core'&&!hosts.includes(r));
+    loose.sort((a,b)=>candidates.get(a.id).length-candidates.get(b.id).length||a.id.localeCompare(b.id));
+    const roots=fixedForSearch.filter(p=>p.kind==='Core');
+    const pieces=[...fixedForSearch.filter(p=>p.kind==='Modifier').map(p=>({id:p.id,perk:p,positions:[p],fixed:true})),...selected.filter(r=>byId.get(r.id).kind==='Modifier').map(r=>({id:r.id,perk:byId.get(r.id),positions:candidates.get(r.id),fixed:false}))];
+    const rectangular=[...fixed,...selected.flatMap(r=>byId.get(r.id).shapes)].every(p=>p.cells.length===p.width*p.height);
+    const looseDead=new Set(),groupDead=new Set();
+    const countBits=value=>{let count=0;while(value){value&=value-1n;count++;}return count;};
+    function placeLoose(n,mask,placed){
+      tick();if(n===loose.length)return placed.map(bare);
+      const state=n+':'+mask;if(looseDead.has(state))return null;
+      for(const p of candidates.get(loose[n].id)){work.candidateChecks++;if(mask&p.mask)continue;
+        const found=placeLoose(n+1,mask|p.mask,[...placed,p]);if(found)return found;
+      }
+      if(looseDead.size<50000)looseDead.add(state);return null;
+    }
+    function domainsFor(remaining,mask,groups){
+      const domains=remaining.map(index=>({index,piece:pieces[index],positions:pieces[index].positions.filter(p=>{work.candidateChecks++;return pieces[index].fixed||!(p.mask&mask);})}));
+      if(domains.some(d=>!d.positions.length))return null;
+      for(const d of domains)d.allowed=groups.map((g,i)=>matches(g.core,d.piece.perk)&&!(d.piece.perk.override&&g.override)?i:-1).filter(i=>i>=0);
+      if(!rectangular)return domains;
+      const reachable=groups.map((group,g)=>{
+        let space=group.mask;
+        for(const d of domains)if(d.allowed.includes(g))for(const p of d.positions)space|=p.mask;
+        let reached=group.mask,previous;do{work.floodIterations++;previous=reached;reached|=neighbors(reached)&space&boardBits;}while(reached!==previous);
+        return reached;
+      });
+      for(const d of domains){d.allowed=d.allowed.filter(g=>d.positions.some(p=>!!(p.mask&reachable[g])));if(!d.allowed.length)return null;}
+      // Necessary group-capacity bound, using unions of mutually incompatible
+      // future placements as an overestimate. It cannot reject a real completion.
+      const subsets=groups.length<=8?Array.from({length:(1<<groups.length)-1},(_,i)=>BigInt(i+1)):[...groups.map((g,i)=>1n<<BigInt(i)),(1n<<BigInt(groups.length))-1n];
+      for(const bits of subsets){
+        let space=0n,demand=0;groups.forEach((g,i)=>{if(bits&(1n<<BigInt(i)))space|=reachable[i];});
+        for(const d of domains)if(!d.piece.fixed&&d.allowed.every(i=>!!(bits&(1n<<BigInt(i)))))demand+=area(d.piece.id);
+        if(demand>countBits(space&~mask))return null;
+      }
+      return domains;
+    }
+    const SWITCH=Symbol('ordering');let constrained=false,trialStart=nodes;
+    function grow(remaining,mask,groups,placed){
+      tick();if(!constrained&&nodes-trialStart>10000)throw SWITCH;
+      if(!remaining.length)return placeLoose(0,mask,placed);
+      const state=remaining.join(',')+':'+mask+':'+groups.map(g=>g.mask+','+Number(g.override)).join(';');
+      if(groupDead.has(state))return null;
+      const domains=domainsFor(remaining,mask,groups);if(!domains){if(groupDead.size<50000)groupDead.add(state);return null;}
+      if(constrained)domains.sort((a,b)=>a.allowed.length-b.allowed.length||a.positions.length-b.positions.length||area(b.piece.id)-area(a.piece.id));
+      const seenTypes=new Set();
+      // Grow one rooted group at a time. A modifier chooses exactly one host.
+      for(const {index,piece,allowed,positions} of domains){
+        const type=JSON.stringify([piece.fixed?positions[0].mask.toString():piece.perk.shapes,allowed,!!piece.perk.override]);
+        if(seenTypes.has(type))continue;seenTypes.add(type);
+        const nextRemaining=remaining.filter(i=>i!==index);
+        for(const p of positions){work.candidateChecks++;
+          for(const g of allowed){work.reachabilityChecks++;if(!(edge(p)&groups[g].mask))continue;
+            const nextGroups=groups.map((group,i)=>i===g?{...group,mask:group.mask|p.mask,override:group.override||!!p.override}:group);
+            const nextPlaced=piece.fixed?placed:[...placed,{...p,groupCoreId:groups[g].core.id}];
+            const found=grow(nextRemaining,mask|p.mask,nextGroups,nextPlaced);if(found)return found;
+          }
+        }
+      }
+      if(groupDead.size<50000)groupDead.add(state);return null;
+    }
+    const initial=roots.map(core=>({core,mask:core.mask,override:!!core.override}));
+    let found;
+    try{found=grow(pieces.map((p,i)=>i),occupied,initial,[]);}catch(error){if(error!==SWITCH)throw error;constrained=true;found=grow(pieces.map((p,i)=>i),occupied,initial,[]);}
+    if(!found){failed.add(key);if(!pieces.length)geometricallyImpossible.add(key);}return found;
   }
   try {
     function improve(found){
@@ -172,10 +244,11 @@ export function solve(problem, options = {}) {
     }
     const found=choose(0,required,required.reduce((n,r)=>n+area(r.id),0));
     const possibleCores=[...fixed,...valid.map(r=>byId.get(r.id))].filter(p=>p.kind==='Core');
+    const parentReason=id=>targets.has(id)?'Requires the selected core '+(byId.get(id)?.targetCoreName??byId.get(targets.get(id))?.name??targets.get(id))+'. Equip it or change Attach to.':'Requires a compatible equipped ability or a core in your priority list.';
     const missingParent=id=>byId.get(id).kind==='Modifier'&&!possibleCores.some(c=>matches(c,byId.get(id)));
-    if(found===null)return result('infeasible',null,[...omissions,...required.map(r=>({id:r.id,reason:missingParent(r.id)?'Requires a compatible equipped ability or a core in your priority list.':!candidates.get(r.id).length?'No fixed-orientation placement fits the unlocked grid.':'Cannot be jointly placed with the other required perks under the connection rules.'}))],'Required perks cannot form an arrangement.');
+    if(found===null)return result('infeasible',null,[...omissions,...required.map(r=>({id:r.id,reason:missingParent(r.id)?parentReason(r.id):!candidates.get(r.id).length?'No fixed-orientation placement fits the unlocked grid.':'Cannot be jointly placed with the other required perks under the connection rules.'}))],'Required perks cannot form an arrangement.');
     const ids=new Set(found.map(p=>p.id));
-    const omitted=optional.filter(r=>!ids.has(r.id)).map(r=>({id:r.id,reason:missingParent(r.id)?'Requires a compatible equipped ability or a core in your priority list.':!candidates.get(r.id).length?'No fixed-orientation placement fits the unlocked grid.':'Omitted to preserve higher-priority perks and their connections.'}));
+    const omitted=optional.filter(r=>!ids.has(r.id)).map(r=>({id:r.id,reason:missingParent(r.id)?parentReason(r.id):!candidates.get(r.id).length?'No fixed-orientation placement fits the unlocked grid.':'Omitted to preserve higher-priority perks and their connections.'}));
     return result('optimal',found,[...omissions,...omitted]);
   } catch(error){
     if(error!==STOP)throw error;

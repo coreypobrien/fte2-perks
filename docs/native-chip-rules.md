@@ -79,3 +79,9 @@ Use the local Python configured by `scripts/Initialize-NativeTools.ps1` when Pyt
 The generated JSON includes disassembly block RVAs and SHA-256 hashes. Enum values are read from reflected metadata rather than assumed. The extractor was run successfully and repeat generation is deterministic. Unknown executables are rejected before PE analysis or output generation.
 
 This is an audited static translation for the known executable. Runtime game behavior has not been directly instrumented. Full acquisition, ownership progression, role values, shape-replacement edge cases, and complex group-merge behavior remain separate research topics.
+
+## Agile Practices audit
+
+`/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_AgilePractices_Mod` is a 3×1 Modifier granted by Machinist rank 9. Its effective tags include Item.Chip.AbilityType.Ultimate and Item.Chip.AbilityType.Tactical. The audited AnyTagsMatch predicate matches either compatible tag; these are alternatives, not cumulative connection requirements. All three Machinist turret variants and the three Bodyguard variants match, while Dual Targeting does not.
+
+The group GUID/socketing evidence above requires one selected group for each chip. Agile Practices may attach through a compatible group’s modifiers as well as directly to its Core; it cannot serve as a simultaneous bridge for both groups. The UI now states ONE of and records/shows the actual group, with an optional exact-host constraint. Independent tests exercise both hosts separately, a tile adjacent to both, and a shared bridge that cannot serve both groups. This audit uses existing extracted tags/native predicates; it adds no production overrides.

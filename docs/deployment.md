@@ -2,7 +2,7 @@
 
 ## One-time repository setup
 
-1. Create the GitHub repository and push this project history to its default branch. The workflow discovers that branch from GitHub metadata, so master and main both work without editing the workflow.
+1. Create the GitHub repository with main as its default branch and push this project history to main. The workflow checks GitHub default-branch metadata before deploying.
 2. In **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
 3. Run **Validate and deploy Pages** from the Actions tab on the default branch, or push another commit. If the first run happened before Pages was enabled, enable it and rerun that workflow.
 4. Open the URL shown by the github-pages deployment environment.
@@ -52,15 +52,15 @@ Local Windows checks and workflow linting do not prove that a GitHub-hosted Ubun
 - [Playwright CI setup](https://playwright.dev/docs/ci-intro) describes installing browser/system dependencies on CI.
 - [MIT license text](https://opensource.org/license/mit) is the source of the original-code license.
 
-## Current publication status
+## Repository and branch
 
-Local release preparation passed a clean frozen install, 57 unit/integration tests, all 23 production browser scenarios under a project URL prefix, and actionlint 1.7.12. The remote is configured and Pages source is GitHub Actions. Initial publication is waiting on local SSH-agent signing: direct SSH authenticates as coreypobrien, but Git push requests fail with an agent communication error. No successful push, Actions run, or live-site validation has been recorded yet.
+The remote is git@github.com:coreypobrien/fte2-perks.git. Use main for local development and the repository default branch. Pages source is GitHub Actions, with main allowed by the github-pages environment. Keep these aligned when configuring another repository.
 
-Once the machine's SSH signing approval is working, push master to origin. On this Windows checkout Git 2.9 defaults to a different SSH client; Windows OpenSSH sees the loaded agent identities:
+On this Windows checkout, Windows OpenSSH sees the loaded agent identities:
 
 ~~~powershell
 $env:GIT_SSH = 'C:\Windows\System32\OpenSSH\ssh.exe'
-git push -u origin master
+git push -u origin main
 ~~~
 
-Then inspect the Validate and deploy Pages workflow, resolve any hosted failures, and run the browser suite against the deployed URL shown by GitHub. Record the run link and live-browser result here after success.
+Hosted test and live-site outcomes are recorded in [verification](verification.md).

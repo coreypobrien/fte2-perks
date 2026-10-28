@@ -60,3 +60,5 @@ Modifier attachment defaults to any one compatible Core. Optional request.coreId
 Read NOTICE.md, docs/known-limitations.md, and docs/deployment.md before changing distribution or publishing claims. MIT covers original authored code; do not represent game-derived text/data or third-party trademarks as project-owned. Preserve the AI-assisted/vibe-coded, use-at-own-risk, no-support and no-warranty notices. Keep archive keys, raw assets, installed tools, generated builds and local evidence ignored.
 
 Keep Actions pinned to verified upstream commit SHAs and Node/pnpm aligned with .node-version and packageManager. PRs and non-default branches validate only; deployment depends on successful tests and uses a separate minimally privileged job. Retain project-prefix browser verification, HTTP boundary checks, and packaged-license assertions. Publish only dist/. Do not claim GitHub-hosted validation or deployment without an actual successful run.
+
+Use main as the local and GitHub default branch. Keep Pages environment branch restrictions aligned with main.

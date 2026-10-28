@@ -36,15 +36,17 @@
       <div id="library-list" class="library-list"></div>
     </section>
     <section class="priorities pane" aria-labelledby="priorities-title"><div class="section-heading"><h2 id="priorities-title">Your priorities</h2><span id="priority-count" class="counter">0</span></div><p class="secondary intro">Higher perks take priority. Required perks are never dropped.<br>Drag to reorder, or use the arrow buttons.</p>
-      <ol id="priority-list" class="priority-list"></ol>
-      <div class="solve-bar"><button id="solve" class="primary">Find arrangement <span aria-hidden="true">↗</span></button><button id="cancel" hidden>Cancel</button><label class="budget-label">Search limit<select id="search-budget"><option value="2500">2.5 seconds</option><option value="10000">10 seconds</option></select></label></div>
+      <div class="solve-bar top-controls"><button id="solve" class="primary">Find arrangement <span aria-hidden="true">↗</span></button><button id="cancel" hidden>Cancel</button><button id="clear-priorities" class="quiet">Clear priorities</button></div>
+      <div id="solver-progress" class="solver-progress" role="status" hidden><span class="spinner" aria-hidden="true"></span><span>Finding arrangement…</span><span id="solver-elapsed" aria-hidden="true">0.0 s / 10 s</span></div>
       <p id="solve-status" class="secondary" role="status"></p>
+      <ol id="priority-list" class="priority-list"></ol>
+      <div class="solve-bar"><button id="solve-bottom" class="primary">Find arrangement <span aria-hidden="true">↗</span></button></div>
     </section>
     <section class="result pane" aria-labelledby="grid-title"><div class="section-heading"><h2 id="grid-title">Grid arrangement</h2><span id="result-badge" class="badge">Ready</span></div>
       <div id="grid" class="grid" role="group" aria-label="Perk grid"></div>
       <div class="legend"><span><i class="legend-perk"></i>Selected perks</span><span><i class="legend-fixed"></i>Ability slots</span><span><i class="legend-locked"></i>Rank locked</span></div>
       <p id="grid-summary" class="secondary"></p><div id="selected-detail" class="selected-detail" hidden></div>
-      <section class="effects-section" aria-labelledby="effects-title"><div class="section-heading"><h2 id="effects-title">Effects you get</h2><span id="effect-count" class="counter"></span></div><p class="secondary intro" id="effects-note">Descriptions from the equipped build, including conditional bonuses.</p><ul id="effects-list" class="effects-list"></ul></section>
+      <section class="effects-section" aria-labelledby="effects-title"><div class="section-heading"><h2 id="effects-title">Effects you get</h2><span id="effect-count" class="counter"></span></div><p class="secondary intro" id="effects-note">Descriptions from equipped perks, including conditional bonuses.</p><ul id="effects-list" class="effects-list"></ul></section>
       <section class="below-section" aria-labelledby="below-title"><div class="section-heading"><h2 id="below-title">Below the line</h2><span id="below-count" class="counter"></span></div><div id="below-list"></div></section>
     </section>
   </div>

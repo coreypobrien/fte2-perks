@@ -2,7 +2,7 @@
 
 Five seeded random priority lists for game build 26090957. Each has 24 optional requests: 12 granted by Machinist and 12 other eligible perks. Every modifier has a compatible selected fixed ability. The minimum total footprint exceeds the 42 free cells, so omissions are unavoidable. All Required flags are false to test priority choices rather than forcing an impossible loadout.
 
-In the local planner, open Import / export build → Import file and select one of the five .afe2.json files. Class, rank, abilities, and the complete priority order load together. Choose the 10-second search limit and Find arrangement. Save build creates a separate named snapshot. You can also open a file as text and use Paste build or Load pasted JSON.
+In the local planner, open Import / export build → Import file and select one of the five .afe2.json files. Class, rank, abilities, and the complete priority order load together. Select Find arrangement (the search limit is fixed at 10 seconds). Save build creates a separate named snapshot. You can also open a file as text and use Paste build or Load pasted JSON.
 
 The files contain inputs, not trusted cached solutions. The app recomputes arrangements. The companion solutions.json records the generated reference results, including exact coordinates, IDs, and omission reasons. A timeout reference is a valid best-found arrangement and is not a proof of optimality. Solver layouts can vary by runtime budget.
 

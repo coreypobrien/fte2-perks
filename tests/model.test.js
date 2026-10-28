@@ -46,10 +46,12 @@ test('effective tags include native auto-population, and current PerksOld refere
   const auto=raw.find(p=>p.properties.Type==='EModChipType::Modifier'&&!p.properties.bDoNotAutoPopulateCompatibilityTags&&p.properties.Modifiers?.some(m=>m.ModifierTag?.TagName));
   const normalized=game.perks.find(p=>p.id===auto.assetPath);for(const mod of auto.properties.Modifiers)if(mod.ModifierTag?.TagName)assert.ok(normalized.tags.includes(mod.ModifierTag.TagName));
 });
-test('description panel includes fixed abilities and included perks once; omitted bonuses never leak',()=>{
+test('description panel includes only equipped requested perks; fixed ability and omitted bonuses never leak',()=>{
   const config=createConfig(game),resil=byName('Resiliency');config.rank=5;config.requests=[{id:resil.id,required:false}];
-  const r=solve(prepareProblem(game,config));assert.equal(r.status,'optimal');assert.ok(!equippedEffects(game,config,r).some(e=>e.id===resil.id));assert.equal(equippedEffects(game,config,r).length,3);
-  config.rank=10;const r2=solve(prepareProblem(game,config));assert.ok(equippedEffects(game,config,r2).some(e=>e.description.includes('300%')));
+  const r=solve(prepareProblem(game,config));assert.equal(r.status,'optimal');assert.ok(!equippedEffects(game,config,r).some(e=>e.id===resil.id));assert.equal(equippedEffects(game,config,r).length,0);
+  config.rank=10;const r2=solve(prepareProblem(game,config));assert.ok(equippedEffects(game,config,r2).some(e=>e.description.includes('300%')));assert.equal(equippedEffects(game,config,r2).length,1);
+  const fixedId=config.abilities.primary;assert.deepEqual(equippedEffects(game,{...config,requests:[{id:fixedId}]},{placements:[],included:[fixedId]}),[]);
+  assert.deepEqual(equippedEffects(game,{...config,requests:[{id:'/Unknown'}]},{placements:[],included:['/Unknown']}),[]);
   assert.equal(equippedEffects(game,config,null).length,0);assert.equal(plainText('<Bold>Conditional</>\r\nbonus'),'Conditional\nbonus');assert.equal(plainText(null),'');
 });
 test('dependency hints distinguish standalone perks, compatible cores, and missing parents',()=>{

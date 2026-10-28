@@ -13,13 +13,13 @@ Story verified: browser loads the versioned game catalog → player selects clas
 | Unit/integration cases | **47 passed, 0 failed** |
 | Instrumented total line coverage | **98.40%** |
 | Instrumented total branch coverage | **95.86%** |
-| Instrumented total function coverage | **97.99%** |
+| Instrumented total function coverage | **97.98%** |
 | Core model line / branch coverage | **100% / 95.60%** |
 | Solver line / branch coverage | **100% / 96.96%** |
 | Storage line / branch coverage | **100% / 100%** |
 | Portable transfer line / branch coverage | **100% / 100%** |
-| Browser scenarios against Vite production output | **20 passed** |
-| Browser scenarios against Vite dev server | **20 passed** |
+| Browser scenarios against Vite production output | **22 passed** |
+| Browser scenarios against Vite dev server | **22 passed** |
 | Unexpected page errors, console errors, or failed requests in normal-flow browser checks | **0** |
 | Catalog provenance / no-observation-input isolation | **Passed** |
 | Native shape and rule recipes against audited executable | **Passed** |
@@ -60,9 +60,15 @@ These artifacts are local test outputs under ignored `work/`. The chat handoff i
 
 ## Build and data evidence
 
-Vite emits static HTML, hashed JavaScript/CSS, a bundled worker, and a 457KB JSON catalog (about 33KB gzip). The browser entry bundle is about 21KB before gzip. No application backend, runtime remote API, external CDN, login, or cloud-save service is needed.
+Vite emits static HTML, hashed JavaScript/CSS, a bundled worker, and a 457KB JSON catalog (about 33KB gzip). The browser entry bundle is about 22KB before gzip. No application backend, runtime remote API, external CDN, login, or cloud-save service is needed.
 
 The game catalog covers build 26090957. All 509 footprints are game-derived: 483 explicit masks plus 26 native constructor defaults. Native Type/restriction defaults, alternative classes, effective tags, hierarchical matching, orthogonal groups, unique group membership, and per-group override exclusions have executable-backed provenance. User observations are tests, never production overrides.
+
+## Priority controls and effect linking
+
+Find arrangement appears above and below the priorities with a fixed 10-second limit, no budget selector, and a visible spinner/elapsed timer. Clear priorities cancels active work, resets requested tiles/descriptions/omissions and autosaves the empty draft while preserving named snapshots. A delayed-worker browser check verified the exact posted budget, progress visibility, clear/reload behavior and busy-state cleanup.
+
+Hovering a priority, tile, equipped effect or omission highlights its counterparts; keyboard focus provides the same association. Omitted perks show their sourced descriptions separately Below the line. Effects you get includes equipped requested perks only, excluding fixed abilities/passive. These interactions and worker error/cancel cleanup passed the production and dev browser suite.
 
 ## Rank filtering and portable builds
 

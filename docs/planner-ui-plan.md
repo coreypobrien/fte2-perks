@@ -41,7 +41,7 @@ Changing the setup preserves requested perks and marks affected requests as inco
 - Other entries are optional preferences in strict order. Start newly added perks as optional.
 - Show the footprint and any unmet dependency next to each selected perk.
 - Highlight requests included in the solved grid with a subtle background, checkmark, and **In grid** text. Mark other requests **Below the line** or the specific blocked state; do not rely on color alone. After editing, change these markers to previous-result status until the next solve.
-- One primary action: **Find arrangement**.
+- **Find arrangement** above and below the priority list, using a fixed 10-second limit with a spinner, elapsed time and Cancel. No budget selector. **Clear priorities** empties the draft list, cancels work and clears the displayed result while preserving named saves.
 - After an input change, label the previous result **Out of date**. Keep it visible until the next solve; never present it as the result of the new inputs.
 
 ### Right: grid and result
@@ -50,10 +50,10 @@ Changing the setup preserves requested perks and marks affected requests as inco
 - Use the game's orientation: no rotate controls and no generated rotated placements.
 - Distinguish fixed abilities, selected perks, empty available cells, and locked/unusable cells. Use text or patterns as well as color.
 - Click a perk in the grid or priority list to highlight its counterpart and show its full details. Highlight required connections once those rules are recovered.
-- Below the grid, show **Effects you get**: description-first statements of the abilities, bonuses, and conditional effects granted by everything equipped, including the primary ability, secondary ability, passive, and all included modifiers/core perks. Do not repeat a catalog of perk names in this panel; names already appear in the priority list and grid. Source attribution belongs in a tooltip, accessible label, or expandable detail.
+- Below the grid, show **Effects you get**: description-first statements of bonuses and conditional effects from equipped requested modifiers/core perks. Exclude fixed primary/secondary/passive descriptions. Do not repeat a catalog of perk names in this panel; names already appear in the priority list and grid. Source attribution belongs in a tooltip, accessible label, or expandable detail.
 - Preserve actual conditions, durations, percentages, caps, and tradeoffs from the game descriptions. Describe conditional effects as conditional, not as always-active stat bonuses. v0 displays sourced descriptions; it does not guess combined arithmetic, stack effects, or rewrite ability magnitudes without decoded rules.
-- Build descriptions only from the successfully solved equipped set, deduplicated by stable ID. Omitted perks contribute no effects. Selecting an effect can highlight its source tile/priority entry without turning the panel into another perk-name list.
-- Follow with a clear horizontal divider and **Below the line**: every requested perk absent from the result, preserving priority order and its Required flag. Show footprint, reason, and controls to raise priority or make a perk required without removing it from the request list.
+- Build descriptions only from the successfully solved equipped set, deduplicated by stable ID. Omitted perks contribute no descriptions to Effects you get; show those descriptions separately Below the line. Hovering or focusing an effect highlights its source tile/priority entry without turning the panel into another perk-name list.
+- Follow with a clear horizontal divider and **Below the line**: every requested perk absent from the result, preserving priority order and its Required flag. Show footprint, full omitted effect description, reason, and controls to raise priority or make a perk required without removing it from the request list.
 - Use specific omission categories: does not fit with higher priorities; locked/unowned; wrong class/ability; unmet dependency; unknown rule; or missing catalog entry. Label unsolved and timed-out cases accurately instead of describing every absence as a proven fit failure.
 - If a required set is impossible, retain that requirement and show the conflict. Do not disguise the required perk as an optional below-the-line omission from a successful build.
 - Show an empty state such as **All requested perks included** when there is nothing below the line. Report remaining usable cells without turning area usage into a build-strength score.
@@ -170,7 +170,7 @@ Explicitly defer combat-strength scoring, automatic perk recommendations, weapon
 - A perk unlocked through one class appears for another eligible class when its game-derived rule permits universal use; origin class alone never hides it.
 - A Specialist exception does not make a perk universally available to every class.
 - Save and reload restores omitted requests, priority order, required flags, abilities, rank, and class; a fresh solve rebuilds the effect descriptions, inclusion highlights, and below-the-line list.
-- Below-the-line entries remain editable requests, never deleted perks. Primary, secondary, and passive descriptions appear in Effects you get exactly once, alongside equipped-perk effects; the panel does not simply relist perk names.
+- Below-the-line entries remain editable requests, never deleted perks. Primary, secondary, and passive descriptions are excluded from Effects you get; omitted descriptions appear separately Below the line; the panel does not simply relist perk names.
 - Included priority rows have a checkmark plus In grid text; omitted requests remain visible. Changing rank or priority never leaves stale inclusion markers looking current.
 - Removing or excluding Resiliency removes its 300% temporary-health duration description from the effect panel. Conditional bonuses retain their conditions rather than becoming assumed baseline statistics.
 - Blocked storage, malformed saved data, and catalog-version changes preserve recoverable user input and never produce a false Saved or Valid status.

@@ -53,7 +53,7 @@ export function dependencyHint(perk,equipped){
 }
 export function equippedEffects(game,config,result){
   if(!result?.placements)return [];
-  const klass=game.classes.find(c=>c.id===config.classId),ids=[...klass.slots.map(s=>config.abilities[s.key]),...config.requests.filter(r=>result.included.includes(r.id)).map(r=>r.id)];
+  const ids=config.requests.filter(r=>result.included.includes(r.id)).map(r=>r.id);
   const byId=new Map(game.perks.map(p=>[p.id,p]));
-  return [...new Set(ids)].map(id=>byId.get(id)).filter(Boolean).map(p=>({id:p.id,description:p.description,source:p.name}));
+  return [...new Set(ids)].map(id=>byId.get(id)).filter(p=>p&&!p.slot).map(p=>({id:p.id,description:p.description,source:p.name}));
 }

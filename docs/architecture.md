@@ -34,6 +34,8 @@ Final connectivity assigns each Modifier to exactly one compatible Core group. I
 
 Budget checks use both elapsed time and node limits. `optimal` means the inclusion vector is proven optimal within this model. `timeout` may contain a valid incumbent but never claims optimality or impossibility. `infeasible` follows completed search or a definitive required-unavailability check. `invalid` is an input error. Cancellation terminates the owned worker; job IDs reject stale messages.
 
+The UI always uses a 10,000 ms budget and a 1,400,000-node safety cap. Find arrangement is available above and below priorities. A shared spinner and elapsed timer indicate active work without implying a percentage; reduced-motion styling is supported. Completion, cancellation, input edits, clear, and worker errors terminate the interval and clear busy state. Active search takes precedence over stale-result badges.
+
 ## Eligibility and catalog scope
 
 Native Type defaults to Core; native RestrictionType defaults to None. None bypasses the class restriction check. Kit uses the selected class (or subclass) against KitRestriction OR explicit AlternativeKitsAllowed. OriginKit remains acquisition metadata. There are no explicit Role restrictions in this catalog; that unsupported case fails closed.
@@ -47,6 +49,10 @@ This is static native-code translation plus asset extraction, not direct runtime
 Granting class uses known unlock-source class names, falling back to OriginKit only when no unlock source is recorded. It is a discovery filter, never an equip restriction. Core and Modifier checkboxes are independent. Show universal is checked initially; disabling it hides universal-use perks from other classes and shared progression while retaining known selected-class grants. Granting class still narrows results when Show universal is enabled. Show unavailable independently exposes disabled class-ineligible entries. Filter state is transient. Known ordinary-perk selected-class unlock sources are hidden below their earliest rank unless Show unavailable is checked, which exposes a disabled row with its rank reason. Changing rank refreshes the library immediately. Saved/imported future-rank requests remain visible in priorities and become solver omissions (or required failures), never silently deleted. A perk with no selected-class grant is not locked by another class’s rank. An unknown-rank selected-class path prevents assuming a lock. Fixed ability pickers retain their existing slot-option rules.
 
 Expanded library descriptions are tracked by stable perk ID and survive adding/removing requests and filtering away/back. Priorities support native drag-and-drop plus keyboard-operable arrow buttons. Both reorder paths use the same stale-result and draft-save flow. New sessions start with an empty build-name field; loading a named snapshot fills its explicit name.
+
+Clear priorities cancels any worker, empties draft requests, removes requested grid tiles and all effects/omissions immediately, clears selection/highlights, and autosaves. It preserves class/rank/ability choices and existing named snapshots.
+
+Equipped effects derive only from included requested IDs, excluding slot abilities/passive even if an invalid request repeats a slot ID. Below the line separately displays each omitted description and reason; unknown IDs get an explicit unavailable-description fallback. Both sections use the same solved snapshot, with stale labels after edits. Linked hover and keyboard focus delegate through row elements keyed by stable ID, highlighting matching priority rows, tiles, effect rows and omission rows. Hover takes precedence over focus and clicked selection; detached DOM rows cannot retain a hover highlight. Re-rendered views restore current highlights.
 
 ## Persistence
 

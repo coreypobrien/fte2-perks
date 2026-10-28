@@ -4,15 +4,31 @@ import {loadState,persistState,saveNamed,cloneConfig} from './core/storage.js';
 const $=id=>document.getElementById(id);
 function element(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
 const storage={getItem:key=>window.localStorage.getItem(key),setItem:(key,value)=>window.localStorage.setItem(key,value)};
-let game,byId,config,result=null,resultConfig=null,stale=false,worker=null,job=0,activeJob=null,builds=[],selectedSaveId=null,storageBlocked=false,selectedPerk=null;
+let game,byId,config,result=null,resultConfig=null,stale=false,worker=null,job=0,activeJob=null,builds=[],selectedSaveId=null,storageBlocked=false,selectedPerk=null,hoveredRow=null,solveTimer=null;
 function notice(text){$('notice').textContent=text;$('notice').hidden=!text;}
 function saveStatus(text,error=false){$('save-status').textContent=text;$('save-status').classList.toggle('error-text',error);}
 function persist(){if(storageBlocked){saveStatus('Existing saves could not be read. Saving is disabled to preserve them.',true);return false;}const value=persistState(storage,{draft:config,builds},game.version);if(!value.ok)saveStatus(value.error,true);return value.ok;}
-function stopWorker(){if(worker){worker.terminate();worker=null;}activeJob=null;$('cancel').hidden=true;$('solve').disabled=false;}
+function stopWorker(){if(worker){worker.terminate();worker=null;}activeJob=null;clearInterval(solveTimer);solveTimer=null;$('solver-progress').hidden=true;$('grid').setAttribute('aria-busy','false');$('cancel').hidden=true;$('solve').disabled=false;$('solve-bottom').disabled=false;}
 function change(){stopWorker();stale=true;if(!storageBlocked)notice('');$('solve-status').textContent='Inputs changed. Find a new arrangement.';renderPriorities();renderResults();return persist();}
 function klass(){return game.classes.find(c=>c.id===config.classId);}
 function fixedCurrent(){return prepareProblem(game,{...config,requests:[]}).fixed;}
-function selectPerk(id){selectedPerk=id;document.querySelectorAll('[data-perk-id]').forEach(n=>n.classList.toggle('highlighted',n.dataset.perkId===id));const perk=byId.get(id);$('selected-detail').hidden=!perk;if(perk){$('selected-detail').replaceChildren(element('h3',perk.name),element('p',perk.description),element('p',dependencyHint(perk,[...fixedCurrent(),...config.requests.map(r=>byId.get(r.id)).filter(Boolean)]),'secondary'));}}
+const linkedRows='.library-row[data-perk-id],.priority-row[data-perk-id],.tile[data-perk-id],.effect-row[data-perk-id],.below-row[data-perk-id]';
+const linkedRow=node=>node instanceof Element?node.closest(linkedRows):null;
+function highlightPerks(){
+  const id=(hoveredRow?.isConnected?hoveredRow.dataset.perkId:null)??linkedRow(document.activeElement)?.dataset.perkId??selectedPerk;
+  document.querySelectorAll(linkedRows).forEach(node=>node.classList.toggle('highlighted',node.dataset.perkId===id));
+}
+function setupLinkedHighlights(){
+  document.addEventListener('pointerover',event=>{hoveredRow=linkedRow(event.target);highlightPerks();});
+  document.addEventListener('pointerout',event=>{hoveredRow=linkedRow(event.relatedTarget);highlightPerks();});
+  document.addEventListener('focusin',highlightPerks);
+  document.addEventListener('focusout',()=>queueMicrotask(highlightPerks));
+}
+function clearPriorities(){
+  stopWorker();config.requests=[];result=null;resultConfig=null;stale=false;selectedPerk=null;hoveredRow=null;$('selected-detail').hidden=true;
+  renderPriorities();renderResults();renderLibrary();persist();$('solve-status').textContent='Priority list cleared.';
+}
+function selectPerk(id){selectedPerk=id;highlightPerks();const perk=byId.get(id);$('selected-detail').hidden=!perk;if(perk){$('selected-detail').replaceChildren(element('h3',perk.name),element('p',perk.description),element('p',dependencyHint(perk,[...fixedCurrent(),...config.requests.map(r=>byId.get(r.id)).filter(Boolean)]),'secondary'));}}
 function renderSetup(){
   $('class-select').replaceChildren(...game.classes.map(c=>new Option(c.name,c.id)));$('class-select').value=config.classId;
   $('rank-select').replaceChildren(...Array.from({length:10},(_,i)=>new Option(String(i+1),String(i+1))));$('rank-select').value=String(config.rank);
@@ -43,10 +59,11 @@ function renderLibrary(){
     const actions=element('div',undefined,'row-actions');actions.append(element('span',unavailable??(p.restriction==='None'?'Universal use':'Selected class'),p.restriction==='None'?'tag universal':'tag'));
     const add=element('button',added?'Added':'Add');add.disabled=added||!!unavailable;add.setAttribute('aria-label','Add '+p.name);add.onclick=()=>{config.requests.push({id:p.id,required:false});change();renderLibrary();};actions.append(add);row.append(actions);$('library-list').append(row);
   }
+  highlightPerks();
 }
 function renderPriorities(){
   const focus=document.activeElement?.dataset,restore=focus?.action&&focus?.perkId?{...focus}:null;
-  $('priority-count').textContent=String(config.requests.length);$('priority-list').replaceChildren();
+  $('clear-priorities').disabled=!config.requests.length;$('priority-count').textContent=String(config.requests.length);$('priority-list').replaceChildren();
   if(!config.requests.length)$('priority-list').append(element('li','Add perks from the library, then put the most important ones first.','empty'));
   config.requests.forEach((request,index)=>{
     const p=byId.get(request.id),included=result?.included?.includes(request.id),row=element('li',undefined,'priority-row'+(included&&!stale?' included':''));row.dataset.perkId=request.id;
@@ -69,6 +86,7 @@ function renderPriorities(){
     name.onclick=()=>selectPerk(request.id);row.append(actions);$('priority-list').append(row);
   });
   if(restore){const target=[...$('priority-list').querySelectorAll('[data-action]')].find(n=>n.dataset.action===restore.action&&n.dataset.perkId===restore.perkId);target?.focus({preventScroll:true});}
+  highlightPerks();
 }
 function renderResults(){
   const displayConfig=resultConfig??config,problem=prepareProblem(game,{...displayConfig,requests:[]}),grid=$('grid');grid.replaceChildren();
@@ -79,28 +97,28 @@ function renderResults(){
     const p=byId.get(placement.id),fixed=problem.fixed.some(f=>f.id===placement.id),tile=element('button',p?.name??'Unknown','tile'+(fixed?' fixed':'')+(placement.width===1?' vertical':''));tile.style.gridArea=`${placement.y+1}/${placement.x+1}/span ${placement.height}/span ${placement.width}`;tile.dataset.perkId=placement.id;tile.setAttribute('aria-label',(p?.name??placement.id)+`, column ${placement.x+1}, row ${placement.y+1}, ${placement.width} by ${placement.height}`);tile.onclick=()=>selectPerk(placement.id);grid.append(tile);
   }
   let label='Ready',kind='';
-  if(stale){label='Out of date';kind='warning';}else if(activeJob!==null){label='Solving…';}else if(result?.status==='optimal'){label='Optimal fit';kind='success';}else if(result?.status==='timeout'){label='Search limit';kind='warning';}else if(result&&!result.placements){label='No arrangement';kind='error';}
+  if(activeJob!==null){label='Solving…';}else if(stale){label='Out of date';kind='warning';}else if(result?.status==='optimal'){label='Optimal fit';kind='success';}else if(result?.status==='timeout'){label='Search limit';kind='warning';}else if(result&&!result.placements){label='No arrangement';kind='error';}
   $('result-badge').textContent=label;$('result-badge').className='badge '+kind;
   $('grid-summary').textContent=stale?'Previous arrangement. Solve again to update the grid, checks, and descriptions.':result?.placements?`${result.included.length} of ${displayConfig.requests.length} requested perks included · ${result.nodes} search steps · ${Math.round(result.elapsedMs)} ms`:'Fixed ability slots shown. Add perks and find an arrangement.';
   $('effects-list').replaceChildren();
   const effects=equippedEffects(game,displayConfig,result);$('effect-count').textContent=effects.length?String(effects.length):'';
-  $('effects-note').textContent=stale?'Descriptions from the previous arrangement · out of date.':'Game descriptions from equipped items. Conditional effects retain their conditions.';
-  for(const effect of effects){const li=element('li'),button=element('button',effect.description);button.dataset.perkId=effect.id;button.setAttribute('aria-label',effect.description+' Source: '+effect.source);button.onclick=()=>selectPerk(effect.id);li.append(button);$('effects-list').append(li);}
-  if(!effects.length)$('effects-list').append(element('li','Find an arrangement to see the descriptions of everything equipped.','empty'));
+  $('effects-note').textContent=stale?'Descriptions from the previous arrangement · out of date.':'Game descriptions from equipped perks. Conditional effects retain their conditions.';
+  for(const effect of effects){const li=element('li',undefined,'effect-row'),button=element('button',effect.description);li.dataset.perkId=effect.id;button.dataset.perkId=effect.id;button.setAttribute('aria-label',effect.description+' Source: '+effect.source);button.onclick=()=>selectPerk(effect.id);li.append(button);$('effects-list').append(li);}
+  if(!effects.length)$('effects-list').append(element('li',result?.placements?'No requested perks are equipped.':'Find an arrangement to see equipped perk effects.','empty'));
   $('below-list').replaceChildren();const omissions=result?.omissions??[];$('below-count').textContent=omissions.length?String(omissions.length):'';
   if(result&&!result.placements)$('below-list').append(element('p',result.error??'No arrangement found. Required perks were not dropped.','error-text'));
-  for(const omission of omissions){const p=byId.get(omission.id),row=element('article',undefined,'below-row');row.dataset.perkId=omission.id;row.append(element('h3',p?.name??'Missing catalog perk'),element('p',omission.reason));const request=config.requests.find(r=>r.id===omission.id);if(request){const require=element('button',request.required?'Required':'Make required');require.disabled=request.required;require.onclick=()=>{request.required=true;change();};row.append(require);} $('below-list').append(row);}
+  for(const omission of omissions){const p=byId.get(omission.id),row=element('article',undefined,'below-row');row.dataset.perkId=omission.id;row.append(element('h3',p?.name??'Missing catalog perk'),element('p',p?.description||'Effect description unavailable for this catalog entry.','omitted-effect'),element('p',omission.reason,'omission-reason'));const request=config.requests.find(r=>r.id===omission.id);if(request){const require=element('button',request.required?'Required':'Make required');require.disabled=request.required;require.onclick=()=>{request.required=true;change();};row.append(require);} $('below-list').append(row);}
   if(!omissions.length)$('below-list').append(element('p',result?.placements?'All requested perks included.':'Omitted requests and their reasons will appear here.','empty'));
-  if(selectedPerk)document.querySelectorAll('[data-perk-id]').forEach(n=>n.classList.toggle('highlighted',n.dataset.perkId===selectedPerk));
+  highlightPerks();
 }
 function renderSaves(){const select=$('saved-builds');select.replaceChildren(...(builds.length?builds.map(b=>new Option(b.name,b.id)):[new Option('No saved builds','')]));if(selectedSaveId)select.value=selectedSaveId;$('load-build').disabled=!builds.length;select.disabled=!builds.length;}
 function startSolve(){
   stopWorker();const current=cloneConfig(config),problem=prepareProblem(game,current);job++;activeJob=job;const thisJob=job;
-  $('solve').disabled=true;$('cancel').hidden=false;$('solve-status').textContent='Searching fixed-orientation placements and compatible groups…';renderResults();
+  $('solve').disabled=true;$('solve-bottom').disabled=true;$('cancel').hidden=false;$('solver-progress').hidden=false;$('grid').setAttribute('aria-busy','true');const started=performance.now();const updateElapsed=()=>{$('solver-elapsed').textContent=((performance.now()-started)/1000).toFixed(1)+' s / 10 s';};updateElapsed();solveTimer=setInterval(updateElapsed,250);$('solve-status').textContent='Searching fixed-orientation placements and compatible groups…';renderResults();
   worker=new Worker(new URL('./worker.js',import.meta.url),{type:'module'});
   worker.onmessage=event=>{if(activeJob!==thisJob||event.data.jobId!==thisJob)return;const next=event.data.result;stopWorker();result=next;resultConfig=current;stale=false;$('solve-status').textContent=next.error??'Search complete. Higher-priority optional perks were preferred.';renderPriorities();renderResults();};
-  worker.onerror=()=>{if(activeJob!==thisJob)return;stopWorker();notice('The solver worker could not start. Serve this folder over HTTP; do not open index.html as a file.');};
-  worker.postMessage({jobId:thisJob,problem,options:{timeLimitMs:Number($('search-budget').value),maxNodes:Number($('search-budget').value)>2500?1400000:350000}});
+  worker.onerror=()=>{if(activeJob!==thisJob)return;stopWorker();notice('The solver worker could not start. Serve this folder over HTTP; do not open index.html as a file.');$('solve-status').textContent='Search could not start.';renderResults();};
+  worker.postMessage({jobId:thisJob,problem,options:{timeLimitMs:10000,maxNodes:1400000}});
 }
 function namedSave(copy){try{const next=saveNamed(builds,$('build-name').value,config,game.version,{existingId:copy?null:selectedSaveId});const previous=builds;builds=next;if(persist()){selectedSaveId=next.at(-1).id;renderSaves();saveStatus('Saved in this browser · '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));}else builds=previous;}catch(error){saveStatus(error.message,true);}}
 function transferStatus(message,error=false){$('transfer-status').textContent=message;$('transfer-status').classList.toggle('error-text',error);}
@@ -132,10 +150,11 @@ async function init(){
   $('rank-select').onchange=()=>{config.rank=Number($('rank-select').value);change();renderLibrary();};
   for(const slot of ['primary','secondary','passive'])$(slot+'-select').onchange=()=>{config.abilities[slot]=$(slot+'-select').value;change();renderLibrary();};
   for(const id of ['search','granting-class','type-core','type-modifier','show-universal','show-unavailable'])$(id).addEventListener(id==='search'?'input':'change',renderLibrary);
+  setupLinkedHighlights();$('clear-priorities').onclick=clearPriorities;$('solve-bottom').onclick=startSolve;
   $('solve').onclick=startSolve;$('cancel').onclick=()=>{stopWorker();$('solve-status').textContent='Search cancelled. No optimality claim was made.';renderResults();};
   setupTransfer();
   $('save-build').onclick=()=>namedSave(false);$('save-copy').onclick=()=>namedSave(true);
   $('load-build').onclick=()=>{const saved=builds.find(b=>b.id===$('saved-builds').value);if(!saved)return;const reconciled=reconcileConfig(game,cloneConfig(saved.config));config=reconciled.config;selectedSaveId=saved.id;$('build-name').value=saved.name;notice([saved.gameVersion!==game.version?'Saved with a different game-data version. Inputs were preserved and are being revalidated.':null,...reconciled.notices].filter(Boolean).join(' '));renderSetup();renderLibrary();renderPriorities();persist();startSolve();};
   startSolve();document.body.classList.remove('loading');
 }
-init().catch(error=>{document.body.classList.remove('loading');notice('The planner could not load: '+error.message);$('solve').disabled=true;});
+init().catch(error=>{document.body.classList.remove('loading');notice('The planner could not load: '+error.message);$('solve').disabled=true;$('solve-bottom').disabled=true;});

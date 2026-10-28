@@ -67,3 +67,7 @@ Retain deterministic node-bound game-data regressions, timeout incumbent checks,
 ## Rank filters and portable builds
 
 Unit tests cover selected-class rank boundaries, alternate and unknown unlock paths, cross-class availability, portable schema/version/size validation, full priority/Required round trips, unknown IDs, and safe filenames. The browser suite uses actual clipboard permissions and a real file chooser/download, verifies named snapshots remain independent, and tests clipboard-denial fallback and malformed/future input recovery. Five checked-in Machinist examples are independently checked for class eligibility, sufficient excess area, fixed-ability compatibility, non-overlap and valid groups in their recorded reference layouts. See docs/build-transfer.md and examples/machinist-validation/README.md.
+
+## Priority controls, progress and linked effects
+
+Browser tests verify linked hover from every row/tile/effect/omission surface plus keyboard focus, descriptions for omitted perks, and fixed-ability exclusion. A delayed real worker exposes the spinner/elapsed indicator and records posted options to verify the fixed 10-second budget. Tests exercise both solve buttons, clearing during search, persisted empty drafts, preserved named snapshots, and progress cleanup on completion/cancel/error. The pure effect model separately verifies that fixed ability IDs and unknown entries cannot leak into the equipped-perk description list.

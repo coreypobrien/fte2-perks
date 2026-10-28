@@ -71,3 +71,5 @@ Unit tests cover selected-class rank boundaries, alternate and unknown unlock pa
 ## Priority controls, progress and linked effects
 
 Browser tests verify linked hover from every row/tile/effect/omission surface plus keyboard focus, descriptions for omitted perks, and fixed-ability exclusion. A delayed real worker exposes the spinner/elapsed indicator and records posted options to verify the fixed 10-second budget. Tests exercise both solve buttons, clearing during search, persisted empty drafts, preserved named snapshots, and progress cleanup on completion/cancel/error. The pure effect model separately verifies that fixed ability IDs and unknown entries cannot leak into the equipped-perk description list.
+
+Machinist example validation also directly checks that every requested ID has an explicit Machinist unlock-source entry at rank 10 or below with no extra grant condition. Origin folder and universal equip eligibility do not qualify a perk for these examples. Fixed slots use Machinist defaults or known Machinist replacement grants.

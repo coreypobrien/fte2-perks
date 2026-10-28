@@ -13,39 +13,27 @@
     },
     "requests": [
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_ADSMovementSpeed",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_KineticAmplification",
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_Slow",
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Shockwave",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_TempHealthOnKill",
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_BedsideManner_Core",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core",
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Cooldown_Exotic",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_StaminaDrainWhileSprinting",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_StoppingPower_Common",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ThermalAmmo",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_RapidShotgun",
         "required": false
       },
       {
@@ -57,7 +45,31 @@
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Turret_Mod_GroupEffort",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CrossPlatformSynergy_Core",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Shockwave",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_SelfApplied",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_ThermalAmmo",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship01",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Rumble_Mod_ElectricAura",
         "required": false
       },
       {
@@ -65,11 +77,23 @@
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/WeaponMastery/Perk_Mastery_HeavyWeaponTraining_Core",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_ExplosiveCore",
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_ResonatingImpact_Core",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_TurretBonusDmg_Mod_TempHealth",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Electrocute",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_HealthBonus_3",
+        "required": false
+      },
+      {
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_Special",
         "required": false
       },
       {
@@ -77,35 +101,11 @@
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_CreativePainPointSolutions_Core",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/PerksOld/Perk_Technician_Turret_Mod_ParasocialRelationship03",
         "required": false
       },
       {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_DodgeRestoreHealth",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthReviveBonus",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Core/Perk_Generic_Core_HealthBonus_3",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Gunner/Perks/PerksOld/Perk_Gunner_Cooldown_Mod",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Medic/Perks/Perk_Medic_HealingBonus_Core",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Perks/Modifiers/Perk_Generic_Mod_Damage_Common",
-        "required": false
-      },
-      {
-        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Turret/Perk_Technician_Turret_Mod_Electrocute",
+        "id": "/Game/Blueprints/Avocado_Classes/Technician/Perks/Perk_Technician_Bodyguard_Mod_DownDefense",
         "required": false
       }
     ]

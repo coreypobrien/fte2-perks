@@ -76,7 +76,7 @@ Known selected-class ordinary-perk unlocks now follow the selected rank, with al
 
 Named builds already included priority order and Required flags; this was retained and reverified. Clipboard/file transfers use the version-1 portable format, preserving all requests, flags, class, rank and ability choices. Real clipboard permissions, file chooser/download, denied clipboard/manual fallback, malformed/future/oversized file rejection, imported unknown IDs and named-save independence passed browser checks.
 
-Five seeded rank-10 Machinist examples each contain 24 optional priorities totaling 61–75 cells against 42 free cells. All five were imported through the browser and compared with their exact source configurations. Reference layouts are non-overlapping and group-valid in the implemented model, but all five reached the 10-second limit; they are best-found validation candidates. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
+Five seeded rank-10 Machinist examples now use only explicit Machinist rank-10-or-below grants, with 24 optional priorities each totaling 59–70 cells against 42 free cells. The corrected Machinist-only files passed all 47 unit/integration tests and a targeted browser scenario importing all five and comparing their exact source configurations. Reference layouts are non-overlapping and group-valid in the implemented model, but all five reached the 10-second limit; they are best-found validation candidates. See [example guide](../examples/machinist-validation/README.md) and [portable format](build-transfer.md).
 
 ## Solver investigation
 

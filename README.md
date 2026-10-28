@@ -28,7 +28,7 @@ Known selected-class perk grants follow the selected rank. Other-class and unkno
 
 ## Machinist validation examples
 
-Five oversized rank-10 lists are in [examples/machinist-validation](examples/machinist-validation/README.md). Import any of the five .afe2.json files through Import file. Each has 24 requests covering 61–75 cells against 42 available cells. Reference placements and omissions are best-found results at the 10-second limit, not certified optima. Regenerate with `node scripts/generate-validation-builds.mjs`.
+Five oversized rank-10 lists are in [examples/machinist-validation](examples/machinist-validation/README.md). Import any of the five .afe2.json files through Import file. Each contains only explicit Machinist grants unlocked by rank 10, with 24 requests covering 59–70 cells against 42 available cells. Reference placements and omissions are best-found results at the 10-second limit, not certified optima. Regenerate with `node scripts/generate-validation-builds.mjs`.
 
 ## Static output
 

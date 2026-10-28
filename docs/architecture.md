@@ -92,4 +92,4 @@ The committed generated data lets ordinary development and testing run without t
 
 The build copies the project MIT license, game-data notice, and Vite runtime-helper license into dist/. Preserve these when changing packaging. Vite uses a relative base so HTML, catalog, and worker URLs resolve under a project prefix. The test server supports --base-path /repo/ to exercise this layout.
 
-The pinned Actions workflow validates every push/PR and deploys successful default-branch runs through the github-pages environment. Only the deployment job has Pages write/OIDC permissions. Repository Pages must use GitHub Actions as its source. See [deployment](deployment.md), [notice](../NOTICE.md), and [limitations](known-limitations.md).
+The pinned Actions workflow validates every push/PR and deploys successful main-branch runs through the github-pages environment. Only the deployment job has Pages write/OIDC permissions. Repository Pages must use GitHub Actions as its source. See [deployment](deployment.md), [notice](../NOTICE.md), and [limitations](known-limitations.md).

@@ -2,7 +2,7 @@
 
 ## Outcome
 
-Working local static web application, built with Vite 8.3.5. The production `dist/` output and the Vite development server both passed the real-browser suite. No deployment was performed.
+Working local static web application, built with Vite 8.3.5. The production `dist/` output and the Vite development server both passed the real-browser suite. The site is deployed on GitHub Pages; see the hosted validation record below.
 
 Story verified: browser loads the versioned game catalog → player selects class/abilities and prioritizes perks → a module worker searches fixed-orientation placements and compatible groups → one solved snapshot drives the grid, inclusion checks, descriptions, and omissions → local draft/named saves survive reload and are revalidated on load.
 
@@ -20,6 +20,8 @@ Story verified: browser loads the versioned game catalog → player selects clas
 | Portable transfer line / branch coverage | **100% / 100%** |
 | Browser scenarios against Vite production output | **23 passed** |
 | Browser scenarios against Vite dev server | **23 passed** |
+| Browser scenarios in GitHub-hosted Ubuntu CI | **23 passed** |
+| Browser scenarios against the live Pages site | **23 passed** |
 | Unexpected page errors, console errors, or failed requests in normal-flow browser checks | **0** |
 | Catalog provenance / no-observation-input isolation | **Passed** |
 | Native shape and rule recipes against audited executable | **Passed** |
@@ -97,3 +99,11 @@ See `architecture.md`, `testing.md`, `native-chip-rules.md`, and root `AGENTS.md
 ## Public release preparation
 
 A fresh source-only copy installed successfully with pnpm --frozen-lockfile, without an installed game, research tools, raw assets, or pre-existing node_modules. All 57 unit/integration tests passed. The production build then passed all 23 browser scenarios under /afe2-pages-check/ using installed Edge, with no unexpected page errors or failed requests. This verifies project-path catalog and worker loading as well as normal build/save/import flows. The pinned Pages workflow passed actionlint 1.7.12. Hosted deployment validation is tracked separately in deployment.md.
+
+## Hosted validation — 2026-10-27
+
+[Workflow run 40622467078](https://github.com/coreypobrien/fte2-perks/actions/runs/40622467078) passed the full catalog/unit suite, static build, all 23 Chromium browser scenarios under a project prefix, and Pages deployment from main. The published site is [the perk planner](https://coreypobrien.github.io/fte2-perks/).
+
+The same 23 browser scenarios then passed against the actual HTTPS site using Edge, with zero unexpected page errors, console errors, or failed requests. This includes the real hashed worker/catalog, five oversized Machinist imports and optimal results, host choices, named saves/reload, clipboard/file transfers, cancellation, storage failures, and deliberately failed resources. Local evidence is in work/evidence-live/browser-report.json with desktop/mobile screenshots. Published LICENSE.txt and NOTICE.txt both returned HTTP 200.
+
+The initial hosted attempt exposed a browser-test synchronization race around the automatic startup worker; the test now waits for the initial failure and the explicit retry separately. After the branch rename, deployment conditions were made explicit for refs/heads/main. Local and GitHub default branches are main, and no remote master branch remains. These checks validate the released implementation, not complete parity with every in-game mechanic.

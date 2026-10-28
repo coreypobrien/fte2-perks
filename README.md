@@ -2,6 +2,8 @@
 
 Build around the perks you care about. Choose your class and abilities, rank your perk priorities, and let the planner find an arrangement that fits the grid and its connection rules.
 
+**[Open the perk planner](https://coreypobrien.github.io/fte2-perks/)** · [Build and deployment checks](https://github.com/coreypobrien/fte2-perks/actions/workflows/pages.yml)
+
 ![Medic build showing perk priorities, a solved grid, equipped effects, and an omitted perk](docs/images/planner.png)
 
 ## What you can do
@@ -46,7 +48,7 @@ The generated dist/ directory is ready for static hosting. It contains the app, 
 
 ## GitHub Pages
 
-The [Actions workflow](.github/workflows/pages.yml) tests pushes and pull requests, builds the site, and checks the production app under a project URL prefix. Successful default-branch runs deploy the tested artifact to Pages. Select **Settings → Pages → Build and deployment → Source: GitHub Actions** in the repository. See the [deployment guide](docs/deployment.md).
+The [Actions workflow](.github/workflows/pages.yml) tests pushes and pull requests, builds the site, and checks the production app under a project URL prefix. Successful main-branch runs deploy the tested artifact to Pages. Select **Settings → Pages → Build and deployment → Source: GitHub Actions** in the repository. See the [deployment guide](docs/deployment.md).
 
 ## License and documentation
 

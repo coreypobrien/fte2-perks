@@ -43,7 +43,7 @@ Browser saves are origin-bound. Export from localhost and import on the hosted s
 
 Update action pins from their official repositories and review the corresponding release notes. Keep the lockfile and Playwright browser install in sync. The default-branch build must pass before deployment; an existing healthy site remains in place when validation fails.
 
-Local Windows checks and workflow linting do not prove that a GitHub-hosted Ubuntu run or Pages publication has succeeded. The first successful hosted run and a live-site browser check remain the final integration checks. This is an experimental, AI-assisted project with no support or availability commitment; see ../SUPPORT.md and known-limitations.md.
+The [main-branch workflow](https://github.com/coreypobrien/fte2-perks/actions/runs/40622467078) passed on GitHub-hosted Ubuntu and deployed [the live site](https://coreypobrien.github.io/fte2-perks/). All 23 browser scenarios subsequently passed against that HTTPS URL. See [verification](verification.md) for evidence and scope. This is an experimental, AI-assisted project with no support or availability commitment; see ../SUPPORT.md and known-limitations.md.
 
 ## Official references
 

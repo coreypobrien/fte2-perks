@@ -2,7 +2,7 @@
 
 ## One-time repository setup
 
-1. Create the GitHub repository with main as its default branch and push this project history to main. The workflow checks GitHub default-branch metadata before deploying.
+1. Create the GitHub repository with main as its default branch and push this project history to main. The workflow explicitly deploys only refs/heads/main.
 2. In **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
 3. Run **Validate and deploy Pages** from the Actions tab on the default branch, or push another commit. If the first run happened before Pages was enabled, enable it and rerun that workflow.
 4. Open the URL shown by the github-pages deployment environment.

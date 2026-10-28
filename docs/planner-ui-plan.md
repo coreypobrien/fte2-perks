@@ -18,16 +18,17 @@ Use a responsive browser workspace with a compact setup bar and three functional
 - Class rank, default 10, controlling which board cells are available.
 - Primary and secondary ability pickers, constrained to the chosen class. Their replacement choices occupy the proper fixed slots; they are not rotations.
 - Passive slot shown on the board, determined by the class and selected replacement rules where applicable.
+- Start the name field blank; only explicit user names and loaded saved names fill it.
 - Named build controls: a build-name field, **Save build**, and a **Saved builds** picker with **Load**. Draft changes autosave independently; saving a named build creates or updates an explicit snapshot.
 
 Changing the setup preserves requested perks and marks affected requests as incompatible or unavailable. Never silently remove them or switch an ability to make the build fit.
 
 ### Left: perk library
 
-- Search names and descriptions; filter by core perks, modifiers, and selected abilities.
+- Search names and descriptions. Filter granting class using unlock metadata, choose Core and Modifier independently, and toggle Show universal to include other-class/shared universal perks. Keep Show unavailable separate.
 - Default to compatible perks; allow showing unavailable perks with reasons.
 - Each result shows name, a small exact footprint, dimensions, and a short effect preview.
-- Add a perk to the priority list. Expand or select a result for its full description, connection requirements, and unlock information where known.
+- Add a perk to the priority list. Expand or select a result for its full description, connection requirements, and unlock information where known. Keep other descriptions expanded when requests change or filters are revisited.
 - Availability in the first release assumes all perks are owned. Label that assumption; personal unlock tracking is later scope.
 - Include class-specific and universal-use perks that the configured class may equip. A perk's unlock/origin class is not an equip restriction. Show **Universal use** only when the game-derived eligibility rule establishes it, plus an unlock-source label in details.
 - Do not expose obsolete/internal packaged assets merely because they exist in the extraction. Current catalog membership and eligibility must be resolved from game data first.
@@ -35,7 +36,7 @@ Changing the setup preserves requested perks and marks affected requests as inco
 ### Middle: chosen perks in priority order
 
 - The top entry is the most important preference.
-- Each row has Required, move up, move down, and remove controls. Drag-to-reorder can supplement these but must not be the only way to reorder.
+- Each row has Required, move up, move down, and remove controls. Drag-to-reorder supplements these and preserves autosave/stale-result behavior.
 - **Required** means the solver must include the perk or report failure. It does not fix the perk to a board position.
 - Other entries are optional preferences in strict order. Start newly added perks as optional.
 - Show the footprint and any unmet dependency next to each selected perk.

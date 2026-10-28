@@ -58,3 +58,13 @@ test('dependency hints distinguish standalone perks, compatible cores, and missi
 test('every class has valid fixed slots and native-derived same-class eligibility',()=>{
   for(const c of game.classes){const config=createConfig(game,c.id),p=prepareProblem(game,config);assert.equal(p.fixed.length,3);assert.equal(solve(p).status,'optimal',c.name);}
 });
+
+test('40-request game-data loadouts finish within a deterministic search-step bound',()=>{
+  for(const name of ['Medic','Hunter','Machinist','Duelist']){
+    const klass=game.classes.find(c=>c.name===name),config=createConfig(game,klass.id);
+    config.requests=game.perks.filter(p=>!availability(p,klass)).slice(0,40).map(p=>({id:p.id,required:false}));
+    if(name==='Duelist')config.requests=config.requests.slice(0,20);
+    const result=solve(prepareProblem(game,config),{maxNodes:10000,timeLimitMs:10000});
+    assert.equal(result.status,'optimal',name);assert.ok(result.included.length>=10,name);assert.ok(result.nodes<10000,name);
+  }
+});

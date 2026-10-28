@@ -18,7 +18,7 @@
     <span class="setup-note">All perks unlocked<br>Fixed orientations</span>
   </section>
   <section class="save-bar" aria-label="Local saved builds">
-    <label>Build name<input id="build-name" maxlength="80" value="Medic priorities" placeholder="Name this build"></label>
+    <label>Build name<input id="build-name" maxlength="80" placeholder="Name this build"></label>
     <button id="save-build">Save build</button><label>Saved builds<select id="saved-builds"><option value="">No saved builds</option></select></label><button id="load-build">Load</button><button id="save-copy" class="quiet">Save copy</button>
     <span id="save-status" class="secondary" role="status">Stored in this browser only.</span>
   </section>
@@ -26,10 +26,10 @@
   <div class="workspace">
     <section class="library pane" aria-labelledby="library-title"><div class="section-heading"><h2 id="library-title">Perk library</h2><span id="library-count" class="counter"></span></div>
       <label class="search-label">Search perks<input id="search" type="search" placeholder="Name or effect…" autocomplete="off"></label>
-      <div class="filters"><label>Type<select id="type-filter"><option value="all">All perks</option><option value="Core">Core perks</option><option value="Modifier">Modifiers</option><option value="universal">Universal use</option></select></label><label class="check-row"><input id="show-unavailable" type="checkbox">Show unavailable</label></div>
+      <div class="filters"><label>Granting class<select id="granting-class"><option value="all">All classes</option></select></label><fieldset><legend>Type</legend><label class="check-row"><input id="type-core" type="checkbox" checked>Core</label><label class="check-row"><input id="type-modifier" type="checkbox" checked>Modifier</label></fieldset><label class="check-row"><input id="show-universal" title="Include universal-use perks from other classes and shared progression" type="checkbox" checked>Show universal</label><label class="check-row"><input id="show-unavailable" type="checkbox">Show unavailable</label></div>
       <div id="library-list" class="library-list"></div>
     </section>
-    <section class="priorities pane" aria-labelledby="priorities-title"><div class="section-heading"><h2 id="priorities-title">Your priorities</h2><span id="priority-count" class="counter">0</span></div><p class="secondary intro">Higher perks take priority.<br>Required perks are never dropped.</p>
+    <section class="priorities pane" aria-labelledby="priorities-title"><div class="section-heading"><h2 id="priorities-title">Your priorities</h2><span id="priority-count" class="counter">0</span></div><p class="secondary intro">Higher perks take priority. Required perks are never dropped.<br>Drag to reorder, or use the arrow buttons.</p>
       <ol id="priority-list" class="priority-list"></ol>
       <div class="solve-bar"><button id="solve" class="primary">Find arrangement <span aria-hidden="true">↗</span></button><button id="cancel" hidden>Cancel</button><label class="budget-label">Search limit<select id="search-budget"><option value="2500">2.5 seconds</option><option value="10000">10 seconds</option></select></label></div>
       <p id="solve-status" class="secondary" role="status"></p>

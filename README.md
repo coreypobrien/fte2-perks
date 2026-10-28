@@ -18,7 +18,7 @@ The application is under `app/`; Vite provides development/build tooling. The cu
 ## Use it
 
 1. Choose a class, rank, and fixed-slot abilities. Medic is the default; all six class setups are available.
-2. Search the game-derived perk library. Add desired perks and use the arrow controls to prioritize them.
+2. Search the game-derived perk library, filter by granting class and Core/Modifier, and toggle cross-class universal perks. Add desired perks and drag or use arrow controls to prioritize them.
 3. Mark hard requirements as Required, then select Find arrangement.
 4. Review the grid, In grid checks, Effects you get descriptions, and Below the line omissions. Changing inputs marks all prior results stale.
 5. Name and save a build, save a copy, or load a named snapshot. The working draft autosaves separately.
@@ -51,7 +51,7 @@ pnpm exec playwright install chromium
 node scripts/test-browser.mjs --directory dist
 ```
 
-Use `--browser-path` for installed Edge/Chrome, `--playwright-module` for an existing Playwright installation, or `--base-url` for an existing local server. See [testing instructions](docs/testing.md) and [verification evidence](docs/verification.md).
+Use `--browser-path` for installed Edge/Chrome, `--playwright-module` for an existing Playwright installation, or `--base-url` for an existing local server. See [testing instructions](docs/testing.md), [verification evidence](docs/verification.md), and [solver performance measurements](docs/solver-performance.md).
 
 ## Game data and limits
 

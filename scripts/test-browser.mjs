@@ -3,6 +3,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {createServer} from './serve.mjs';
+import {createConfig,availability} from '../app/core/model.js';
 const args=process.argv.slice(2),arg=(name,fallback=null)=>args.includes(name)?args[args.indexOf(name)+1]:fallback;
 let playwright;
 try{playwright=await import('playwright');}catch(error){const module=arg('--playwright-module');if(!module)throw new Error('Install dev dependencies (npm install), or pass --playwright-module PATH_TO_PLAYWRIGHT_INDEX_MJS.');playwright=await import(pathToFileURL(path.resolve(module)));}
@@ -20,6 +21,26 @@ try{
   await check('static page loads catalog and a keyboard-accessible library without server APIs',async()=>{
     await page.goto(base);await page.locator('.library-row').first().waitFor();assert.equal(await page.locator('#class-select').inputValue(),'/Game/Blueprints/Avocado_Classes/Medic/Player_Medic');
     assert.equal(await page.locator('#grid .tile.fixed').count(),3);await page.locator('#search').focus();await page.keyboard.type('Doctor');assert.ok(await page.getByRole('button',{name:"Add Doctor's Orders",exact:true}).isEnabled());
+  });
+  await check('granting class, independent type and universal filters preserve expanded descriptions',async()=>{
+    assert.equal(await page.locator('#build-name').inputValue(),'');
+    await page.locator('#search').fill('');
+    await page.locator('#granting-class').selectOption('Medic');
+    await page.locator('#type-modifier').uncheck();
+    assert.ok(await page.locator('.library-row').count()>0);
+    assert.ok((await page.locator('.library-row summary').allTextContents()).every(s=>s.startsWith('Core')));
+    await page.locator('#type-core').uncheck();assert.equal(await page.locator('.library-row').count(),0);
+    await page.locator('#type-core').check();await page.locator('#type-modifier').check();await page.locator('#granting-class').selectOption('all');
+    await page.locator('#search').fill('Drive');await page.locator('#show-universal').uncheck();assert.equal(await page.locator('.library-row').count(),0);
+    await page.locator('#show-universal').check();assert.ok(await page.getByRole('button',{name:'Add Drive',exact:true}).isEnabled());
+    await page.locator('#search').fill('');
+    const doctor=page.locator('.library-row').filter({has:page.getByRole('button',{name:"Add Doctor's Orders",exact:true})});
+    const formula=page.locator('.library-row').filter({has:page.getByRole('button',{name:'Add Concentrated Formula',exact:true})});
+    await doctor.locator('summary').click();await formula.locator('summary').click();
+    await doctor.getByRole('button',{name:"Add Doctor's Orders",exact:true}).click();
+    assert.ok(await doctor.locator('details').evaluate(n=>n.open));assert.ok(await formula.locator('details').evaluate(n=>n.open));
+    await page.getByRole('button',{name:"Remove Doctor's Orders",exact:true}).click();
+    await page.locator('#search').fill('Doctor');
   });
   await check('empty build names are rejected without creating a saved snapshot',async()=>{
     await page.locator('#build-name').fill(' ');await page.locator('#save-build').click();assert.match(await page.locator('#save-status').innerText(),/Enter a build name/);assert.equal(await page.locator('#saved-builds').inputValue(),'');
@@ -39,6 +60,14 @@ try{
     await solve();assert.match(await page.locator('#grid-summary').innerText(),/4 of 4/);assert.equal(await page.locator('#effects-list li').filter({hasText:'300%'}).count(),1);
     assert.match(await page.locator('#grid .tile').filter({hasText:'Resiliency'}).getAttribute('aria-label'),/row 1/);
     await page.locator('#grid .tile').filter({hasText:"Doctor's Orders"}).click();assert.match(await page.locator('#selected-detail').innerText(),/5%/);
+  });
+  await check('drag reorder persists priorities and invalidates the solved snapshot',async()=>{
+    const rows=page.locator('.priority-row'),before=await rows.evaluateAll(ns=>ns.map(n=>n.dataset.perkId));
+    await rows.first().dragTo(rows.last());
+    const after=await rows.evaluateAll(ns=>ns.map(n=>n.dataset.perkId));assert.deepEqual(after,[...before.slice(1),before[0]]);
+    assert.equal(await page.locator('#result-badge').innerText(),'Out of date');
+    const stored=await page.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')).draft.requests.map(r=>r.id));assert.deepEqual(stored,after);
+    await rows.last().dragTo(rows.first());assert.deepEqual(await rows.evaluateAll(ns=>ns.map(n=>n.dataset.perkId)),before);
   });
   await check('named save, save copy, autosave, reorder, removal and reload preserve stable inputs',async()=>{
     await page.getByRole('button',{name:'Move Resiliency up',exact:true}).focus();await page.keyboard.press('Enter');assert.match(await page.locator('.priority-row').nth(2).innerText(),/Resiliency/);await solve();
@@ -78,6 +107,15 @@ try{
   const coverage=await page.coverage.stopJSCoverage(),functions=new Map();
   for(const file of coverage.filter(f=>f.url.endsWith('/main.js')||/\/assets\/index-[\w-]+\.js$/.test(f.url)))for(const fn of file.functions){const key=fn.functionName+':'+fn.ranges[0].startOffset;functions.set(key,(functions.get(key)??false)||fn.ranges[0].count>0);}
   report.coverage.push({module:'browser entry (source or Vite bundle)',metric:'browser V8 function coverage across normal-flow navigations; not statement/branch coverage',totalFunctions:functions.size,executedFunctions:[...functions.values()].filter(Boolean).length});
+  await check('40-request loadout completes through the real worker and retains all omitted requests',async()=>{
+    const catalog=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url))),config=createConfig(catalog),klass=catalog.classes.find(k=>k.id===config.classId);
+    config.requests=catalog.perks.filter(p=>!availability(p,klass)).slice(0,40).map(p=>({id:p.id,required:false}));
+    const c=await browser.newContext(),p=await c.newPage();p.on('pageerror',e=>report.pageErrors.push(e.message));
+    await c.addInitScript(state=>localStorage.setItem('afe2.perk-planner.v0',JSON.stringify(state)),{schemaVersion:1,gameVersion:catalog.version,draft:config,builds:[]});
+    await p.goto(base);await p.locator('.priority-row').first().waitFor();await p.locator('#cancel').waitFor({state:'hidden',timeout:16000});
+    assert.equal(await p.locator('#result-badge').innerText(),'Optimal fit');assert.equal(await p.locator('.priority-row').count(),40);assert.equal(await p.locator('.priority-row.included').count(),14);assert.equal(await p.locator('#below-list .below-row').count(),26);
+    await c.close();
+  });
   await check('blocked local storage reports failure without inventing a successful save',async()=>{
     const denied=await browser.newContext();await denied.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Quota full','QuotaExceededError');};});const p=await denied.newPage();p.on('pageerror',e=>report.pageErrors.push(e.message));await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#build-name').fill('Cannot save');await p.locator('#save-build').click();assert.match(await p.locator('#save-status').innerText(),/unavailable|full/);assert.equal(await p.locator('#saved-builds').inputValue(),'');await denied.close();
   });

@@ -10,15 +10,15 @@ Story verified: browser loads the versioned game catalog → player selects clas
 
 | Check | Result |
 | --- | --- |
-| Unit/integration cases | **35 passed, 0 failed** |
-| Instrumented total line coverage | **97.98%** |
-| Instrumented total branch coverage | **94.75%** |
-| Instrumented total function coverage | **96.00%** |
+| Unit/integration cases | **40 passed, 0 failed** |
+| Instrumented total line coverage | **98.26%** |
+| Instrumented total branch coverage | **95.53%** |
+| Instrumented total function coverage | **97.87%** |
 | Core model line / branch coverage | **100% / 95.12%** |
-| Solver line / branch coverage | **100% / 96.02%** |
+| Solver line / branch coverage | **100% / 96.96%** |
 | Storage line / branch coverage | **100% / 100%** |
-| Browser scenarios against Vite production output | **13 passed** |
-| Browser scenarios against Vite dev server | **13 passed** |
+| Browser scenarios against Vite production output | **16 passed** |
+| Browser scenarios against Vite dev server | **16 passed** |
 | Unexpected page errors, console errors, or failed requests in normal-flow browser checks | **0** |
 | Catalog provenance / no-observation-input isolation | **Passed** |
 | Native shape and rule recipes against audited executable | **Passed** |
@@ -28,6 +28,8 @@ Unit coverage thresholds are enforced at 95% lines, 90% branches, and 90% functi
 ## Browser evidence
 
 The suite used Chromium through the installed Microsoft Edge executable. It exercised the actual generated Vite bundle, hashed worker, catalog asset, and localStorage, not the old illustrative mockup. Layout checks ran at widths 1440, 1024, 736, 390, and 320 pixels.
+
+The latest suite also verifies granting-class and independent Core/Modifier/universal filters, preservation of expanded descriptions, native drag-and-drop reorder with draft persistence/staleness, and a full 40-request worker result. New build-name fields start blank.
 
 1. Catalog loading, fixed slots, searchable library and keyboard operation.
 2. Blank saved-build names rejected without creating a snapshot.
@@ -57,9 +59,13 @@ These artifacts are local test outputs under ignored `work/`. The chat handoff i
 
 ## Build and data evidence
 
-Vite emits static HTML, hashed JavaScript/CSS, a bundled worker, and a 457KB JSON catalog (about 33KB gzip). The browser entry bundle is about 17KB before gzip. No application backend, runtime remote API, external CDN, login, or cloud-save service is needed.
+Vite emits static HTML, hashed JavaScript/CSS, a bundled worker, and a 457KB JSON catalog (about 33KB gzip). The browser entry bundle is about 19KB before gzip. No application backend, runtime remote API, external CDN, login, or cloud-save service is needed.
 
 The game catalog covers build 26090957. All 509 footprints are game-derived: 483 explicit masks plus 26 native constructor defaults. Native Type/restriction defaults, alternative classes, effective tags, hierarchical matching, orthogonal groups, unique group membership, and per-group override exclusions have executable-backed provenance. User observations are tests, never production overrides.
+
+## Solver investigation
+
+The 25-case, one-second comparison reduced timeouts from 15 to 3. Medic catalog-order 40 requests now solves optimally in about 42 ms; the more demanding rank-10 compatible 40-request list solves optimally in about 3.3 seconds using the longer budget. Timed-out searches retain improved valid incumbents instead of just required-only results. See [benchmarks and remaining edges](solver-performance.md).
 
 ## Practical limits
 

@@ -10,6 +10,7 @@ Read `README.md`, `docs/architecture.md`, `docs/native-chip-rules.md`, and `docs
 - Never automatically add unrequested filler perks. An optional requested core/connector may enable a higher-ranked or required modifier.
 - Show effect descriptions for the equipped build, not another perk-name catalog. Conditional bonuses retain conditions. Omitted perks contribute no descriptions.
 - Keep requested perks visible when excluded or incompatible. Inclusion checkmarks, grid, descriptions, and omissions must use one solved input snapshot and become stale together after edits.
+- Library granting-class filters use unlock metadata independently of equip eligibility. Preserve expanded descriptions across list updates. Keep drag reorder and keyboard arrows using the same autosave/stale-result behavior. New build names start blank.
 - All perks are assumed unlocked in v0, but class/alternative-class restrictions still apply. Unlock origin is NOT equip scope.
 - Save only to local browser storage. Preserve unknown IDs; do not overwrite malformed/future-version saves during recovery. Named snapshots must not alias autosaved drafts.
 
@@ -43,3 +44,5 @@ Run affected tests while implementing, then the full unit/catalog/browser suite 
 When changing solver semantics, retain the independent exhaustive small-board oracle and regression tests for fixed orientation, optional connectors, shared bridges, overrides, required conflicts, and budget truthfulness. Do not replace them with implementation-mirroring snapshots.
 
 Keep future-agent documentation current, record tests and limitations, and commit coherent changes using the repository-local Git identity. Do not publish or deploy without a user request.
+
+For solver changes, read docs/solver-performance.md and run scripts/benchmark-solver.mjs. Never treat connectivity failure as geometric impossibility: later requested connectors may repair it. Reachability pruning is a relaxation and must retain fixed modifiers and sparse-footprint safeguards. Occupancy memo keys must preserve connection-bearing identity and footprint masks.

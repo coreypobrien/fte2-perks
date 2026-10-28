@@ -15,7 +15,7 @@ node scripts/test-catalog-inputs.mjs
 node --test --experimental-test-coverage tests/*.test.js
 ```
 
-`npm test` runs catalog/isolation/unit/integration checks. Coverage reported for `app/core` excludes the browser DOM entry point; browser testing is separate. `scripts/serve.mjs` CLI startup is checked through the local server/browser flow rather than a unit-only subprocess coverage claim.
+`pnpm test` runs catalog/isolation/unit/integration checks. Coverage reported for `app/core` excludes the browser DOM entry point; browser testing is separate. `scripts/serve.mjs` CLI startup is checked through the local server/browser flow rather than a unit-only subprocess coverage claim.
 
 ## Browser tests
 
@@ -57,3 +57,9 @@ Fault-injection tests run in isolated browser contexts. Expected failed catalog/
 - Editing inputs invalidates the grid, descriptions, and inclusion checks together.
 - Malformed/future saves remain untouched, and a failed localStorage write never displays Saved.
 - Budget limits/cancellation never display a false optimum or impossibility claim.
+
+## Solver performance regressions
+
+Run `node scripts/benchmark-solver.mjs` for 25 deterministic cases across all six classes, rank 5/10 compatible Medic lists, oversubscription, fragmentation, and impossible requirements. Output is `work/evidence/solver-benchmarks.json`. Use `--budget-ms 10000 --only Medic-connected` for the longer search cases; output then has a budget suffix. `--baseline work/solver-before.mjs` optionally compares an older solver module. See solver-performance.md for baseline reproduction and measured limits.
+
+Retain deterministic node-bound game-data regressions, timeout incumbent checks, fixed-modifier/sparse-footprint checks, and the independent mixed geometry/group-assignment oracle. Browser tests also cover granting/type/universal filters, expansion preservation, blank initial name, real drag-and-drop persistence/staleness, and a real 40-request worker flow.

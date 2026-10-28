@@ -86,3 +86,32 @@ test('small independent exhaustive oracle agrees on lexicographic selection for 
   for(const order of permutations){const items=order.map(i=>shapes[i]);let expected=[];for(let subset=7;subset>=0;subset--){const selected=items.map((p,i)=>i).filter(i=>subset&(1<<(2-i)));if(brute(items,selected,0,new Set())){expected=selected.map(i=>items[i].id);break;}}
     assert.deepEqual(new Set(solve(board(2,2,items)).included),new Set(expected));}
 });
+
+test('oversubscribed lists retain the lexicographic prefix and prune over-capacity branches',()=>{
+  const items=Array.from({length:60},(_,i)=>chip('dot-'+i));const r=solve(board(6,6,items),{maxNodes:10000,timeLimitMs:5000});
+  assert.equal(r.status,'optimal');assert.deepEqual(new Set(r.included),new Set(items.slice(0,36).map(p=>p.id)));assert.ok(r.nodes<10000);
+});
+test('budget exhaustion retains an improved valid incumbent with required perks',()=>{
+  const items=Array.from({length:30},(_,i)=>chip('dot-'+i));const p=board(5,5,items,items.map((p,i)=>({id:p.id,required:i===0})));
+  const r=solve(p,{maxNodes:60,timeLimitMs:5000});assert.equal(r.status,'timeout');assert.ok(r.included.length>1);assert.ok(r.included.includes('dot-0'));assert.ok(connectedGroups(r.placements));
+});
+test('fixed modifiers and disconnected footprints do not cause unsafe reachability pruning',()=>{
+  const core=chip('core',1,1,{accepts:['A']}),bridge=chip('bridge',1,1,{kind:'Modifier',tags:['A']});
+  const mod=chip('mod',1,1,{kind:'Modifier',tags:['A']}),dot=chip('dot');
+  assert.equal(solve(board(4,1,[mod,dot],undefined,{fixed:[placed(core),placed(bridge,1)]})).included.length,2);
+  const sparse=chip('sparse',3,1,{kind:'Modifier',tags:['A'],shapes:[{width:3,height:1,cells:[[0,0],[2,0]]}]});
+  assert.equal(solve(board(5,1,[sparse,mod,dot],undefined,{fixed:[placed(core)]})).status,'optimal');
+});
+test('independent geometry and group-assignment oracle checks mixed requests and requirements',()=>{
+  const items=[chip('root',1,1,{accepts:['A']}),chip('mod',1,1,{kind:'Modifier',tags:['A']}),chip('bridge',2,1,{kind:'Modifier',tags:['A']}),chip('other',1,2)];
+  function legal(ps){const cores=ps.filter(p=>p.kind==='Core'),mods=ps.filter(p=>p.kind==='Modifier');
+    const touches=(a,b)=>a.points.some(([x,y])=>b.points.some(([u,v])=>Math.abs(x-u)+Math.abs(y-v)===1));
+    function assign(i,groups){if(i===mods.length)return groups.every((g,k)=>{const seen=new Set([cores[k]]);let changed=true;while(changed){changed=false;for(const m of g)if(!seen.has(m)&&[...seen].some(p=>touches(p,m))){seen.add(m);changed=true;}}return g.every(m=>seen.has(m));});
+      return cores.some((c,k)=>c.accepts.includes('A')&&assign(i+1,groups.map((g,j)=>j===k?[...g,mods[i]]:g)));}
+    return assign(0,cores.map(()=>[]));}
+  function fits(selected,i=0,ps=[],used=new Set()){if(i===selected.length)return legal(ps);const p=selected[i],shape=p.shapes[0];for(let y=0;y<=2-shape.height;y++)for(let x=0;x<=3-shape.width;x++){const points=shape.cells.map(([u,v])=>[x+u,y+v]),keys=points.map(([u,v])=>u+','+v);if(keys.every(k=>!used.has(k))&&fits(selected,i+1,[...ps,{...p,points}],new Set([...used,...keys])))return true;}return false;}
+  for(const order of [items,[...items].reverse(),[items[1],items[2],items[3],items[0]]])for(const required of [null,'mod','bridge']){
+    let expected=null;for(let bits=15;bits>=0;bits--){const selected=order.filter((p,i)=>bits&(1<<(3-i)));if(required&&!selected.some(p=>p.id===required))continue;if(fits(selected)){expected=selected.map(p=>p.id);break;}}
+    const r=solve(board(3,2,order,order.map(p=>({id:p.id,required:p.id===required}))));assert.equal(r.status,expected?'optimal':'infeasible');if(expected)assert.deepEqual(new Set(r.included),new Set(expected));
+  }
+});

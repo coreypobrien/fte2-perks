@@ -21,9 +21,13 @@ The production app is static HTML, CSS, and ES modules under `app/`. `node scrip
 
 Every declared shape is used in its declared orientation; the solver generates no rotations. The board mask is column-major (`x * height + y`), while occupancy bits use row-major (`y * width + x`) internally. Negative board entries are unusable; other entries are unlock ranks.
 
-Fixed abilities occupy their selected slots first. Candidate placements are precomputed for requested perks against unlocked cells and fixed occupancy. Required requests are included in every candidate subset. Optional subsets are considered in descending lexicographic inclusion order, with area pruning and cached failed subsets. An exact placement search runs for each subset; a first feasible arrangement within a subset is enough because placement preferences do not outrank perk inclusion.
+Fixed abilities occupy their selected slots first. Candidate placements are precomputed against unlocked cells and fixed occupancy. Include-first optional branching preserves strict lexicographic order, with required requests always present. Each partial subset is packed immediately to improve the valid incumbent before exploring longer lists. The incumbent comparison uses inclusion order, never perk count. Search prunes area overflow, unavailable footprints, and missing roots only when no selected or undecided requested Core can supply them.
 
-The required-only arrangement is only an incumbent, not an infeasibility proof: a later optional core or connector may enable a required modifier. Full search must continue when that initial subset fails.
+Placement search handles connection-bearing pieces before unrelated standalone cores, then uses candidate counts. Failed placement states memoize occupancy and the identity/occupied mask of every connection-bearing piece; standalone cores are interchangeable obstacles. Identity and masks are essential for alternative footprints and group semantics. Cached geometric impossibility prunes all supersets. Connectivity failure alone must never prune supersets: a lower-priority requested core or bridge can rescue a higher or required modifier.
+
+Partial placement pruning floods a relaxed union of compatible modifier candidate cells from each possible Core. It ignores conflicts between future candidates, group exclusivity, and overrides, making reachability a necessary condition only. It includes fixed modifiers and disables this flood for disconnected footprints, since the exact validator treats a chip as one graph node. Pruned connectivity branches conservatively prevent a geometric-impossibility claim. Final group assignment remains authoritative. Cached bitmask perimeters avoid repeatedly rebuilding geometry for final adjacency checks.
+
+The required-only arrangement is an incumbent, never an infeasibility proof. A timeout returns the best valid arrangement found so far, including improvements made at partial subsets. Some crowded arrangements still need the longer budget; benchmarks are documented in solver-performance.md.
 
 Final connectivity assigns each Modifier to exactly one compatible Core group. It permits orthogonal chains whose members all match the same root Core. Independent reachability is only pruning, since a shared bridge cannot serve two different groups at once. Per-group GrantedAbilityOverride exclusions apply. A memoized assignment search handles ambiguous groups; a single-core shortcut uses connectivity plus the override count.
 
@@ -36,6 +40,12 @@ Native Type defaults to Core; native RestrictionType defaults to None. None bypa
 The browser catalog preserves all 509 packaged chip definitions, 6 class boards, and fixed ability alternatives. Ability-slot entries appear in pickers rather than as ordinary requests. All 29 PerksOld records are retained because current entitlements reference them. Shared generic/weapon/reward acquisition membership remains incompletely traced; the UI assumes everything unlocked and reports this scope in Data & validation.
 
 This is static native-code translation plus asset extraction, not direct runtime instrumentation. Replacement shape and group-merge edge cases, full acquisition/ownership progression, combat stacking arithmetic, and automated runtime parity remain research limits. Do not claim that every possible in-game case is certified.
+
+## Library and priority interactions
+
+Granting class uses known unlock-source class names, falling back to OriginKit only when no unlock source is recorded. It is a discovery filter, never an equip restriction. Core and Modifier checkboxes are independent. Show universal is checked initially; disabling it hides universal-use perks from other classes and shared progression while retaining known selected-class grants. Granting class still narrows results when Show universal is enabled. Show unavailable independently exposes disabled class-ineligible entries. Filter state is transient.
+
+Expanded library descriptions are tracked by stable perk ID and survive adding/removing requests and filtering away/back. Priorities support native drag-and-drop plus keyboard-operable arrow buttons. Both reorder paths use the same stale-result and draft-save flow. New sessions start with an empty build-name field; loading a named snapshot fills its explicit name.
 
 ## Persistence
 

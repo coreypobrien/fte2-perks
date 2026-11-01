@@ -15,6 +15,18 @@ Open **Import / export build** beside the save controls:
 
 Import replaces the working draft and its visible name, resets the selected named-save identity, and runs the solver. Existing named snapshots are not updated; use Save build to create a new one. Malformed, foreign, unsupported-version or oversized imports leave the current draft and named saves unchanged. Clipboard read/write failures display recovery instructions. A blocked browser store remains preserved; imports can still be reviewed in memory.
 
+## Build links
+
+**Copy build link** beside the build name copies the current inputs, including unsolved or omitted requests, Required flags, exact host choices, and name. If clipboard access fails, a selected read-only link field appears for manual copying. Links contain all build inputs; anyone with the link can open them. No URL shortener or server storage is used.
+
+The URL keeps the hosting path (including a project prefix) and stores a `#build=1.<payload>` fragment. Version 1 encodes a UTF-8 JSON tuple `[name, gameVersion, classId, rank, primary, secondary, passive, requests]`; each request is `[id, 0|1, optionalCoreId]`. The tuple is zlib-wrapped DEFLATE compressed and unpadded base64url encoded using browser CompressionStream/DecompressionStream. Full stable asset IDs remain self-contained across catalog reordering; no mutable numeric catalog indices are used. The five 24-request validation examples produce complete hosted links of 626–689 characters in local checks.
+
+Decoding limits the fragment to 65,536 characters and the decompressed payload to one MiB, validates tuple fields and the portable schema, then follows the same reconciliation and draft-only import path as JSON. Unknown requests and host IDs survive. Cached results never travel in links. Malformed, unsupported, or oversized links leave existing inputs and storage unchanged. Valid links automatically recompute results. After loading, the fragment is removed with replaceState so a reload restores subsequent draft edits. Hash navigation also accepts links in an already open planner. Named snapshots and malformed/future browser storage remain preserved. Modern browser compression streams are required; JSON transfer remains available.
+
+## Library ordering
+
+Name (A–Z) is the default. Unlock rank sorts ascending by the earliest known grant in the granting-class filter, or the selected class when filtering all classes. When that class has no recorded grant, the earliest known rank across other grants is used; entries with no known rank sort last. This discovery order does not change availability: an unknown-rank path still prevents claiming a rank lock. Size counts occupied cells in the smallest declared footprint, ascending or descending. Equal values sort by name then stable ID. Sorting preserves expanded descriptions and never edits priorities, autosaves, or solved results; it is a transient library preference.
+
 ## Version 1 format
 
 ```json

@@ -1,5 +1,16 @@
 import { compatible } from './solver.js';
 export const plainText=text=>(text??'').replace(/<[^>]*>/g,'').replace(/\r\n/g,'\n').trim();
+/** Discovery order only; never changes availability or requested priorities. */
+export function compareLibraryPerks(a,b,sort,className){
+  const rank=p=>{
+    const all=p.unlockSources??[],selected=all.filter(s=>s.class===className),sources=selected.length?selected:all;
+    const known=sources.filter(s=>Number.isInteger(s.requiredRank)).map(s=>s.requiredRank);
+    return known.length?Math.min(...known):Infinity;
+  };
+  const size=p=>Math.min(...p.shapes.map(s=>s.cells?.length??s.width*s.height));
+  const difference=sort==='rank'?rank(a)-rank(b):sort==='size'?size(a)-size(b):sort==='size-desc'?size(b)-size(a):0;
+  return (Number.isNaN(difference)?0:difference)||a.name.localeCompare(b.name)||a.id.localeCompare(b.id);
+}
 const pathOf=ref=>ref?.split('.')[0]??null;
 export function canEquip(perk,klass){
   if(perk.restriction==='None')return true;

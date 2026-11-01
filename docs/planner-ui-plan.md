@@ -6,7 +6,7 @@ This document records the implemented v0 contract. The early concept remains in 
 
 The static browser workspace supports six classes. Rank defaults to 10 and controls the actual 10×6 board's unlocked cells. Primary, secondary and passive abilities occupy fixed slots, with class-appropriate replacements. Orientations are fixed; no rotated placements are generated.
 
-The library searches names/descriptions and filters by granting class, independent Core/Modifier checkboxes, universal use and unavailable entries. Unlock origin is separate from equip eligibility. Known selected-class ordinary-perk grants obey its rank; other-class and unknown/shared acquisition are assumed available. Show unavailable reveals disabled entries with reasons. Expanding a description survives adding/removing requests and revisiting filters.
+The library sorts by name (default), unlock rank, or occupied size in either direction, searches names/descriptions and filters by granting class, independent Core/Modifier checkboxes, universal use and unavailable entries. Unlock origin is separate from equip eligibility. Known selected-class ordinary-perk grants obey its rank; other-class and unknown/shared acquisition are assumed available. Show unavailable reveals disabled entries with reasons. Expanding a description survives adding/removing requests and revisiting filters.
 
 ## Priorities and search
 
@@ -27,6 +27,8 @@ Optimal fit means proven best within the implemented rule model and stated prefe
 ## Saving and transfer
 
 Draft autosave is separate from cloned named snapshots. Saves preserve class, rank, abilities, all requested IDs in order, Required flags and optional host constraints. Malformed/future data is preserved rather than overwritten, and unknown IDs remain visible. A saved result is never authoritative after import; inputs are revalidated and solved again.
+
+Copy build link shares compressed inputs in a URL fragment, with a selected manual-copy field when clipboard access fails. Opening a valid link loads the draft and recomputes the layout; existing named snapshots remain untouched.
 
 Clipboard and JSON file controls use the independent portable format in build-transfer.md, with manual JSON fallback when clipboard access fails. Import replaces the draft and leaves named snapshots untouched. Browser storage is profile/origin-bound and has no cloud synchronization; export to move builds or keep backups.
 

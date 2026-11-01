@@ -93,3 +93,7 @@ The second reported input, `tests/fixtures/machinist-fire-rate-survive-team.afe2
 Run `node scripts/test-browser.mjs --directory dist --base-path /afe2-pages-check/` after `pnpm build` to verify relative asset, catalog, and worker URLs under a GitHub Pages project path. HTTP tests cover prefix redirects, boundary checks, and traversal rejection. Packaging tests verify exact project, game-data, and Vite license notices in the output.
 
 The Pages workflow runs a frozen install, full catalog/unit suite, production build, and this prefixed browser suite on Ubuntu with Playwright Chromium. Available evidence uploads even after test failures. Deployment depends on successful validation and is limited to the repository default branch. Local Windows checks do not establish that the hosted workflow has run; see [deployment](deployment.md).
+
+## Build links and library sorting
+
+Share codec tests cover Unicode, exact host choices, unknown IDs, all five example sizes, malformed/future tuples, corruption, size limits and bounded decompression. Real-browser flows cover clipboard success and denial/manual selection, draft-only link imports, named-save isolation, automatic recomputation, consumed-fragment reload behavior, hash navigation, future-storage preservation, and invalid-link recovery under a project prefix. Sorting tests verify rank context, sparse/multiple footprint sizes, deterministic ties, actual library ordering, preserved expansion, unchanged saved inputs/results, and mobile overflow.

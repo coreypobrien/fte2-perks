@@ -4,6 +4,7 @@ import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {createServer} from './serve.mjs';
 import {createConfig,availability} from '../app/core/model.js';
+import {createBuildLink,readBuildLink} from '../app/core/share.js';
 import {exportBuild,importBuild} from '../app/core/transfer.js';
 const args=process.argv.slice(2),arg=(name,fallback=null)=>args.includes(name)?args[args.indexOf(name)+1]:fallback;
 let playwright;
@@ -22,6 +23,57 @@ try{
   await check('static page loads catalog and a keyboard-accessible library without server APIs',async()=>{
     await page.goto(base);await page.locator('.library-row').first().waitFor();assert.equal(await page.locator('#class-select').inputValue(),'/Game/Blueprints/Avocado_Classes/Medic/Player_Medic');
     assert.equal(await page.locator('#grid .tile.fixed').count(),3);await page.locator('#search').focus();await page.keyboard.type('Doctor');assert.ok(await page.getByRole('button',{name:"Add Doctor's Orders",exact:true}).isEnabled());
+  });
+  await check('compact build links load drafts, preserve saves and recover from clipboard denial and bad links',async()=>{
+    const game=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url))),config=createConfig(game);
+    const doctor=game.perks.find(p=>p.name==="Doctor's Orders");
+    config.requests=[{id:doctor.id,required:true},{id:'/Unknown/shared-perk',required:false,coreId:'/Unknown/host'}];
+    const c=await browser.newContext({permissions:['clipboard-read','clipboard-write']}),p=await c.newPage();
+    await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#cancel').waitFor({state:'hidden'});
+    await p.locator('#build-name').fill('Keep me');await p.locator('#save-build').click();
+    const named=await p.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')).builds);
+    const url=await createBuildLink(base,'Shared 👽',config,'previous-version');await p.goto(url);await p.locator('#cancel').waitFor({state:'hidden'});
+    await p.waitForFunction(()=>document.getElementById('save-status').textContent.includes('Shared build loaded'));
+    assert.equal(await p.locator('#build-name').inputValue(),'Shared 👽');assert.equal(new URL(p.url()).hash,'');
+    assert.match(await p.locator('#notice').innerText(),/different game-data version/);
+    const state=()=>p.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0')));
+    assert.deepEqual((await state()).draft,config);assert.deepEqual((await state()).builds,named);
+    await p.locator('#save-build').click();assert.equal((await state()).builds.length,2);assert.deepEqual((await state()).builds[0],named[0]);
+    assert.equal(await p.locator('#priority-list .priority-row').count(),2);assert.match(await p.locator('#below-list').innerText(),/Missing catalog perk/);
+    await p.bringToFront();await p.locator('#copy-link').click();await p.waitForFunction(()=>document.getElementById('save-status').textContent.includes('link copied'));
+    const copied=await p.evaluate(()=>navigator.clipboard.readText());assert.deepEqual((await readBuildLink(new URL(copied).hash)).config,config);
+    await p.locator('#rank-select').selectOption('9');await p.reload();await p.locator('.library-row').first().waitFor();assert.equal(await p.locator('#rank-select').inputValue(),'9');
+    const before=await state();await p.goto(base+'#build=99.abc');await p.waitForFunction(()=>document.getElementById('notice').textContent.includes('Unsupported build link'));
+    assert.deepEqual(await state(),before);
+    await p.goto(base+'#build=1.broken');await p.waitForFunction(()=>document.getElementById('notice').textContent.includes('Invalid or oversized'));
+    assert.deepEqual(await state(),before);await c.close();
+    const denied=await browser.newContext();await denied.addInitScript(()=>{localStorage.setItem('afe2.perk-planner.v0',JSON.stringify({schemaVersion:99,secret:'preserved'}));Object.defineProperty(navigator,'clipboard',{value:{writeText:async()=>{throw new Error('denied');}}});});
+    const q=await denied.newPage();await q.goto(url);await q.waitForFunction(()=>document.getElementById('save-status').textContent.includes('Shared build loaded'));
+    await q.locator('#copy-link').click();await q.locator('#share-link-field').waitFor();
+    assert.match(await q.locator('#save-status').innerText(),/Copy the selected build link manually/);
+    assert.deepEqual((await readBuildLink(new URL(await q.locator('#share-link').inputValue()).hash)).config,config);
+    assert.equal(await q.locator('#share-link').evaluate(n=>n.selectionEnd-n.selectionStart), (await q.locator('#share-link').inputValue()).length);
+    const second=await createBuildLink(base,'Hash navigation',{...config,rank:8},game.version);
+    await q.evaluate(hash=>location.hash=hash,new URL(second).hash);await q.waitForFunction(()=>document.getElementById('build-name').value==='Hash navigation');
+    assert.equal(await q.locator('#rank-select').inputValue(),'8');assert.deepEqual(await q.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0'))),{schemaVersion:99,secret:'preserved'});await denied.close();
+  });
+  await check('library sort orders by rank and footprint without changing build or expanded descriptions',async()=>{
+    const game=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url))),byId=new Map(game.perks.map(p=>[p.id,p]));
+    const c=await browser.newContext(),p=await c.newPage();await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#cancel').waitFor({state:'hidden'});
+    await p.locator('#build-name').fill('Sort check');await p.locator('#save-build').click();
+    const before=await p.evaluate(()=>localStorage.getItem('afe2.perk-planner.v0'));
+    const first=p.locator('.library-row').first(),id=await first.getAttribute('data-perk-id');await first.locator('summary').click();
+    const ids=()=>p.locator('.library-row').evaluateAll(rows=>rows.map(r=>r.dataset.perkId));
+    for(const sort of ['rank','size','size-desc','name']){
+      await p.locator('#library-sort').selectOption(sort);const perks=(await ids()).map(id=>byId.get(id));
+      const value=perk=>{if(sort==='name')return perk.name; if(sort.startsWith('size'))return Math.min(...perk.shapes.map(s=>s.cells.length));const selected=perk.unlockSources.filter(s=>s.class==='Medic'),sources=selected.length?selected:perk.unlockSources;return Math.min(...sources.filter(s=>Number.isInteger(s.requiredRank)).map(s=>s.requiredRank));};
+      for(let i=1;i<perks.length;i++){const a=value(perks[i-1]),b=value(perks[i]);assert.ok(sort==='name'?a.localeCompare(b)<=0:sort==='size-desc'?a>=b:a<=b);}
+      assert.ok(await p.locator('.library-row').evaluateAll((rows,id)=>rows.find(r=>r.dataset.perkId===id).querySelector('details').open,id));
+      assert.equal(await p.evaluate(()=>localStorage.getItem('afe2.perk-planner.v0')),before);assert.equal(await p.locator('#result-badge').innerText(),'Optimal fit');
+    }
+    await p.locator('#granting-class').selectOption('Medic');await p.locator('#library-sort').selectOption('rank');assert.ok((await ids()).length>0);
+    await p.setViewportSize({width:390,height:844});assert.ok(await p.locator('#library-sort').isVisible());assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    await p.screenshot({path:path.join(evidence,'sort-mobile.png'),fullPage:true});await c.close();
   });
   await check('granting class, independent type and universal filters preserve expanded descriptions',async()=>{
     assert.equal(await page.locator('#build-name').inputValue(),'');

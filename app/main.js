@@ -1,4 +1,5 @@
-import {createConfig,reconcileConfig,canEquip,availability,slotOptions,prepareProblem,dependencyHint,equippedEffects} from './core/model.js';
+import {createBuildLink,readBuildLink} from './core/share.js';
+import {createConfig,reconcileConfig,canEquip,availability,slotOptions,prepareProblem,dependencyHint,equippedEffects,compareLibraryPerks} from './core/model.js';
 import {compatible as dependencyParent} from './core/solver.js';
 import {exportBuild,importBuild,buildFilename,MAX_BUILD_SIZE} from './core/transfer.js';
 import {loadState,persistState,saveNamed,cloneConfig} from './core/storage.js';
@@ -46,7 +47,10 @@ function renderLibrary(){
   if(grant!=='all')list=list.filter(p=>fromClass(p,grant));
   if(!$('show-universal').checked)list=list.filter(p=>p.restriction!=='None'||fromClass(p,klass().name));
   if(query)list=list.filter(p=>(p.name+' '+p.description).toLowerCase().includes(query));
-  list.sort((a,b)=>a.name.localeCompare(b.name));$('library-count').textContent=String(list.length);$('library-list').replaceChildren();
+  const sort=$('library-sort').value;
+  $('library-sort-note').hidden=sort==='name';
+  $('library-sort-note').textContent=sort==='rank'?'Earliest known rank in '+(grant==='all'?klass().name:grant)+' when recorded; otherwise earliest known grant. Unknown ranks last.':'Size counts occupied cells in the smallest fixed-orientation footprint.';
+  list.sort((a,b)=>compareLibraryPerks(a,b,$('library-sort').value,grant==='all'?klass().name:grant));$('library-count').textContent=String(list.length);$('library-list').replaceChildren();
   if(!list.length)$('library-list').append(element('p','No matching perks. Try another search or include unavailable perks.','empty'));
   for(const p of list){
     const unavailable=availability(p,klass(),config.rank),added=config.requests.some(r=>r.id===p.id),row=element('article',undefined,'library-row');row.dataset.perkId=p.id;
@@ -128,13 +132,34 @@ function namedSave(copy){try{const next=saveNamed(builds,$('build-name').value,c
 function transferStatus(message,error=false){$('transfer-status').textContent=message;$('transfer-status').classList.toggle('error-text',error);}
 function currentExport(){return exportBuild($('build-name').value,config,game.version);}
 function loadPortable(text){
-  const build=importBuild(text),reconciled=reconcileConfig(game,build.config);
+  loadBuild(importBuild(text));
+}
+function loadBuild(build){
+  const reconciled=reconcileConfig(game,build.config);
   config=reconciled.config;selectedSaveId=null;$('build-name').value=build.name;
   change();renderSetup();renderLibrary();renderSaves();
   notice([build.gameVersion!==game.version?'Imported from a different game-data version; inputs are being revalidated.':null,...reconciled.notices].filter(Boolean).join(' '));
   transferStatus('Build loaded with '+config.requests.length+' priorities. Use Save build to keep a named snapshot.');startSolve();
 }
+async function loadSharedLink(){
+  try{
+    const build=await readBuildLink(location.hash);if(!build)return false;
+    loadBuild(build);
+    // Consume the import so reload restores later autosaved edits.
+    history.replaceState(null,'',location.pathname+location.search);
+    saveStatus('Shared build loaded into the draft. Named saves were kept.');return true;
+  }catch(error){notice(error.message);return false;}
+}
 function setupTransfer(){
+  $('copy-link').onclick=async()=>{
+    $('copy-link').disabled=true;
+    try{
+      const url=await createBuildLink(location.href,$('build-name').value,cloneConfig(config),game.version);
+      $('share-link').value=url;
+      try{await navigator.clipboard.writeText(url);saveStatus('Build link copied.');}
+      catch{$('share-link-field').hidden=false;$('share-link').focus();$('share-link').select();saveStatus('Clipboard unavailable. Copy the selected build link manually.',true);}
+    }catch(error){saveStatus(error.message,true);}finally{$('copy-link').disabled=false;}
+  };
   $('copy-build').onclick=async()=>{try{const text=currentExport();$('build-json').value=text;await navigator.clipboard.writeText(text);transferStatus('Build copied, including priorities and Required flags.');}catch(error){$('manual-transfer').open=true;transferStatus('Clipboard copy unavailable. Copy the build JSON below manually.',true);}};
   $('paste-build').onclick=async()=>{try{const text=await navigator.clipboard.readText();$('build-json').value=text;loadPortable(text);}catch(error){$('manual-transfer').open=true;transferStatus('Could not load from clipboard: '+error.message+' You can paste JSON below.',true);}};
   $('load-json').onclick=()=>{try{loadPortable($('build-json').value);}catch(error){transferStatus(error.message,true);}};
@@ -153,12 +178,13 @@ async function init(){
   $('class-select').onchange=()=>{const requests=config.requests;config={...createConfig(game,$('class-select').value),rank:config.rank,requests};renderSetup();renderLibrary();change();};
   $('rank-select').onchange=()=>{config.rank=Number($('rank-select').value);change();renderLibrary();};
   for(const slot of ['primary','secondary','passive'])$(slot+'-select').onchange=()=>{config.abilities[slot]=$(slot+'-select').value;change();renderLibrary();};
-  for(const id of ['search','granting-class','type-core','type-modifier','show-universal','show-unavailable'])$(id).addEventListener(id==='search'?'input':'change',renderLibrary);
+  for(const id of ['search','granting-class','library-sort','type-core','type-modifier','show-universal','show-unavailable'])$(id).addEventListener(id==='search'?'input':'change',renderLibrary);
   setupLinkedHighlights();$('clear-priorities').onclick=clearPriorities;$('solve-bottom').onclick=startSolve;
   $('solve').onclick=startSolve;$('cancel').onclick=()=>{stopWorker();$('solve-status').textContent='Search cancelled. No optimality claim was made.';renderResults();};
   setupTransfer();
   $('save-build').onclick=()=>namedSave(false);$('save-copy').onclick=()=>namedSave(true);
   $('load-build').onclick=()=>{const saved=builds.find(b=>b.id===$('saved-builds').value);if(!saved)return;const reconciled=reconcileConfig(game,cloneConfig(saved.config));config=reconciled.config;selectedSaveId=saved.id;$('build-name').value=saved.name;notice([saved.gameVersion!==game.version?'Saved with a different game-data version. Inputs were preserved and are being revalidated.':null,...reconciled.notices].filter(Boolean).join(' '));renderSetup();renderLibrary();renderPriorities();persist();startSolve();};
-  startSolve();document.body.classList.remove('loading');
+  window.addEventListener('hashchange',loadSharedLink);
+  if(!await loadSharedLink())startSolve();document.body.classList.remove('loading');
 }
 init().catch(error=>{document.body.classList.remove('loading');notice('The planner could not load: '+error.message);$('solve').disabled=true;$('solve-bottom').disabled=true;});

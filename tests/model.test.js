@@ -1,11 +1,22 @@
 import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {canEquip,availability,createConfig,reconcileConfig,slotOptions,prepareProblem,dependencyHint,equippedEffects,plainText} from '../app/core/model.js';
+import {canEquip,availability,createConfig,reconcileConfig,slotOptions,prepareProblem,dependencyHint,equippedEffects,plainText,compareLibraryPerks} from '../app/core/model.js';
 import {solve,compatible} from '../app/core/solver.js';
 const game=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url)));
 const byName=(name,predicate=()=>true)=>game.perks.find(p=>p.name===name&&predicate(p));
 const medic=game.classes.find(c=>c.name==='Medic'),marauder=game.classes.find(c=>c.name==='Marauder');
+test('library sorting uses contextual earliest known ranks, occupied size and deterministic name ties',()=>{
+  const perk=(id,name,ranks,shapes)=>({id,name,unlockSources:ranks,shapes});
+  const a=perk('a','Alpha',[{class:'Medic',requiredRank:8},{class:'Medic',requiredRank:3},{class:'Hunter',requiredRank:1}],[{width:3,height:2}]);
+  const b=perk('b','Beta',[{class:'Medic',requiredRank:2}],[{width:4,height:3,cells:[[0,0],[1,0]]},{width:1,height:1}]);
+  const c=perk('c','Unknown',[{class:'Medic',requiredRank:null}],[{width:2,height:2}]);
+  const order=(sort,klass='Medic')=>[c,a,b].sort((x,y)=>compareLibraryPerks(x,y,sort,klass)).map(p=>p.id);
+  assert.deepEqual(order('name'),['a','b','c']);assert.deepEqual(order('rank'),['b','a','c']);assert.deepEqual(order('rank','Hunter'),['a','b','c']);assert.deepEqual(order('rank','Other'),['a','b','c']);
+  assert.deepEqual(order('size'),['b','c','a']);assert.deepEqual(order('size-desc'),['a','c','b']);
+  assert.ok(compareLibraryPerks({...c,id:'a'},c,'rank','Medic')<0);
+  assert.ok(compareLibraryPerks({...c,name:'A',unlockSources:undefined},c,'rank','Medic')<0);
+});
 test('universal-use restrictions are independent of origin class and active entitlement lists',()=>{
   const drive=byName('Drive');assert.equal(drive.restriction,'None');assert.ok(drive.originKit.includes('/Lancer/'));assert.ok(canEquip(drive,medic));assert.ok(canEquip(drive,marauder));
   const doctor=byName("Doctor's Orders");assert.ok(canEquip(doctor,medic));assert.ok(!canEquip(doctor,marauder));

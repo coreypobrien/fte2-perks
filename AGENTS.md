@@ -25,7 +25,7 @@ Read `README.md`, `docs/architecture.md`, `docs/native-chip-rules.md`, and `docs
 - Use selected ability replacement compatibility, not a union with the base ability. All 29 PerksOld paths remain referenced by current class entitlements; never filter solely by folder name.
 - Full ownership/acquisition and all runtime edge cases are not certified. Keep limitations honest; an optimal result is relative to the implemented audited rule model.
 
-## Commands (Node.js 22.14+)
+## Commands (Node.js 24.x)
 
 ```powershell
 pnpm install --frozen-lockfile

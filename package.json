@@ -4,7 +4,7 @@
   "private": true,
   "description": "Static local perk planner with native-derived game rules and exact priority fitting",
   "engines": {
-    "node": ">=22.14.0"
+    "node": "24.x"
   },
   "scripts": {
     "test": "node scripts/validate-catalog.mjs && node scripts/test-catalog-inputs.mjs && node --test --experimental-test-coverage --test-coverage-lines=95 --test-coverage-branches=90 --test-coverage-functions=90 tests/*.test.js",

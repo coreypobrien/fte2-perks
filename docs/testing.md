@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Node.js 22.14+ runs development and tests. Install pinned development tools with `pnpm install --frozen-lockfile`; there are no deployed server/runtime dependencies. Browser tests use Playwright 1.62.1 (dev dependency) plus Chromium, or an explicitly selected installed Edge/Chrome executable.
+Use Node.js 24.x for development and tests, matching `.node-version`, the package engine and CI. Install pinned development tools with `pnpm install --frozen-lockfile`; there are no deployed server/runtime dependencies. Browser tests use Playwright 1.62.1 (dev dependency) plus Chromium, or an explicitly selected installed Edge/Chrome executable.
 
 ## Core and integration tests
 

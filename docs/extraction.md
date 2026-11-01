@@ -66,7 +66,7 @@ These are asset observations, not tests that every runtime effect matches its to
 
 ## Reproduce
 
-Requires Windows, PowerShell, Node.js 22.14+, and the installed game. Run from the repository root:
+Requires Windows, PowerShell, Node.js 24.x, and the installed game. Run from the repository root:
 
 ```powershell
 .\scripts\Initialize-ResearchTools.ps1

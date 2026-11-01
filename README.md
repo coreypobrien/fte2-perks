@@ -26,7 +26,7 @@ This unofficial tool is not affiliated with or endorsed by the game's developers
 
 ## Run locally
 
-Use Node.js 22.14+ (CI uses Node 24) and the pnpm version pinned in package.json:
+Use Node.js 24.x (matching `.node-version` and CI) and the pnpm version pinned in package.json:
 
 ~~~sh
 pnpm install --frozen-lockfile

@@ -15,7 +15,7 @@ This app was largely vibe-coded with AI assistance. It is experimental, unoffici
 
 The app uses modern JavaScript, BigInt and a module Web Worker. Chromium/Edge is covered by the automated browser suite; other browser/device combinations are not fully certified. Clipboard access depends on browser permissions and a suitable origin; manual JSON and file controls are available.
 
-Drafts and named snapshots belong to the browser profile and origin. Clearing storage, changing browsers, or moving between localhost and GitHub Pages can make saves unavailable. Export important builds and import them at the new origin. Hosted deployment does not migrate local saves. The app has no accounts, cloud synchronization, telemetry code, or server-side build storage.
+Drafts and named snapshots belong to the browser profile and origin. Clearing storage, changing browsers, or moving between localhost and GitHub Pages can make saves unavailable. Export important builds and import them at the new origin. Hosted deployment does not migrate local saves. The app has no accounts, cloud synchronization, telemetry code, or planner-side build storage. The optional Shorten with is.gd checkbox sends the full build URL to that external service, which stores a redirect and receives request IPs; its policies and availability apply. Ordinary self-contained sharing needs no shortener. Shortening failures fall back to the original build link.
 
 Unknown saved IDs are retained as missing entries, and malformed/future saves are preserved rather than overwritten. This defensive behavior is not a data-recovery guarantee. The 60-second budget and cancellation keep search bounded but cannot guarantee an optimum for arbitrary input or device performance.
 

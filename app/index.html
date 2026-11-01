@@ -19,7 +19,7 @@
   </section>
   <section class="save-bar" aria-label="Local saved builds">
     <label>Build name<input id="build-name" maxlength="80" placeholder="Name this build"></label>
-    <button id="copy-link">Copy build link</button><label id="share-link-field" hidden>Build link<input id="share-link" type="text" readonly aria-label="Build link"></label>
+    <div class="share-controls"><button id="copy-link">Copy build link</button><label class="check-row"><input id="shorten-link" type="checkbox" aria-describedby="shorten-note">Shorten with is.gd</label><span id="shorten-note" class="secondary" hidden>Sends your build link to is.gd, which stores a permanent redirect.</span></div><label id="share-link-field" hidden>Build link<input id="share-link" type="text" readonly aria-label="Build link"></label>
     <button id="save-build">Save build</button><label>Saved builds<select id="saved-builds"><option value="">No saved builds</option></select></label><button id="load-build">Load</button><button id="save-copy" class="quiet">Save copy</button>
     <span id="save-status" class="secondary" role="status">Stored in this browser only.</span>
     <details id="transfer-panel" class="transfer-panel"><summary>Import / export build</summary>

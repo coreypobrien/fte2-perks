@@ -28,7 +28,7 @@ Optimal fit means proven best within the implemented rule model and stated prefe
 
 Draft autosave is separate from cloned named snapshots. Saves preserve class, rank, abilities, all requested IDs in order, Required flags and optional host constraints. Malformed/future data is preserved rather than overwritten, and unknown IDs remain visible. A saved result is never authoritative after import; inputs are revalidated and solved again.
 
-Copy build link shares compressed inputs in a URL fragment, with a selected manual-copy field when clipboard access fails. Opening a valid link loads the draft and recomputes the layout; existing named snapshots remain untouched.
+Copy build link shares compressed inputs in a URL fragment, with a selected manual-copy field when clipboard access fails. An unchecked Shorten with is.gd checkbox optionally sends the generated build link to that service to store a permanent redirect; failures keep the original link and manual-copy recovery remains available. Opening a valid link loads the draft and recomputes the layout; existing named snapshots remain untouched.
 
 Clipboard and JSON file controls use the independent portable format in build-transfer.md, with manual JSON fallback when clipboard access fails. Import replaces the draft and leaves named snapshots untouched. Browser storage is profile/origin-bound and has no cloud synchronization; export to move builds or keep backups.
 

@@ -57,6 +57,39 @@ try{
     await q.evaluate(hash=>location.hash=hash,new URL(second).hash);await q.waitForFunction(()=>document.getElementById('build-name').value==='Hash navigation');
     assert.equal(await q.locator('#rank-select').inputValue(),'8');assert.deepEqual(await q.evaluate(()=>JSON.parse(localStorage.getItem('afe2.perk-planner.v0'))),{schemaVersion:99,secret:'preserved'});await denied.close();
   });
+  await check('is.gd shortening is opt-in, caches responses and preserves build fragments through redirects',async()=>{
+    const c=await browser.newContext({permissions:['clipboard-read','clipboard-write']}),p=await c.newPage();let calls=0,target='',release;
+    const pending=new Promise(resolve=>release=resolve);
+    await c.route('https://is.gd/create.php?**',async route=>{calls++;const endpoint=new URL(route.request().url());target=endpoint.searchParams.get('url');assert.equal(endpoint.searchParams.has('logstats'),false);assert.equal(route.request().headers().referer,undefined);await pending;await route.fulfill({json:{shorturl:'https://is.gd/Abc123'}});});
+    await c.route('https://is.gd/Abc123',route=>route.fulfill({status:302,headers:{location:target}}));
+    await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#cancel').waitFor({state:'hidden'});
+    assert.equal(await p.locator('#shorten-link').isChecked(),false);assert.equal(calls,0);
+    await p.locator('#build-name').fill('Short shared build');await p.getByRole('button',{name:"Add Doctor's Orders",exact:true}).click();await p.getByRole('checkbox',{name:"Require Doctor's Orders",exact:true}).check();
+    await p.locator('#copy-link').click();await p.waitForFunction(()=>document.getElementById('save-status').textContent==='Build link copied.');assert.equal(calls,0);
+    await p.locator('#shorten-link').check();assert.match(await p.locator('#shorten-note').innerText(),/Sends your build link to is.gd/);await p.locator('#copy-link').click();
+    await p.waitForFunction(()=>document.getElementById('save-status').textContent.includes('Shortening build'));assert.ok(await p.locator('#copy-link').isDisabled());assert.ok(await p.locator('#shorten-link').isDisabled());
+    release();await p.waitForFunction(()=>document.getElementById('save-status').textContent==='Short build link copied.');
+    assert.equal(await p.evaluate(()=>navigator.clipboard.readText()),'https://is.gd/Abc123');assert.equal(calls,1);
+    const build=await readBuildLink(new URL(target).hash);assert.equal(build.config.requests.length,1);assert.equal(build.config.requests[0].required,true);assert.equal(build.name,'Short shared build');
+    await p.locator('#copy-link').click();await p.waitForFunction(()=>!document.getElementById('copy-link').disabled);assert.equal(calls,1);
+    const q=await c.newPage();await q.goto('https://is.gd/Abc123');await q.waitForFunction(()=>document.getElementById('save-status').textContent.includes('Shared build loaded'));assert.equal(new URL(q.url()).hash,'');assert.equal(await q.locator('#build-name').inputValue(),'Short shared build');
+    await q.locator('#rank-select').selectOption('9');await q.reload();await q.locator('.library-row').first().waitFor();assert.equal(await q.locator('#rank-select').inputValue(),'9');
+    await p.setViewportSize({width:390,height:844});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:path.join(evidence,'shorten-mobile.png'),fullPage:true});
+    await p.reload();await p.locator('.library-row').first().waitFor();assert.equal(await p.locator('#shorten-link').isChecked(),false);assert.equal(calls,1);await c.close();
+  });
+  await check('shortener errors, rate limits and clipboard denial retain a usable original link',async()=>{
+    const c=await browser.newContext(),p=await c.newPage();let calls=0,mode='success';
+    await c.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:async()=>{throw new Error('denied');}}}));
+    await c.route('https://is.gd/create.php?**',async route=>{calls++;if(mode==='offline')return route.abort();return route.fulfill({json:mode==='success'?{shorturl:'https://is.gd/Abc123'}:mode==='rate'?{errorcode:3}:mode==='bad'?{shorturl:'https://evil.example/invalid'}:{errorcode:1}});});
+    await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#shorten-link').check();
+    await p.locator('#copy-link').click();await p.locator('#share-link-field').waitFor();assert.equal(await p.locator('#share-link').inputValue(),'https://is.gd/Abc123');assert.match(await p.locator('#save-status').innerText(),/Copy the selected/);
+    for(const failure of ['offline','bad','invalid','rate']){
+      mode=failure;await p.locator('#build-name').fill(failure);await p.locator('#copy-link').click();await p.waitForFunction(()=>!document.getElementById('copy-link').disabled);
+      assert.match(await p.locator('#save-status').innerText(),/Using the original build link/);const original=await p.locator('#share-link').inputValue();assert.equal((await readBuildLink(new URL(original).hash)).name,failure);assert.ok(await p.locator('#shorten-link').isEnabled());
+    }
+    const count=calls;await p.locator('#build-name').fill('during cooldown');await p.locator('#copy-link').click();await p.waitForFunction(()=>!document.getElementById('copy-link').disabled);assert.equal(calls,count);assert.match(await p.locator('#save-status').innerText(),/Wait one minute/);
+    await p.locator('#shorten-link').uncheck();await p.locator('#copy-link').click();await p.waitForFunction(()=>!document.getElementById('copy-link').disabled);assert.equal(calls,count);assert.doesNotMatch(await p.locator('#save-status').innerText(),/is.gd/);await c.close();
+  });
   await check('library sort orders by rank and footprint without changing build or expanded descriptions',async()=>{
     const game=JSON.parse(fs.readFileSync(new URL('../app/data/game.json',import.meta.url))),byId=new Map(game.perks.map(p=>[p.id,p]));
     const c=await browser.newContext(),p=await c.newPage();await p.goto(base);await p.locator('.library-row').first().waitFor();await p.locator('#cancel').waitFor({state:'hidden'});

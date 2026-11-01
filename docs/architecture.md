@@ -13,6 +13,7 @@ The production app is static HTML, CSS, and ES modules under `app/`. `node scrip
 | `app/main.js` | DOM UI, one current input configuration, a separate solved snapshot, worker job IDs/cancellation, named saves and stale states. |
 | `app/core/model.js` | Native-derived class eligibility, ability-slot options, configuration reconciliation, problem assembly, and sourced effect descriptions. |
 | `app/core/solver.js` | Pure fixed-orientation packing, required constraints, lexicographic optional choices, unique connected group assignment, and truthful budget statuses. |
+| `app/core/shorten.js` | Optional user-triggered is.gd requests, strict response validation, bounded session cache, timeout and rate-limit cooldown. |
 | `app/core/share.js` | Versioned compressed URL-fragment builds with bounded decoding and portable-schema validation. |
 | `app/core/transfer.js` | Validated versioned portable build JSON, priority/Required preservation, safe download filenames. |
 | `app/core/storage.js` | Versioned localStorage serialization, validation, defensive loading, independent draft and named snapshots. |
@@ -73,7 +74,7 @@ Local browser saves are bound to the browser profile and origin (host + scheme +
 
 ## Portable builds
 
-Import/export uses the independent `afe2-perk-build` version-1 format. It contains a name, game-data version, and full input configuration; request order and Required flags are authoritative. Cached placements are never imported. Files and clipboard share the same parser, validation and one-MiB limit. The UI imports into the draft, clears the selected named-save identity, reconciles stale catalog IDs, and reruns the worker. Existing named snapshots are untouched. Invalid/future documents leave inputs unchanged. Clipboard failure expands a manual JSON fallback. Copy build link uses the independent version-1 URL codec in share.js; opening it validates before importing through the same draft-only path and recomputes the arrangement. The consumed fragment is removed so later reloads restore draft edits. See build-transfer.md for the schema and exact behavior.
+Import/export uses the independent `afe2-perk-build` version-1 format. It contains a name, game-data version, and full input configuration; request order and Required flags are authoritative. Cached placements are never imported. Files and clipboard share the same parser, validation and one-MiB limit. The UI imports into the draft, clears the selected named-save identity, reconciles stale catalog IDs, and reruns the worker. Existing named snapshots are untouched. Invalid/future documents leave inputs unchanged. Clipboard failure expands a manual JSON fallback. Copy build link uses the independent version-1 URL codec in share.js; opening it validates before importing through the same draft-only path and recomputes the arrangement. The consumed fragment is removed so later reloads restore draft edits. An unchecked Shorten with is.gd option permits direct CORS shortening only on an explicit copy action; failures retain the self-contained link. It uses no account, backend or external scripts, and adds no required runtime dependency. Disclosure, provider limits, cache, timeout and cooldown are documented in build-transfer.md. See build-transfer.md for the schema and exact behavior.
 
 ## Tests
 

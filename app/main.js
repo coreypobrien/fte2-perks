@@ -1,4 +1,5 @@
 import {createBuildLink,readBuildLink} from './core/share.js';
+import {createShortener} from './core/shorten.js';
 import {createConfig,reconcileConfig,canEquip,availability,slotOptions,prepareProblem,dependencyHint,equippedEffects,compareLibraryPerks} from './core/model.js';
 import {compatible as dependencyParent} from './core/solver.js';
 import {exportBuild,importBuild,buildFilename,MAX_BUILD_SIZE} from './core/transfer.js';
@@ -151,14 +152,21 @@ async function loadSharedLink(){
   }catch(error){notice(error.message);return false;}
 }
 function setupTransfer(){
+  const shorten=createShortener();
+  $('shorten-link').onchange=()=>{$('shorten-note').hidden=!$('shorten-link').checked;};
   $('copy-link').onclick=async()=>{
-    $('copy-link').disabled=true;
+    const useShortener=$('shorten-link').checked;
+    $('copy-link').disabled=true;$('shorten-link').disabled=true;
     try{
-      const url=await createBuildLink(location.href,$('build-name').value,cloneConfig(config),game.version);
+      let url=await createBuildLink(location.href,$('build-name').value,cloneConfig(config),game.version),fallback='';
+      if(useShortener){
+        saveStatus('Shortening build link with is.gd…');
+        try{url=await shorten(url);}catch(error){fallback=error.message+' Using the original build link. ';}
+      }
       $('share-link').value=url;
-      try{await navigator.clipboard.writeText(url);saveStatus('Build link copied.');}
-      catch{$('share-link-field').hidden=false;$('share-link').focus();$('share-link').select();saveStatus('Clipboard unavailable. Copy the selected build link manually.',true);}
-    }catch(error){saveStatus(error.message,true);}finally{$('copy-link').disabled=false;}
+      try{await navigator.clipboard.writeText(url);saveStatus(fallback+(useShortener&&!fallback?'Short build link copied.':'Build link copied.'),!!fallback);}
+      catch{$('share-link-field').hidden=false;$('share-link').focus();$('share-link').select();saveStatus(fallback+'Clipboard unavailable. Copy the selected build link manually.',true);}
+    }catch(error){saveStatus(error.message,true);}finally{$('copy-link').disabled=false;$('shorten-link').disabled=false;}
   };
   $('copy-build').onclick=async()=>{try{const text=currentExport();$('build-json').value=text;await navigator.clipboard.writeText(text);transferStatus('Build copied, including priorities and Required flags.');}catch(error){$('manual-transfer').open=true;transferStatus('Clipboard copy unavailable. Copy the build JSON below manually.',true);}};
   $('paste-build').onclick=async()=>{try{const text=await navigator.clipboard.readText();$('build-json').value=text;loadPortable(text);}catch(error){$('manual-transfer').open=true;transferStatus('Could not load from clipboard: '+error.message+' You can paste JSON below.',true);}};

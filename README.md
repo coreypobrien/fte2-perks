@@ -12,7 +12,7 @@ Build around the perks you care about. Choose your class and abilities, rank you
 - **Find an arrangement.** Fit fixed-orientation perks into rank-unlocked cells, respecting ability compatibility and connected groups. Modifiers can choose any compatible host or attach to one you select.
 - **See what makes the cut.** Included perks are highlighted in your priority list. Read their equipped effects and see descriptions and reasons for choices left Below the line. Hover or focus to link a perk across the list, grid, and effects.
 - **Explore the catalog.** Search perk names and descriptions; sort by name, unlock rank, or size; filter by granting class, Core/Modifier type, and universal use. Select class, rank, and ability variants to compare builds.
-- **Keep and share builds.** Copy a compact build link, save named builds in your browser, or copy/paste and import/export JSON. Saves include priority order, Required flags, and host choices, including perks that did not fit.
+- **Keep and share builds.** Copy a compact build link (optionally shorten it with is.gd), save named builds in your browser, or copy/paste and import/export JSON. Saves include priority order, Required flags, and host choices, including perks that did not fit.
 
 The search runs in your browser, with a 60-second budget and cancellation. A completed search proves the best priority fit within the implemented model; a timed-out search reports its best result without claiming optimality. There are no accounts or server-side saves.
 

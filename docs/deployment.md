@@ -43,6 +43,8 @@ Browser saves are origin-bound. Export from localhost and import on the hosted s
 
 Update action pins from their official repositories and review the corresponding release notes. Keep the lockfile and Playwright browser install in sync. The default-branch build must pass before deployment; an existing healthy site remains in place when validation fails.
 
+The build's Node version and each action's JavaScript runtime are independent. All JavaScript actions now declare `node24`, including the nested `actions/upload-artifact` used by `actions/upload-pages-artifact`. The Pages pins use configure-pages v6.0.0, upload-pages-artifact v5.0.0 and deploy-pages v5.0.1, verified against official release tags and manifests. When updating composite actions, inspect nested action runtimes too; changing `.node-version` alone does not migrate them.
+
 The [main-branch workflow](https://github.com/coreypobrien/fte2-perks/actions/runs/40622467078) passed on GitHub-hosted Ubuntu and deployed [the live site](https://coreypobrien.github.io/fte2-perks/). All 23 browser scenarios subsequently passed against that HTTPS URL. See [verification](verification.md) for evidence and scope. This is an experimental, AI-assisted project with no support or availability commitment; see ../SUPPORT.md and known-limitations.md.
 
 ## Official references
